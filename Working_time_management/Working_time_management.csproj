@@ -7,4 +7,13 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Bilder\Logo_Hochschule.PNG" />
+    <None Remove="Logo_Hochschule.PNG" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Logo_Hochschule.PNG" />
+  </ItemGroup>
+
 </Project>

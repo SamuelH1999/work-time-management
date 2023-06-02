@@ -16,16 +16,18 @@ using System.Windows.Shapes;
 namespace Working_time_management
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaktionslogik für menu.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class menu : Page
     {
-        public MainWindow()
+        public menu()
         {
             InitializeComponent();
-
-            ContentFrame.Content = new Startpage();
         }
 
+        private void LogOut(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new Startpage());
+        }
     }
 }

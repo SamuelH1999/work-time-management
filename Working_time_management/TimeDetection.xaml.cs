@@ -16,16 +16,13 @@ using System.Windows.Shapes;
 namespace Working_time_management
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaktionslogik für TimeDetection.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class TimeDetection : Page
     {
-        public MainWindow()
+        public TimeDetection()
         {
             InitializeComponent();
-
-            ContentFrame.Content = new Startpage();
         }
-
     }
 }

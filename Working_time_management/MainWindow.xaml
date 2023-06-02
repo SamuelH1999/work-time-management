@@ -5,8 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Working_time_management"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Background="White">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="180*"/>
+        </Grid.RowDefinitions>
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Column="1" Content=" 16:00 Uhr&#xA;01.06.2023" HorizontalAlignment="Center" FontSize="18" Width="96"/>
+
+        <Label Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right">
+            <Image Source="/Logo_Hochschule.png" />
+        </Label>
+        <Frame x:Name="ContentFrame" Grid.ColumnSpan="3" Grid.Row="1" NavigationUIVisibility="Hidden"/>
     </Grid>
+
+
 </Window>

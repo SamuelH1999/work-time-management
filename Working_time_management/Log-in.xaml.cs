@@ -16,16 +16,18 @@ using System.Windows.Shapes;
 namespace Working_time_management
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaktionslogik für Log_in.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Log_in : Page
     {
-        public MainWindow()
+        public Log_in()
         {
             InitializeComponent();
-
-            ContentFrame.Content = new Startpage();
         }
 
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
