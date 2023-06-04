@@ -6,36 +6,50 @@
       xmlns:local="clr-namespace:Working_time_management"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Startpage">
+      Title="Startpage" Background="White">
 
 
-      <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
 
-            <Button x:Name="Anmeldung" Click="LogInEvent">Anmeldung</Button>
+        <Button x:Name="Anmeldung" FontSize="15" Click="LogInEvent">Anmeldung</Button>
 
-            <Button x:Name="btnTimeDtc" Grid.Row="2" Click="TimeDtc">Zeiterfassung</Button>
-          
-        <Button x:Name="btnLogIn" Grid.Column="3" Grid.Row="6" Click="btnLogInSuc" Visibility="Hidden">Bestätigen!</Button>
+        <Button x:Name="btnTimeDtc" Grid.Row="2" FontSize="18" Click="TimeDtc" Background="#FFAFAFAF">Zeiterfassung</Button>
 
-        <Frame x:Name="LogInFrame" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="6" Margin="15,15,0,15"/>
+        <Label x:Name="lblAnm" FontSize="20" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Visibility="Hidden">
+            Anmelden
+        </Label>
+
+        <Label Grid.Row="2" Grid.Column="1" FontSize="15" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+            ID
+        </Label>
+
+        <TextBox Grid.ColumnSpan="3" Grid.Row="3" Grid.Column="1" FontSize="20" Margin="80,0,0,0"/>
+
+        <Label x:Name="lblPwd" Grid.Row="4" Grid.Column="1" FontSize="15" VerticalAlignment="Bottom" HorizontalAlignment="Center" Visibility="Hidden">
+            Passwort
+        </Label>
+
+        <TextBox x:Name="tbPwd" Grid.ColumnSpan="3" Grid.Row="5" Grid.Column="1" FontSize="20" Margin="80,0,0,0" Visibility="Hidden"/>
+
+        <Button x:Name="btnLogIn" Grid.Column="3" Grid.Row="4" Click="btnLogInSuc" FontSize="15">Bestätigen!</Button>
 
     </Grid>
 </Page>
