@@ -1,0 +1,41 @@
+﻿<Page x:Class="Working_time_management.userManagement"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Working_time_management"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="userManagement"
+      Background="White">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Button x:Name="BenutzerAnlegen" Grid.Row="0" Grid.Column="0">Benutzer anlegen</Button>
+
+        <Button x:Name="BenutzerLöschen" Grid.Row="2" Grid.Column="0">Benutzer löschen</Button>
+
+        <Button x:Name="BenutzerBearbeiten" Grid.Row="4" Grid.Column="0">Benutzer bearbeiten</Button>
+
+        <Button x:Name="zurueck" Grid.Row="0" Grid.Column="5" Click="BackMeAd">Zurück</Button>
+
+    </Grid>
+</Page>

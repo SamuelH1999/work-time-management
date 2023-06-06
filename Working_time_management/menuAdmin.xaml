@@ -29,7 +29,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Button x:Name="Benutzerverwaltung">Benutzerverwaltung</Button>
+        <Button x:Name="Benutzerverwaltung" Click="UserM">Benutzerverwaltung</Button>
 
         <Button x:Name="Mitarbeiterantraege" Grid.Row="2">Mitarbeiteranträge</Button>
 

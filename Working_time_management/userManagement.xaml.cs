@@ -16,23 +16,18 @@ using System.Windows.Shapes;
 namespace Working_time_management
 {
     /// <summary>
-    /// Interaktionslogik für menu.xaml
+    /// Interaktionslogik für userManagement.xaml
     /// </summary>
-    public partial class menuAdmin : Page
+    public partial class userManagement : Page
     {
-        public menuAdmin()
+        public userManagement()
         {
             InitializeComponent();
         }
 
-        private void LogOut(object sender, RoutedEventArgs e)
+        private void BackMeAd(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new Startpage());
-        }
-
-        private void UserM(object sender, RoutedEventArgs e)
-        {
-            this.NavigationService.Navigate(new userManagement());
+            this.NavigationService.Navigate(new menuAdmin());
         }
     }
 }
