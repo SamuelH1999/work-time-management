@@ -16,4 +16,10 @@
     <Resource Include="Logo_Hochschule.PNG" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="menuAdmin.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
 </Project>

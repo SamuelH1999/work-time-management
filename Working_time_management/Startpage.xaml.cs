@@ -42,8 +42,22 @@ namespace Working_time_management
 
         private void btnLogInSuc(object sender, RoutedEventArgs e)
         {
-            //if(isLogIn)
-            this.NavigationService.Navigate(new menu());
+            if (isLogIn)
+            {
+                string userPwd1 = "123456";
+                string adminPwd = "654321";
+                if (string.Compare(userPwd1, tbPwd.Text) == 0) {
+                    this.NavigationService.Navigate(new menu());
+                }
+                else if (string.Compare(adminPwd, tbPwd.Text) == 0)
+                        {
+                    this.NavigationService.Navigate(new menuAdmin());
+                }
+                else
+                {
+
+                }
+            }
         }
 
         private void TimeDtc(object sender, RoutedEventArgs e)
