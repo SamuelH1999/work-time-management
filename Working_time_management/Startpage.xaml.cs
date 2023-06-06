@@ -55,8 +55,12 @@ namespace Working_time_management
                 }
                 else
                 {
-
+                        
                 }
+            }
+            else 
+            {
+                this.NavigationService.Navigate(new TimeDetection());
             }
         }
 
