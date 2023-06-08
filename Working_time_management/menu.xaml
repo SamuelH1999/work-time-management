@@ -27,6 +27,7 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
         <Button x:Name="Anmeldung">Mitarbeiterinformationen</Button>
@@ -37,7 +38,9 @@
 
         <Button x:Name="Anträge" Grid.Row="6">Anträge</Button>
 
-        <Button x:Name="Abmelden" Click="LogOut" Grid.Row="7" Grid.Column="4">Abmelden</Button>
+        <Button x:Name="Abmelden" Click="LogOut" Grid.Row="7" Grid.Column="5">Abmelden</Button>
+        
+        <Frame x:Name="contentFrameMenu" Grid.Row="1" Grid.Column="1" Grid.RowSpan="6" Grid.ColumnSpan="4"></Frame>
 
     </Grid>
 </Page>
