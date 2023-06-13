@@ -1,0 +1,43 @@
+﻿<Page x:Class="Working_time_management.request"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Working_time_management"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="request">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Button x:Name="backRequest" Grid.Row="0" Grid.Column="5" Click="clickBackRequest">Zurück</Button>
+
+        <Label FontSize="22" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Grid.ColumnSpan="2">Anträge:</Label>
+        <Label FontSize="22" Grid.Column="3" Grid.Row="1" VerticalAlignment="Center" Grid.ColumnSpan="2">Status:</Label>
+        
+        <Label FontSize="22" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" Grid.ColumnSpan="2">Urlaubsantrag</Label>
+        <Label FontSize="22" Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" Grid.ColumnSpan="2">Antrag auf Versetzung</Label>
+
+        <Label FontSize="22" Grid.Column="3" Grid.Row="2" VerticalAlignment="Center" Grid.ColumnSpan="2">Genehmigt</Label>
+        <Label FontSize="22" Grid.Column="3" Grid.Row="3" VerticalAlignment="Center" Grid.ColumnSpan="2">In Bearbeitung</Label>
+
+    </Grid>
+</Page>

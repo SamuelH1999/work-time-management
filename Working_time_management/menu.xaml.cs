@@ -29,5 +29,25 @@ namespace Working_time_management
         {
             this.NavigationService.Navigate(new Startpage());
         }
+
+        private void ClickWorkerInformation(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new workerInformation());
+        }
+
+        private void ClickHoliday(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new Holidays());
+        }
+
+        private void ClickOvertime(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new overtime());
+        }
+
+        private void clickRequest(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new request());
+        }
     }
 }
