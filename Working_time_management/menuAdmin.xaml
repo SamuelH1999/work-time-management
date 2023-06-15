@@ -27,17 +27,20 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
         <Button x:Name="Benutzerverwaltung" Click="UserM">Benutzerverwaltung</Button>
 
-        <Button x:Name="Mitarbeiterantraege" Grid.Row="2">Mitarbeiteranträge</Button>
+        <Button x:Name="Mitarbeiterantraege" Grid.Row="2" Click="userRequest">Mitarbeiteranträge</Button>
 
-        <Button x:Name="Abwesenheiten" Grid.Row="4">Abwesenheiten</Button>
+        <Button x:Name="Abwesenheiten" Grid.Row="4" Click="absenceClick">Abwesenheiten</Button>
 
-        <Button x:Name="Einstellungen" Grid.Row="6">Einstellungen</Button>
+        <Button x:Name="Einstellungen" Grid.Row="6" Click="settingsClick">Einstellungen</Button>
 
-        <Button x:Name="Abmelden" Click="LogOut" Grid.Row="7" Grid.Column="4">Abmelden</Button>
+        <Button x:Name="Abmelden" Click="LogOut" Grid.Row="7" Grid.Column="5">Abmelden</Button>
+
+        <Frame x:Name="contentFrameAdmin" Grid.Row="0" Grid.Column="1" Grid.RowSpan="7" Grid.ColumnSpan="5"></Frame>
 
     </Grid>
 </Page>

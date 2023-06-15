@@ -32,7 +32,22 @@ namespace Working_time_management
 
         private void UserM(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new userManagement());
+            contentFrameAdmin.Content = new userManagement();
+        }
+
+        private void userRequest(object sender, RoutedEventArgs e)
+        {
+            contentFrameAdmin.Content = new processRequest();
+        }
+
+        private void absenceClick(object sender, RoutedEventArgs e)
+        {
+            contentFrameAdmin.Content = new absence();
+        }
+
+        private void settingsClick(object sender, RoutedEventArgs e)
+        {
+            contentFrameAdmin.Content = new settings();
         }
     }
 }

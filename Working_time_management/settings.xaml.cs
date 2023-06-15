@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Working_time_management
 {
     /// <summary>
-    /// Interaktionslogik für userManagement.xaml
+    /// Interaktionslogik für settings.xaml
     /// </summary>
-    public partial class userManagement : Page
+    public partial class settings : Page
     {
-        public userManagement()
+        public settings()
         {
             InitializeComponent();
         }

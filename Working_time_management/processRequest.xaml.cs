@@ -16,18 +16,13 @@ using System.Windows.Shapes;
 namespace Working_time_management
 {
     /// <summary>
-    /// Interaktionslogik für Log_in.xaml
+    /// Interaktionslogik für processRequest.xaml
     /// </summary>
-    public partial class Log_in : Page
+    public partial class processRequest : Page
     {
-        public Log_in()
+        public processRequest()
         {
             InitializeComponent();
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
         }
     }
 }

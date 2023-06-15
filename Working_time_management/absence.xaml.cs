@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Working_time_management
 {
     /// <summary>
-    /// Interaktionslogik für UserInfo.xaml
+    /// Interaktionslogik für absence.xaml
     /// </summary>
-    public partial class UserInfo : Page
+    public partial class absence : Page
     {
-        public UserInfo()
+        public absence()
         {
             InitializeComponent();
         }

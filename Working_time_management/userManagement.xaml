@@ -9,9 +9,8 @@
       Title="userManagement"
       Background="White">
 
-    <Grid>
+    <Grid Margin="45">
         <Grid.RowDefinitions>
-            <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
@@ -25,17 +24,29 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Button x:Name="BenutzerAnlegen" Grid.Row="0" Grid.Column="0">Benutzer anlegen</Button>
+        <Button x:Name="BenutzerAnlegen" Grid.Row="0" Grid.Column="0">Neuen Benutzer anlegen</Button>
 
-        <Button x:Name="BenutzerLöschen" Grid.Row="2" Grid.Column="0">Benutzer löschen</Button>
+        <Button x:Name="BenutzerLöschen" Grid.Row="0" Grid.Column="1">Benutzer löschen</Button>
 
-        <Button x:Name="BenutzerBearbeiten" Grid.Row="4" Grid.Column="0">Benutzer bearbeiten</Button>
+        <Button x:Name="BenutzerBearbeiten" Grid.Row="0" Grid.Column="2">Benutzer bearbeiten</Button>
 
-        <Button x:Name="zurueck" Grid.Row="0" Grid.Column="5" Click="BackMeAd">Zurück</Button>
+        <Label Grid.Row="1" Grid.Column="0" FontSize="18" VerticalAlignment="Center">Benutzerliste</Label>
+
+        <ListBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" Grid.RowSpan="5">
+            <ListBoxItem MinHeight="30">Hans Wurst</ListBoxItem>
+            <ListBoxItem MinHeight="30">Petra Maier</ListBoxItem>
+            <ListBoxItem MinHeight="30">Ferdie Fuchs</ListBoxItem>
+            <ListBoxItem MinHeight="30">Susie Sommer</ListBoxItem>
+            <ListBoxItem MinHeight="30">Fred Mann</ListBoxItem>
+            <ListBoxItem MinHeight="30">Peter Schmidt</ListBoxItem>
+            <ListBoxItem MinHeight="30">Rainer Zufall</ListBoxItem>
+            <ListBoxItem MinHeight="30">Otto Normal</ListBoxItem>
+            <ListBoxItem MinHeight="30">Andi Bar</ListBoxItem>
+            <ListBoxItem MinHeight="30">Rudi Winkler</ListBoxItem>
+            <ListBoxItem MinHeight="30">Marie Johanna Gärtner</ListBoxItem>
+        </ListBox>
 
     </Grid>
 </Page>

@@ -40,7 +40,7 @@
 
         <Button x:Name="Abmelden" Click="LogOut" Grid.Row="7" Grid.Column="5">Abmelden</Button>
         
-        <Frame x:Name="contentFrameMenu" Grid.Row="1" Grid.Column="1" Grid.RowSpan="6" Grid.ColumnSpan="4"></Frame>
+        <Frame x:Name="contentFrameMenu" Grid.Row="0" Grid.Column="1" Grid.RowSpan="7" Grid.ColumnSpan="5"></Frame>
 
     </Grid>
 </Page>
