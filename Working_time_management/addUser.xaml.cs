@@ -16,24 +16,19 @@ using System.Windows.Shapes;
 namespace Working_time_management
 {
     /// <summary>
-    /// Interaktionslogik für userManagement.xaml
+    /// Interaktionslogik für addUser.xaml
     /// </summary>
-    public partial class userManagement : Page
+    public partial class addUser : Page
     {
-        public userManagement()
+        public addUser()
         {
             InitializeComponent();
         }
 
-        public userManagement(string addName)
+        private void confirmClick(object sender, RoutedEventArgs e)
         {
-            InitializeComponent();
-            userList.Items.Add(addName);
-        }
-
-        private void newUserClick(object sender, RoutedEventArgs e)
-        {
-            this.NavigationService.Navigate(new addUser());
+            string fullName = tbFirstName.Text + " " + tbLastName.Text;
+            this.NavigationService.Navigate(new userManagement(fullName));
         }
     }
 }

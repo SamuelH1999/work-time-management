@@ -26,7 +26,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Button x:Name="BenutzerAnlegen" Grid.Row="0" Grid.Column="0">Neuen Benutzer anlegen</Button>
+        <Button x:Name="BenutzerAnlegen" Grid.Row="0" Grid.Column="0" Click="newUserClick">Neuen Benutzer anlegen</Button>
 
         <Button x:Name="BenutzerLöschen" Grid.Row="0" Grid.Column="1">Benutzer löschen</Button>
 
@@ -34,7 +34,7 @@
 
         <Label Grid.Row="1" Grid.Column="0" FontSize="18" VerticalAlignment="Center">Benutzerliste</Label>
 
-        <ListBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" Grid.RowSpan="5">
+        <ListBox x:Name="userList" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" Grid.RowSpan="5">
             <ListBoxItem MinHeight="30">Hans Wurst</ListBoxItem>
             <ListBoxItem MinHeight="30">Petra Maier</ListBoxItem>
             <ListBoxItem MinHeight="30">Ferdie Fuchs</ListBoxItem>
