@@ -32,22 +32,22 @@ namespace Working_time_management
 
         private void ClickWorkerInformation(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new workerInformation());
+            contentFrameMenu.Content = new workerInformation();
         }
 
         private void ClickHoliday(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new Holidays());
+            contentFrameMenu.Content = new Holidays();
         }
 
         private void ClickOvertime(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new overtime());
+            contentFrameMenu.Content = new overtime();
         }
 
         private void clickRequest(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new request());
+            contentFrameMenu.Content = new request();
         }
     }
 }

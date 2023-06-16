@@ -24,10 +24,5 @@ namespace Working_time_management
         {
             InitializeComponent();
         }
-
-        private void ClickWorkerInformation(object sender, RoutedEventArgs e)
-        {
-            this.NavigationService.Navigate(new menu());
-        }
     }
 }
