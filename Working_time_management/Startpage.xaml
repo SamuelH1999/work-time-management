@@ -41,7 +41,7 @@
             ID
         </Label>
 
-        <TextBox Grid.ColumnSpan="3" Grid.Row="3" Grid.Column="1" FontSize="20" Margin="80,0,0,0"/>
+        <TextBox x:Name="tbId" Grid.ColumnSpan="3" Grid.Row="3" Grid.Column="1" FontSize="20" Margin="80,0,0,0"/>
 
         <Label x:Name="lblPwd" Grid.Row="4" Grid.Column="1" FontSize="15" VerticalAlignment="Bottom" HorizontalAlignment="Center" Visibility="Hidden">
             Passwort

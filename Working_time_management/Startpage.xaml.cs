@@ -46,8 +46,18 @@ namespace Working_time_management
             {
                 string userPwd1 = "123456";
                 string adminPwd = "654321";
+                int userID;
+                if(tbId.Text.Length < 1) {
+                    userID = 0; 
+                }
+                else
+                {
+
+                    userID = int.Parse(tbId.Text);
+                }
+
                 if (string.Compare(userPwd1, tbPwd.Text) == 0) {
-                    this.NavigationService.Navigate(new menu());
+                    this.NavigationService.Navigate(new menu(userID));
                 }
                 else if (string.Compare(adminPwd, tbPwd.Text) == 0)
                         {

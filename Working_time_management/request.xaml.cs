@@ -25,11 +25,6 @@ namespace Working_time_management
             InitializeComponent();
         }
 
-        private void clickBackRequest(object sender, RoutedEventArgs e)
-        {
-            this.NavigationService.Navigate(new menu());
-        }
-
         private void clickNewRequest(object sender, RoutedEventArgs e)
         {
             newRequest newReq = new newRequest();

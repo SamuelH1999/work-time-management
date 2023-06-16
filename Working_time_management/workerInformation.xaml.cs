@@ -20,9 +20,15 @@ namespace Working_time_management
     /// </summary>
     public partial class workerInformation : Page
     {
-        public workerInformation()
+        public int userID;
+        public workerInformation(int id)
         {
             InitializeComponent();
+            this.userID = id;
+            if (userID == 123456) {
+                lblUserName.Content = "Rainer Zufall";
+                lblUserAge.Content = "60";
+            }
         }
     }
 }

@@ -20,9 +20,11 @@ namespace Working_time_management
     /// </summary>
     public partial class menu : Page
     {
-        public menu()
+        public int userID;
+        public menu(int id)
         {
             InitializeComponent();
+            this.userID = id;
         }
 
         private void LogOut(object sender, RoutedEventArgs e)
@@ -32,7 +34,7 @@ namespace Working_time_management
 
         private void ClickWorkerInformation(object sender, RoutedEventArgs e)
         {
-            contentFrameMenu.Content = new workerInformation();
+            contentFrameMenu.Content = new workerInformation(userID);
         }
 
         private void ClickHoliday(object sender, RoutedEventArgs e)
