@@ -8,11 +8,8 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="workerInformation">
 
-    <Grid>
+    <Grid Margin="45">
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
@@ -23,20 +20,16 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-
-        <Button x:Name="zurueck" Grid.Row="0" Grid.Column="5" Click="backMenu">Zurück</Button>
-        <Label FontSize="22" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center">Status:</Label>
-        <Label FontSize="22" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center">Name:</Label>
-        <Label FontSize="22" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center">Alter:</Label>
-        <Label FontSize="22" Grid.Column="0" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center">Wohnort:</Label>
+    
+        <Label FontSize="22" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" Content="Status:"></Label>
+        <Label FontSize="22" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center">Name:</Label>
+        <Label FontSize="22" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center">Alter:</Label>
+        <Label FontSize="22" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center">Wohnort:</Label>
         
-        <Label FontSize="22" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center">Angemeldet</Label>
-        <Label FontSize="22" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center">Peter Schmidt</Label>
-        <Label FontSize="22" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center">45</Label>
-        <Label FontSize="22" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center">Fulda</Label>
+        <Label FontSize="22" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center">Angemeldet</Label>
+        <Label FontSize="22" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center">Peter Schmidt</Label>
+        <Label FontSize="22" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center">45</Label>
+        <Label FontSize="22" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center">Fulda</Label>
     </Grid>
 </Page>

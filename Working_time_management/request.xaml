@@ -6,11 +6,11 @@
       xmlns:local="clr-namespace:Working_time_management"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="request">
+      Title="request"
+      Background="White">
 
-    <Grid>
+    <Grid Margin="45">
         <Grid.RowDefinitions>
-            <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
@@ -24,20 +24,22 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Button x:Name="backRequest" Grid.Row="0" Grid.Column="5" Click="clickBackRequest">Zurück</Button>
+        <Button x:Name="btnDetails" Grid.Row="0" Grid.Column="0" Click="clickNewRequest">Neuer Antrag</Button>
 
-        <Label FontSize="22" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Grid.ColumnSpan="2">Anträge:</Label>
-        <Label FontSize="22" Grid.Column="3" Grid.Row="1" VerticalAlignment="Center" Grid.ColumnSpan="2">Status:</Label>
-        
-        <Label FontSize="22" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" Grid.ColumnSpan="2">Urlaubsantrag</Label>
-        <Label FontSize="22" Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" Grid.ColumnSpan="2">Antrag auf Versetzung</Label>
+        <Button x:Name="btnAnnehmen" Grid.Row="0" Grid.Column="1">Antrag löschen</Button>
 
-        <Label FontSize="22" Grid.Column="3" Grid.Row="2" VerticalAlignment="Center" Grid.ColumnSpan="2">Genehmigt</Label>
-        <Label FontSize="22" Grid.Column="3" Grid.Row="3" VerticalAlignment="Center" Grid.ColumnSpan="2">In Bearbeitung</Label>
+
+
+        <Label Grid.Row="1" Grid.Column="0" FontSize="18" VerticalAlignment="Center">Meine Anträge:</Label>
+
+
+        <ListBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" Grid.RowSpan="5">
+            <ListBoxItem MinHeight="30" Content="Urlaub&#x9; &#x9;&#x9; 19.07.2023 - 25.07.2023&#x9; &#x9;&#x9; Status: bestätigt"></ListBoxItem>
+            <ListBoxItem MinHeight="30" Content="Überstudnenabbau&#x9; 20.06.2023 &#x9;&#x9;&#x9;&#x9; Status: offen" ></ListBoxItem>
+
+        </ListBox>
 
     </Grid>
 </Page>

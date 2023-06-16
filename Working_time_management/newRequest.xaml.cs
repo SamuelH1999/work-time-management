@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Working_time_management
 {
     /// <summary>
-    /// Interaktionslogik für workerInformation.xaml
+    /// Interaktionslogik für newRequest.xaml
     /// </summary>
-    public partial class workerInformation : Page
+    public partial class newRequest : Window
     {
-        public workerInformation()
+        public newRequest()
         {
             InitializeComponent();
         }
