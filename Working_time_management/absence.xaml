@@ -27,7 +27,7 @@
 
         <Button x:Name="btnDetails" Grid.Row="0" Grid.Column="0">Details</Button>
 
-        <Button x:Name="btnNeueAbw" Grid.Row="0" Grid.Column="2">Abwesenheit hinzufügen</Button>
+        <Button x:Name="btnNeueAbw" Grid.Row="0" Grid.Column="1">Abwesenheit hinzufügen</Button>
 
 
         <Label Grid.Row="1" Grid.Column="0" FontSize="18" VerticalAlignment="Center">Abwesenheiten:</Label>
