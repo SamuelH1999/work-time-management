@@ -28,9 +28,9 @@
 
         <Button x:Name="BenutzerAnlegen" Grid.Row="0" Grid.Column="0" Click="newUserClick">Neuen Benutzer anlegen</Button>
 
-        <Button x:Name="BenutzerLöschen" Grid.Row="0" Grid.Column="1">Benutzer löschen</Button>
+        <Button x:Name="BenutzerLöschen" Grid.Row="0" Grid.Column="1" Click="deleteUserClick">Benutzer löschen</Button>
 
-        <Button x:Name="BenutzerBearbeiten" Grid.Row="0" Grid.Column="2">Benutzer bearbeiten</Button>
+        <Button x:Name="BenutzerBearbeiten" Grid.Row="0" Grid.Column="2" Click="editUserClick">Benutzer bearbeiten</Button>
 
         <Label Grid.Row="1" Grid.Column="0" FontSize="18" VerticalAlignment="Center">Benutzerliste</Label>
 

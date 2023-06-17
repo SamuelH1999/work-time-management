@@ -28,12 +28,37 @@ namespace Working_time_management
         public userManagement(string addName)
         {
             InitializeComponent();
-            userList.Items.Add(addName);
+            ListBoxItem newUser = new ListBoxItem();
+            newUser.Content = addName;
+            userList.Items.Add(newUser);
         }
 
         private void newUserClick(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new addUser());
+        }
+
+        private void deleteUserClick(object sender, RoutedEventArgs e)
+
+        {
+            if (userList.SelectedItem != null)
+            {
+                ListBoxItem deletedUser = userList.SelectedItem as ListBoxItem;
+                MessageBoxResult mboxResult = MessageBox.Show("Möchten Sie " + deletedUser.Content.ToString() + " wirklich löschen?", "Nutzer löschen", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
+                if (mboxResult == MessageBoxResult.Yes)
+                {
+                    userList.Items.Remove(deletedUser);
+                }
+            }
+        }
+        private void editUserClick(object sender, RoutedEventArgs e)
+        {
+            if (userList.SelectedItem != null)
+            {
+                ListBoxItem editUser = userList.SelectedItem as ListBoxItem;
+                string[] names = editUser.Content.ToString().Split();
+                this.NavigationService.Navigate(new editUser(names));
+            }
         }
     }
 }

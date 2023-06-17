@@ -16,27 +16,28 @@ using System.Windows.Shapes;
 namespace Working_time_management
 {
     /// <summary>
-    /// Interaktionslogik für addUser.xaml
+    /// Interaktionslogik für editUser.xaml
     /// </summary>
-    public partial class addUser : Page
+    public partial class editUser : Page
     {
-        public addUser()
+        public editUser(string[] names)
         {
             InitializeComponent();
+            tbFirstName.Text = names[0];
+            tbLastName.Text = names[1];
         }
 
-        private void confirmClick(object sender, RoutedEventArgs e)
+        private void confirmEditClick(object sender, RoutedEventArgs e)
         {
-            if(tbFirstName.Text.Length > 0 || tbLastName.Text.Length > 0) 
+            if (tbFirstName.Text.Length > 0 || tbLastName.Text.Length > 0)
             {
                 string fullName = tbFirstName.Text + " " + tbLastName.Text;
-                this.NavigationService.Navigate(new userManagement(fullName)); 
+                this.NavigationService.Navigate(new userManagement(fullName));
             }
             else
             {
                 this.NavigationService.Navigate(new userManagement());
             }
-            
         }
     }
 }
