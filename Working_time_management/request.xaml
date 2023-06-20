@@ -37,7 +37,7 @@
 
         <ListBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" Grid.RowSpan="5">
             <ListBoxItem MinHeight="30" Content="Urlaub&#x9; &#x9;&#x9; 19.07.2023 - 25.07.2023&#x9; &#x9;&#x9; Status: bestätigt"></ListBoxItem>
-            <ListBoxItem MinHeight="30" Content="Überstudnenabbau&#x9; 20.06.2023 &#x9;&#x9;&#x9;&#x9; Status: offen" ></ListBoxItem>
+            <ListBoxItem MinHeight="30" Content="Überstundenabbau&#x9; 20.06.2023 &#x9;&#x9;&#x9;&#x9; Status: offen" ></ListBoxItem>
 
         </ListBox>
 
