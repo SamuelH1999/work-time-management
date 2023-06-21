@@ -25,24 +25,19 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Button x:Name="btnDetails" Grid.Row="0" Grid.Column="0">Details</Button>
+        <Button x:Name="btnDetails" Grid.Row="0" Grid.Column="0" Click="showDetails">Details</Button>
 
-        <Button x:Name="btnAnnehmen" Grid.Row="0" Grid.Column="1">Antrag annehmen</Button>
+        <Button x:Name="btnAnnehmen" Grid.Row="0" Grid.Column="1" Click="acceptClick">Antrag annehmen</Button>
 
-        <Button x:Name="btnAblehnen" Grid.Row="0" Grid.Column="2">Antrag ablehnen</Button>
+        <Button x:Name="btnAblehnen" Grid.Row="0" Grid.Column="2" Click="rejectClick">Antrag ablehnen</Button>
 
 
         <Label Grid.Row="1" Grid.Column="0" FontSize="18" VerticalAlignment="Center">Offene Anträge:</Label>
 
 
-        <ListBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" Grid.RowSpan="5">
-            <ListBoxItem MinHeight="30" Content="Hans Wurst&#x9; &#x9;&#x9; Urlaub&#x9; &#x9;&#x9; Eingegangen: 12.06.2023"></ListBoxItem>
-            <ListBoxItem MinHeight="30" Content="Petra Maier&#x9; &#x9;&#x9; Überstunden &#x9;&#x9; Eingegangen: 10.06.2023" ></ListBoxItem>
-            <ListBoxItem MinHeight="30" Content="Susie Sommer&#x9; &#x9;&#x9; Urlaub&#x9; &#x9;&#x9; Eingegangen: 08.06.2023"></ListBoxItem>
-            <ListBoxItem MinHeight="30" Content="Rainer Zufall&#x9; &#x9;&#x9; Krankheit &#x9;&#x9; Eingegangen: 08.06.2023"></ListBoxItem>
-            <ListBoxItem MinHeight="30" Content="Otto Normal&#x9; &#x9;&#x9; Urlaub&#x9; &#x9;&#x9; Eingegangen: 30.05.2023"></ListBoxItem>
-            <ListBoxItem MinHeight="30" Content="Marie Johanna Gärtner &#x9;&#x9; Urlaub&#x9; &#x9;&#x9; Eingegangen: 30.05.2023"></ListBoxItem>
-            <ListBoxItem x:Name="newItem" MinHeight="30" Content=""></ListBoxItem>
+        <ListBox x:Name="openRequests" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" Grid.RowSpan="5">
+            <ListBoxItem MinHeight="30" Content="Susie Sommer&#x9; &#x9;&#x9; Urlaub&#x9; &#x9;&#x9; Eingegangen: 18.06.2023"></ListBoxItem>
+            <ListBoxItem MinHeight="30" Content="Rainer Zufall&#x9; &#x9;&#x9; Urlaub&#x9; &#x9;&#x9; Eingegangen: 23.06.2023"></ListBoxItem>
         </ListBox>
     </Grid>
 </Page>

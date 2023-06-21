@@ -20,19 +20,38 @@ namespace Working_time_management
     /// </summary>
     public partial class processRequest : Page
     {
-        public bool holidayChecked;
         public processRequest()
         {
             InitializeComponent();
         }
 
-
-        private void newHolidayRequest(NavigationEventArgs e)
+        private void showDetails(object sender, RoutedEventArgs e)
         {
-            bool holidayChecked = ParameterStore.holidayChecked;
-            if (holidayChecked == true) 
+            if (openRequests.SelectedItem != null)
             {
-                newItem.Content = "Urlaub";        
+                ListBoxItem details = openRequests.SelectedItem as ListBoxItem;
+                string[] names = details.Content.ToString().Split();
+                MessageBoxResult mboxResult = MessageBox.Show("Antragsteller: " + names[0] + " " + names[1] + "\nZeitraum: 30.06.2023 - 14.07.2023", "Antragsdetails", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
+            }
+        }
+
+        private void acceptClick(object sender, RoutedEventArgs e)
+        {
+            if (openRequests.SelectedItem != null)
+            {
+                ListBoxItem deletedUser = openRequests.SelectedItem as ListBoxItem;
+                openRequests.Items.Remove(deletedUser);
+                MessageBoxResult mboxResult = MessageBox.Show("Antrag akzeptiert!", "Antrag bearbeitet", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
+            }
+        }
+
+        private void rejectClick(object sender, RoutedEventArgs e)
+        {
+            if (openRequests.SelectedItem != null)
+            {
+                ListBoxItem deletedUser = openRequests.SelectedItem as ListBoxItem;
+                openRequests.Items.Remove(deletedUser);
+                MessageBoxResult mboxResult = MessageBox.Show("Antrag abgelehnt!", "Antrag bearbeitet", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
             }
         }
     }
