@@ -25,10 +25,18 @@ namespace Working_time_management
             InitializeComponent();
         }
 
+        public request(int i)
+        {
+            InitializeComponent();
+            ListBoxItem newRequest = new ListBoxItem();
+            newRequest.Content = "Urlaub            30.06.2023 - 14.07.2023             Status: offen";
+            newRequest.MinHeight = 30;
+            allRequest.Items.Add(newRequest);
+        }
+
         private void clickNewRequest(object sender, RoutedEventArgs e)
         {
-            newRequest newReq = new newRequest();
-            newReq.Show();
+            this.NavigationService.Navigate(new newRequest());
         }
     }
 }

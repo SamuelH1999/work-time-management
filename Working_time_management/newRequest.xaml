@@ -1,15 +1,16 @@
-﻿<Window x:Class="Working_time_management.newRequest"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Working_time_management"
-        mc:Ignorable="d"
-        Title="newRequest" Height="450" Width="800">
+﻿<Page x:Class="Working_time_management.newRequest"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Working_time_management"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="newRequest"
+      Background="White">
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
@@ -21,10 +22,20 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-
-        <Button x:Name="btnDetails" Grid.Row="0" Grid.Column="0">Urlaub</Button>
-
-        <Button x:Name="btnAnnehmen" Grid.Row="0" Grid.Column="1">Überstunden</Button>
         
+        <Label Grid.Row="0" Grid.Column="0" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Right">Urlaub:</Label>
+        <Label Grid.Row="1" Grid.Column="0" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Right">Überstundenabbau:</Label>
+        <Label Grid.Row="2" Grid.Column="0" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Right">Von:</Label>
+        <Label Grid.Row="3" Grid.Column="0" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Right">Bis:</Label>
+
+        <RadioButton x:Name="checkboxHoliday" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Checked="checkedHoliday" GroupName="holidayType"></RadioButton>
+        <RadioButton Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="holidayType"></RadioButton>
+
+        <DatePicker Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center"></DatePicker>
+        <DatePicker Grid.Row="3" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center"></DatePicker>
+
+        <Button x:Name="btnHolidayRequest" Grid.Row="4" Grid.Column="1" FontSize="14" Click="clickHolReqVerify" Margin="100,10,10,10">Bestätigen!</Button>
+
+
     </Grid>
-</Window>
+</Page>

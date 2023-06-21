@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,6 +21,7 @@ namespace Working_time_management
     /// </summary>
     public partial class menuAdmin : Page
     {
+        public bool holidayChecked;
         public menuAdmin()
         {
             InitializeComponent();

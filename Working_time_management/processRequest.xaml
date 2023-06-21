@@ -42,6 +42,7 @@
             <ListBoxItem MinHeight="30" Content="Rainer Zufall&#x9; &#x9;&#x9; Krankheit &#x9;&#x9; Eingegangen: 08.06.2023"></ListBoxItem>
             <ListBoxItem MinHeight="30" Content="Otto Normal&#x9; &#x9;&#x9; Urlaub&#x9; &#x9;&#x9; Eingegangen: 30.05.2023"></ListBoxItem>
             <ListBoxItem MinHeight="30" Content="Marie Johanna Gärtner &#x9;&#x9; Urlaub&#x9; &#x9;&#x9; Eingegangen: 30.05.2023"></ListBoxItem>
+            <ListBoxItem x:Name="newItem" MinHeight="30" Content=""></ListBoxItem>
         </ListBox>
     </Grid>
 </Page>

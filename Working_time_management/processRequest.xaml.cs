@@ -20,9 +20,20 @@ namespace Working_time_management
     /// </summary>
     public partial class processRequest : Page
     {
+        public bool holidayChecked;
         public processRequest()
         {
             InitializeComponent();
+        }
+
+
+        private void newHolidayRequest(NavigationEventArgs e)
+        {
+            bool holidayChecked = ParameterStore.holidayChecked;
+            if (holidayChecked == true) 
+            {
+                newItem.Content = "Urlaub";        
+            }
         }
     }
 }
