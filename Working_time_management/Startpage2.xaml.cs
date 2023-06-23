@@ -12,26 +12,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.IO;
-using System.Windows.Markup;
-using System.Reflection;
 
 namespace Working_time_management
 {
     /// <summary>
-    /// Interaktionslogik für Startpage.xaml
+    /// Interaktionslogik für Startpage2.xaml
     /// </summary>
-    public partial class Startpage : Page
+    public partial class Startpage2 : Page
     {
-        public Startpage()
+        public Startpage2()
         {
             InitializeComponent();
         }
-
         private bool isLogIn = false;
 
         private void LogInEvent(object sender, RoutedEventArgs e)
-        {   
+        {
             isLogIn = true;
             lblAnm.Visibility = Visibility.Visible;
             lblPwd.Visibility = Visibility.Visible;
@@ -47,38 +43,33 @@ namespace Working_time_management
         {
             if (isLogIn)
             {
-                // This will get the current WORKING directory (i.e. \bin\Debug)
-                string workingDirectory = Environment.CurrentDirectory;
-                // or: Directory.GetCurrentDirectory() gives the same result
-                // This will get the current PROJECT directory
-                string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
-                string[] pwdIdCSV = File.ReadAllLines(projectDirectory + @"\data\id_pwd\id_pwd.csv");
-                string userID = tbId.Text;
-                bool pwdCorrect = false;
-                foreach (string line in pwdIdCSV)
+                string userPwd1 = "123456";
+                string adminPwd = "654321";
+                int userID;
+                if (tbId.Text.Length < 1)
                 {
-                    string[] data = line.Split(';');
-                    string ID = data[0];
-                    string pwd = data[1];
-                    if (ID == userID)
-                    {
-                        if (string.Compare(pwd, tbPwd.Text) == 0)
-                        {
-                            pwdCorrect = true;
-                            break;
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
+                    userID = 0;
                 }
-                if (pwdCorrect)
+                else
+                {
+
+                    userID = int.Parse(tbId.Text);
+                }
+
+                if (string.Compare(userPwd1, tbPwd.Text) == 0)
                 {
                     this.NavigationService.Navigate(new menu(userID));
-                }   
+                }
+                else if (string.Compare(adminPwd, tbPwd.Text) == 0)
+                {
+                    this.NavigationService.Navigate(new menuAdmin());
+                }
+                else
+                {
+
+                }
             }
-            else 
+            else
             {
                 this.NavigationService.Navigate(new TimeDetection());
             }

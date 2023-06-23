@@ -27,6 +27,12 @@ namespace Working_time_management
             this.userID = id;
         }
 
+        public menu(string id)
+        {
+            InitializeComponent();
+            this.userID = int.Parse(id);
+        }
+
         private void LogOut(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new Startpage());
