@@ -31,7 +31,7 @@ namespace Working_time_management
             {
                 ListBoxItem details = openRequests.SelectedItem as ListBoxItem;
                 string[] names = details.Content.ToString().Split();
-                MessageBoxResult mboxResult = MessageBox.Show("Antragsteller: " + names[0] + " " + names[1] + "\nZeitraum: 30.06.2023 - 14.07.2023", "Antragsdetails", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
+                MessageBox.Show("Antragsteller: " + names[0] + " " + names[1] + "\nZeitraum: 30.06.2023 - 14.07.2023", "Antragsdetails", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
             }
         }
 
@@ -41,7 +41,7 @@ namespace Working_time_management
             {
                 ListBoxItem deletedUser = openRequests.SelectedItem as ListBoxItem;
                 openRequests.Items.Remove(deletedUser);
-                MessageBoxResult mboxResult = MessageBox.Show("Antrag akzeptiert!", "Antrag bearbeitet", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
+                MessageBox.Show("Antrag akzeptiert!", "Antrag bearbeitet", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
             }
         }
 
@@ -51,7 +51,7 @@ namespace Working_time_management
             {
                 ListBoxItem deletedUser = openRequests.SelectedItem as ListBoxItem;
                 openRequests.Items.Remove(deletedUser);
-                MessageBoxResult mboxResult = MessageBox.Show("Antrag abgelehnt!", "Antrag bearbeitet", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
+                MessageBox.Show("Antrag abgelehnt!", "Antrag bearbeitet", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
             }
         }
     }

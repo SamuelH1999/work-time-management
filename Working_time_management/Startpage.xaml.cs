@@ -52,16 +52,16 @@ namespace Working_time_management
         }
 
         private void btnLogInSuc(object sender, RoutedEventArgs e)
-        {
-            if (isLogIn)
-            {
-                // This will get the current WORKING directory (i.e. \bin\Debug)
+        {       // This will get the current WORKING directory (i.e. \bin\Debug)
                 string workingDirectory = Environment.CurrentDirectory;
                 // or: Directory.GetCurrentDirectory() gives the same result
                 // This will get the current PROJECT directory
                 string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
                 string[] pwdIdCSV = File.ReadAllLines(projectDirectory + @"\data\id_pwd\id_pwd.csv");
                 string userID = tbId.Text;
+            // Anmeldung für Menü
+            if (isLogIn)
+            {
                 LogInResult inputCorrect = LogInResult.IDNotFound;
                 foreach (string line in pwdIdCSV)
                 {
@@ -94,12 +94,12 @@ namespace Working_time_management
                 switch(inputCorrect)
                 {
                     case LogInResult.IDNotFound:
-                        MessageBoxResult mboxResult = MessageBox.Show("ID nicht gefunden!", "Anmeldefehler", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
+                        MessageBox.Show("ID nicht gefunden!", "Anmeldefehler", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
                         tbId.Text = "";
                         tbPwd.Text = "";
                         break;
                     case LogInResult.PwdIncorrect:
-                        MessageBoxResult mboxResult2 = MessageBox.Show("Passwort nicht korrekt!", "Anmeldefehler", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
+                        MessageBox.Show("Passwort nicht korrekt!", "Anmeldefehler", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
                         tbPwd.Text = "";
                         break;
                     case LogInResult.UserCorrect:
@@ -110,9 +110,29 @@ namespace Working_time_management
                         break;
                 }
             }
+            // Anmeldung für Zeiterfassung
             else 
-            {
-                this.NavigationService.Navigate(new TimeDetection());
+            {   
+                bool idFound = false;
+                foreach (string line in pwdIdCSV)
+                {
+                    string[] data = line.Split(';');
+                    string ID = data[0];
+                    if (ID == userID)
+                    {
+                        idFound = true;
+                        break;
+                    }
+                }
+                if (idFound)
+                {
+                    this.NavigationService.Navigate(new TimeDetection());
+                }
+                else 
+                {
+                    MessageBox.Show("ID nicht gefunden!", "Anmeldefehler", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
+                    tbId.Text = "";
+                }
             }
         }
 
