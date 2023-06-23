@@ -21,9 +21,13 @@ namespace Working_time_management
     public partial class TimeDetection : Page
     {
         private bool isActive = false;
-        public TimeDetection()
+        private string id;
+        public TimeDetection(string id_str)
         {
             InitializeComponent();
+            this.id = id_str;
+            
+            
         }
 
         private void btnCaG(object sender, RoutedEventArgs e)

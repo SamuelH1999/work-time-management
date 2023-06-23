@@ -34,10 +34,7 @@
 
 
         <ListBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" Grid.RowSpan="5">
-            <ListBoxItem MinHeight="30" Content="Hans Wurst&#x9; &#x9;&#x9; Urlaub&#x9; &#x9;&#x9; bis: 21.06.2023"></ListBoxItem>
-            <ListBoxItem MinHeight="30" Content="Petra Maier&#x9; &#x9;&#x9; Überstunden &#x9;&#x9; bis: 16.06.2023" ></ListBoxItem>
-            <ListBoxItem MinHeight="30" Content="Susie Sommer&#x9; &#x9;&#x9; Urlaub&#x9; &#x9;&#x9; bis: 08.06.2023"></ListBoxItem>
-            <ListBoxItem MinHeight="30" Content="Rainer Zufall&#x9; &#x9;&#x9; Krankheit &#x9;&#x9; bis: 23.06.2023"></ListBoxItem>
+            <ListBoxItem MinHeight="30" Content="Andi Bar&#x9;&#x9; &#x9;&#x9; Krankheit &#x9;&#x9; bis: 23.06.2023"></ListBoxItem>
             <ListBoxItem MinHeight="30" Content="Otto Normal&#x9; &#x9;&#x9; Urlaub&#x9; &#x9;&#x9; bis: 05.07.2023"></ListBoxItem>
             <ListBoxItem MinHeight="30" Content="Marie Johanna Gärtner &#x9;&#x9; Urlaub&#x9; &#x9;&#x9; bis: 07.07.2023"></ListBoxItem>
         </ListBox>

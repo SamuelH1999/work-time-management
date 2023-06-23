@@ -71,7 +71,7 @@ namespace Working_time_management
             }
             else
             {
-                this.NavigationService.Navigate(new TimeDetection());
+                this.NavigationService.Navigate(new TimeDetection(""));
             }
         }
 

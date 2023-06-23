@@ -52,13 +52,10 @@ namespace Working_time_management
         }
 
         private void btnLogInSuc(object sender, RoutedEventArgs e)
-        {       // This will get the current WORKING directory (i.e. \bin\Debug)
-                string workingDirectory = Environment.CurrentDirectory;
-                // or: Directory.GetCurrentDirectory() gives the same result
-                // This will get the current PROJECT directory
-                string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
-                string[] pwdIdCSV = File.ReadAllLines(projectDirectory + @"\data\id_pwd\id_pwd.csv");
-                string userID = tbId.Text;
+        {   
+            // "..\" --> geht in der Ordnerebene nach oben
+            string[] pwdIdCSV = File.ReadAllLines(@"..\..\..\data\id_pwd\id_pwd.csv");
+            string userID = tbId.Text;
             // Anmeldung für Menü
             if (isLogIn)
             {
@@ -126,7 +123,7 @@ namespace Working_time_management
                 }
                 if (idFound)
                 {
-                    this.NavigationService.Navigate(new TimeDetection());
+                    this.NavigationService.Navigate(new TimeDetection(userID));
                 }
                 else 
                 {

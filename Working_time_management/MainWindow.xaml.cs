@@ -23,7 +23,6 @@ namespace Working_time_management
         public MainWindow()
         {
             InitializeComponent();
-
             ContentFrame.Content = new Startpage();
         }
 
