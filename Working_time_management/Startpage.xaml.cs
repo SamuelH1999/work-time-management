@@ -30,6 +30,14 @@ namespace Working_time_management
 
         private bool isLogIn = false;
 
+        enum LogInResult
+        {
+            IDNotFound,
+            PwdIncorrect,
+            UserCorrect,
+            AdminCorrect
+        }
+
         private void LogInEvent(object sender, RoutedEventArgs e)
         {   
             isLogIn = true;
@@ -54,7 +62,7 @@ namespace Working_time_management
                 string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
                 string[] pwdIdCSV = File.ReadAllLines(projectDirectory + @"\data\id_pwd\id_pwd.csv");
                 string userID = tbId.Text;
-                bool pwdCorrect = false;
+                LogInResult inputCorrect = LogInResult.IDNotFound;
                 foreach (string line in pwdIdCSV)
                 {
                     string[] data = line.Split(';');
@@ -64,19 +72,43 @@ namespace Working_time_management
                     {
                         if (string.Compare(pwd, tbPwd.Text) == 0)
                         {
-                            pwdCorrect = true;
-                            break;
+                            if (string.Compare(userID, "123123") == 0)
+                            {
+                                inputCorrect = LogInResult.AdminCorrect;
+                                break;
+                            }
+                            else
+                            {
+                                inputCorrect = LogInResult.UserCorrect;
+                                break;
+                            }
+                            
                         }
                         else
                         {
+                            inputCorrect = LogInResult.PwdIncorrect;
                             break;
                         }
                     }
                 }
-                if (pwdCorrect)
+                switch(inputCorrect)
                 {
-                    this.NavigationService.Navigate(new menu(userID));
-                }   
+                    case LogInResult.IDNotFound:
+                        MessageBoxResult mboxResult = MessageBox.Show("ID nicht gefunden!", "Anmeldefehler", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
+                        tbId.Text = "";
+                        tbPwd.Text = "";
+                        break;
+                    case LogInResult.PwdIncorrect:
+                        MessageBoxResult mboxResult2 = MessageBox.Show("Passwort nicht korrekt!", "Anmeldefehler", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
+                        tbPwd.Text = "";
+                        break;
+                    case LogInResult.UserCorrect:
+                        this.NavigationService.Navigate(new menu(userID));
+                        break;
+                    case LogInResult.AdminCorrect:
+                        this.NavigationService.Navigate(new menuAdmin());
+                        break;
+                }
             }
             else 
             {
