@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Diagnostics.Eventing.Reader;
+using System.Security.Policy;
 
 namespace Working_time_management
 {
@@ -75,11 +76,11 @@ namespace Working_time_management
             }
             return (int) inputCorrect;
         }
-        public void addUserToCSV(string[] pwd)
+        public void addUserToID_PWDCSV(string[] pwd)
         {
-            File.WriteAllLines(@"..\..\..\data\id_pwd\id_pwd.csv", pwd, Encoding.UTF8);
+            File.AppendAllLines(@"..\..\..\data\id_pwd\id_pwd.csv", pwd, Encoding.UTF8);
         }
-        public void addUserToCSV(string lastName, string firtsName, string DateOfBirth, string residence)
+        public void addUserToWorkerInformationCSV(string lastName, string firtsName, string DateOfBirth, string residence)
         {
             string[] data = { lastName + ";" + firtsName + ";" + DateOfBirth + ";" + residence };
             File.WriteAllLines(@"..\..\..\data\id_pwd\id_pwd.csv", data); // Pfad muss geändert werden; Außerdem müssen neue Ordner erstellt werden

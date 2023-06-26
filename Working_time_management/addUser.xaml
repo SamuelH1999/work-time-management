@@ -16,6 +16,8 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -26,15 +28,18 @@
 
         <Label Grid.Row="0" Grid.Column="0" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Right">Vorname:</Label>
         <Label Grid.Row="1" Grid.Column="0" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Right">Nachname:</Label>
-        <Label Grid.Row="2" Grid.Column="0" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Right">Alter:</Label>
+        <Label Grid.Row="2" Grid.Column="0" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Right">Geburtsdatum:</Label>
         <Label Grid.Row="3" Grid.Column="0" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Right">Wohnort:</Label>
+        <Label Grid.Row="4" Grid.Column="0" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Right">Passwort:</Label>
+        <Label Grid.Row="5" Grid.Column="0" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Right">ID:</Label>
 
         <TextBox x:Name="tbFirstName" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" FontSize="18" Margin="10" VerticalAlignment="Center"></TextBox>
         <TextBox x:Name="tbLastName" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" FontSize="18" Margin="10" VerticalAlignment="Center"></TextBox>
-        <TextBox Grid.Row="2" Grid.Column="1" FontSize="18" Grid.ColumnSpan="1" Margin="10" VerticalAlignment="Center"></TextBox>
-        <TextBox Grid.Row="3" Grid.Column="1" FontSize="18" Grid.ColumnSpan="2" Margin="10" VerticalAlignment="Center"></TextBox>
-        <Label Grid.Row="4" Grid.Column="0" FontSize="18" Content=""></Label>
-        <Button Grid.Row="4" Grid.Column="2" FontSize="18" Margin="25,5,25,5" Click="confirmClick" >Bestätigen</Button>
+        <TextBox x:Name="tbDateOfBirth" Grid.Row="2" Grid.Column="1" FontSize="18" Grid.ColumnSpan="1" Margin="10" VerticalAlignment="Center"></TextBox>
+        <TextBox x:Name="tbResidence" Grid.Row="3" Grid.Column="1" FontSize="18" Grid.ColumnSpan="2" Margin="10" VerticalAlignment="Center"></TextBox>
+        <TextBox x:Name="tbPwd" Grid.Row="4" Grid.Column="1" FontSize="18" Grid.ColumnSpan="2" Margin="10" VerticalAlignment="Center"></TextBox>
+        <TextBox x:Name="tbID" Grid.Row="5" Grid.Column="1" FontSize="18" Grid.ColumnSpan="2" Margin="10" VerticalAlignment="Center"></TextBox>
+        <Button Grid.Row="6" Grid.Column="2" FontSize="18" Margin="25,5,25,5" Click="confirmClick" >Bestätigen</Button>
 
     </Grid>
 </Page>
