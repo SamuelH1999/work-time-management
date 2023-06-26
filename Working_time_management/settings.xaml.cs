@@ -24,5 +24,23 @@ namespace Working_time_management
         {
             InitializeComponent();
         }
+
+        private void selectDuration_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(IniHandler.KeyExists("Maximum", "Breaks"))
+            {
+                IniHandler.DeleteKey("Maximum", "Breaks");
+            }
+            IniHandler.Write("Maximum", selectDuration.Text, "Breaks");
+        }
+
+        private void selectTime_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (IniHandler.KeyExists("Fix", "Breaks"))
+            {
+                IniHandler.DeleteKey("Fix", "Breaks");
+            }
+            IniHandler.Write("Fix", selectTime.Text, "Breaks");
+        }
     }
 }

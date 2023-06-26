@@ -25,6 +25,5 @@ namespace Working_time_management
             InitializeComponent();
             ContentFrame.Content = new Startpage();
         }
-
     }
 }
