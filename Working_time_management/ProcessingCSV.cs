@@ -75,6 +75,15 @@ namespace Working_time_management
             }
             return (int) inputCorrect;
         }
-        
+        public void addUserToCSV(string[] pwd)
+        {
+            File.WriteAllLines(@"..\..\..\data\id_pwd\id_pwd.csv", pwd, Encoding.UTF8);
+        }
+        public void addUserToCSV(string lastName, string firtsName, string DateOfBirth, string residence)
+        {
+            string[] data = { lastName + ";" + firtsName + ";" + DateOfBirth + ";" + residence };
+            File.WriteAllLines(@"..\..\..\data\id_pwd\id_pwd.csv", data); // Pfad muss geändert werden; Außerdem müssen neue Ordner erstellt werden
+        }
+
     }
 }
