@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -23,24 +24,51 @@ namespace Working_time_management
         public settings()
         {
             InitializeComponent();
+            for (int i = 0; i < selectDuration.Items.Count; i++)
+            {
+                ComboBoxItem item = (ComboBoxItem) selectDuration.Items[i];
+                if (item != null)
+                {
+                    if (string.Compare(item.Content.ToString(), IniHandler.Read("Maximum", "Breaks")) == 0)
+                    {
+                        selectDuration.SelectedItem = item;
+                        break;
+                    }                
+                }
+            }
+
+            for (int i = 0; i < selectTime.Items.Count; i++)
+            {
+                ComboBoxItem item = (ComboBoxItem)selectTime.Items[i];
+                if (item != null)
+                {
+                    if (string.Compare(item.Content.ToString(), IniHandler.Read("Fix", "Breaks")) == 0)
+                    {
+                        selectTime.SelectedItem = item;
+                        break;
+                    }
+                }
+            }
         }
 
         private void selectDuration_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(IniHandler.KeyExists("Maximum", "Breaks"))
+            ComboBoxItem selected = selectDuration.SelectedItem as ComboBoxItem;
+            if (selected != null)
             {
-                IniHandler.DeleteKey("Maximum", "Breaks");
+                IniHandler.Write("Maximum", selected.Content.ToString(), "Breaks");
             }
-            IniHandler.Write("Maximum", selectDuration.Text, "Breaks");
+            
         }
 
         private void selectTime_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (IniHandler.KeyExists("Fix", "Breaks"))
+            ComboBoxItem selected = selectTime.SelectedItem as ComboBoxItem;
+            if(selected != null)
             {
-                IniHandler.DeleteKey("Fix", "Breaks");
+                IniHandler.Write("Fix", selected.Content.ToString(), "Breaks");
             }
-            IniHandler.Write("Fix", selectTime.Text, "Breaks");
+            
         }
     }
 }

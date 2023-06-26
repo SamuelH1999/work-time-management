@@ -35,27 +35,27 @@
         <CheckBox Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" >zu festen Zeiten</CheckBox>
         <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">Automatische Pause nach ... Stunden</Label>
         <ComboBox x:Name="selectDuration" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" SelectionChanged="selectDuration_SelectionChanged">
-            <ComboBoxItem>4</ComboBoxItem>
-            <ComboBoxItem>5</ComboBoxItem>
-            <ComboBoxItem IsSelected="True">6</ComboBoxItem>
-            <ComboBoxItem>7</ComboBoxItem>
-            <ComboBoxItem>8</ComboBoxItem>
+            <ComboBoxItem Content="4"/>
+            <ComboBoxItem Content="5"/>
+            <ComboBoxItem Content="6"/>
+            <ComboBoxItem Content="7"/>
+            <ComboBoxItem Content="8"/>
         </ComboBox>
         <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">Feste Pausenzeit</Label>
         <ComboBox x:Name="selectTime" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" SelectionChanged="selectTime_SelectionChanged">
-            <ComboBoxItem>10:00</ComboBoxItem>
-            <ComboBoxItem>10:30</ComboBoxItem>
-            <ComboBoxItem>11:00</ComboBoxItem>
-            <ComboBoxItem>11:30</ComboBoxItem>
-            <ComboBoxItem IsSelected="True" >12:00</ComboBoxItem>
-            <ComboBoxItem>12:30</ComboBoxItem>
-            <ComboBoxItem>13:00</ComboBoxItem>
-            <ComboBoxItem>13:30</ComboBoxItem>
-            <ComboBoxItem>14:00</ComboBoxItem>
-            <ComboBoxItem>14:30</ComboBoxItem>
-            <ComboBoxItem>15:00</ComboBoxItem>
-            <ComboBoxItem>15:30</ComboBoxItem>
-            <ComboBoxItem>16:00</ComboBoxItem>
+            <ComboBoxItem Content="10:00"/>
+            <ComboBoxItem Content="10:30"/>
+            <ComboBoxItem Content="11:00"/>
+            <ComboBoxItem Content="11:30"/>
+            <ComboBoxItem Content="12:00"/>
+            <ComboBoxItem Content="12:30"/>
+            <ComboBoxItem Content="13:00"/>
+            <ComboBoxItem Content="13:30"/>
+            <ComboBoxItem Content="14:00"/>
+            <ComboBoxItem Content="14:30"/>
+            <ComboBoxItem Content="15:00"/>
+            <ComboBoxItem Content="15:30"/>
+            <ComboBoxItem Content="16:00"/>
         </ComboBox>
         <Button Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" MinHeight="30">Neues Admin Passwort festlegen</Button>
     </Grid>
