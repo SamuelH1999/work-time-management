@@ -48,8 +48,7 @@ namespace Working_time_management
         {
             string userID = tbId.Text;
             string userPWD = tbPwd.Text;
-            var PCSV = new ProcessingCSV();
-            int inputCorrect = PCSV.checkLogIn(userID, userPWD, isLogIn);
+            int inputCorrect = ProcessingCSV.checkLogIn(userID, userPWD, isLogIn);
             switch (inputCorrect)
             {
                 case 0:

@@ -10,9 +10,9 @@ using System.Security.Policy;
 
 namespace Working_time_management
 {
-    class ProcessingCSV
+    public static class ProcessingCSV
     {
-        enum LogInResult
+        private enum LogInResult
         {
             IDNotFound,
             PwdIncorrect,
@@ -22,12 +22,12 @@ namespace Working_time_management
             TimeDetectionIdNotFound,
         }
 
-        private string[] readPwdIDCSV()
+        private static string[] readPwdIDCSV()
         {
             string[] pwdIdCSV = File.ReadAllLines(@"..\..\..\data\id_pwd\id_pwd.csv");
             return pwdIdCSV;
         }
-        public int checkLogIn(string userID, string userPWD, bool isLogIn)
+        public static int checkLogIn(string userID, string userPWD, bool isLogIn)
         {
             string[] CSV = readPwdIDCSV();
 
@@ -76,11 +76,11 @@ namespace Working_time_management
             }
             return (int) inputCorrect;
         }
-        public void addUserToID_PWDCSV(string[] pwd)
+        public static void addUserToID_PWDCSV(string[] pwd)
         {
             File.AppendAllLines(@"..\..\..\data\id_pwd\id_pwd.csv", pwd, Encoding.UTF8);
         }
-        public void addUserToWorkerInformationCSV(string lastName, string firtsName, string DateOfBirth, string residence)
+        public static void addUserToWorkerInformationCSV(string lastName, string firtsName, string DateOfBirth, string residence)
         {
             string[] data = { lastName + ";" + firtsName + ";" + DateOfBirth + ";" + residence };
             File.WriteAllLines(@"..\..\..\data\id_pwd\id_pwd.csv", data); // Pfad muss geändert werden; Außerdem müssen neue Ordner erstellt werden
