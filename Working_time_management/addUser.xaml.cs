@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,14 +30,28 @@ namespace Working_time_management
         {
             if(tbFirstName.Text.Length > 0 || tbLastName.Text.Length > 0) 
             {
+                string pwd = tbPwd.Text;
+                string id = tbID.Text;
+                string[] pwdID = {id + ";" + pwd};
                 string fullName = tbFirstName.Text + " " + tbLastName.Text;
-                this.NavigationService.Navigate(new userManagement(fullName)); 
+                var PCSV = new ProcessingCSV();
+                PCSV.addUserToID_PWDCSV(pwdID);
+                this.NavigationService.Navigate(new userManagement());
+                
             }
             else
             {
                 this.NavigationService.Navigate(new userManagement());
             }
             
+        }
+        private void newFolder(int newID)
+        {
+            String sPath = @"..\..\..\data\\worker_information" + @"\" + newID; // newID ist die neue ID des Mitarbeiters welcher angelegt werden soll
+            if (Directory.Exists(sPath) == false)
+            {
+                Directory.CreateDirectory(sPath);
+            }
         }
     }
 }
