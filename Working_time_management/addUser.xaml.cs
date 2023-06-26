@@ -35,7 +35,7 @@ namespace Working_time_management
                 string[] pwdID = {id + ";" + pwd};
                 string fullName = tbFirstName.Text + " " + tbLastName.Text;
                 ProcessingCSV.addUserToID_PWDCSV(pwdID);
-                this.NavigationService.Navigate(new userManagement());
+                this.NavigationService.Navigate(new userManagement(fullName));
                 
             }
             else
