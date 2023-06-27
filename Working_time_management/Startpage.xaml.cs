@@ -51,25 +51,25 @@ namespace Working_time_management
             int inputCorrect = ProcessingCSV.checkLogIn(userID, userPWD, isLogIn);
             switch (inputCorrect)
             {
-                case 0:
+                case (int)ProcessingCSV.LogInResult.IDNotFound:
                     MessageBox.Show("ID nicht gefunden!", "Anmeldefehler", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
                     tbId.Text = "";
                     tbPwd.Text = "";
                     break;
-                case 1:
+                case (int)ProcessingCSV.LogInResult.PwdIncorrect:
                     MessageBox.Show("Passwort nicht korrekt!", "Anmeldefehler", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
                     tbPwd.Text = "";
                     break;
-                case 2:
+                case (int)ProcessingCSV.LogInResult.UserCorrect:
                     this.NavigationService.Navigate(new menu(userID));
                     break;
-                case 3:
+                case (int)ProcessingCSV.LogInResult.AdminCorrect:
                     this.NavigationService.Navigate(new menuAdmin());
                     break;
-                case 4:
+                case (int)ProcessingCSV.LogInResult.TimeDetectionIdFound:
                     this.NavigationService.Navigate(new TimeDetection(userID));
                     break;
-                case 5:
+                case (int)ProcessingCSV.LogInResult.TimeDetectionIdNotFound:
                     MessageBox.Show("ID nicht gefunden!", "Anmeldefehler", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
                     tbId.Text = "";
                     break;

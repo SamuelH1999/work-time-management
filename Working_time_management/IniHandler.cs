@@ -12,7 +12,7 @@ namespace Working_time_management
 {
     public static class IniHandler   // revision 11
     {
-        static readonly string Path = @"..\..\..\data\admin\init\settings.ini";
+        private static readonly string Path = @"..\..\..\data\admin\init\settings.ini";
 
         [DllImport("kernel32", CharSet = CharSet.Unicode)]
         static extern long WritePrivateProfileString(string Section, string Key, string Value, string FilePath);

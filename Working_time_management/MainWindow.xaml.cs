@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Working_time_management
 {
@@ -24,6 +25,16 @@ namespace Working_time_management
         {
             InitializeComponent();
             ContentFrame.Content = new Startpage();
+            DispatcherTimer clockTimer = new DispatcherTimer();
+            clockTimer.Interval = TimeSpan.FromSeconds(1);
+            clockTimer.Tick += clockTick;
+            clockTimer.Start();
+            
+        }
+
+        void clockTick(object sender, EventArgs e)
+        {
+            tbClock.Content = " " + DateTime.Now.ToString("HH:mm") + " Uhr\n" + DateTime.Now.ToString("dd.MM.yyyy");
         }
     }
 }

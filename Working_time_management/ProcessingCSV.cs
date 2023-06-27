@@ -12,7 +12,7 @@ namespace Working_time_management
 {
     public static class ProcessingCSV
     {
-        private enum LogInResult
+        public enum LogInResult
         {
             IDNotFound,
             PwdIncorrect,
