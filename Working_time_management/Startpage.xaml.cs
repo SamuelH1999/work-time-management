@@ -72,6 +72,7 @@ namespace Working_time_management
                 case (int)ProcessingCSV.LogInResult.TimeDetectionIdNotFound:
                     MessageBox.Show("ID nicht gefunden!", "Anmeldefehler", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
                     tbId.Text = "";
+                    tbPwd.Text = "";
                     break;
             }
         }
