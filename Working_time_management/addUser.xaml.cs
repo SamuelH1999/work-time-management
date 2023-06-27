@@ -33,10 +33,15 @@ namespace Working_time_management
                 string pwd = tbPwd.Text;
                 string id = tbID.Text;
                 string[] pwdID = {id + ";" + pwd};
-                string fullName = tbFirstName.Text + " " + tbLastName.Text;
+                string fullName = tbFirstName.Text + " " + tbLastName.Text;         //für den GUI-Test
+                string lastNameForCSV = tbLastName.Text;                            //für den Eintrag in die CSV-Datei
+                string firstNameForCSV = tbFirstName.Text;                          //für den Eintrag in die CSV-Datei
+                string dateOfBirth = tbDateOfBirth.Text;
+                string residence = tbResidence.Text;    
                 ProcessingCSV.addUserToID_PWDCSV(pwdID);
+                newFolder(id);
+                ProcessingCSV.addUserToWorkerInformationCSV(id,lastNameForCSV, firstNameForCSV, dateOfBirth, residence);
                 this.NavigationService.Navigate(new userManagement(fullName));
-                
             }
             else
             {
@@ -44,7 +49,7 @@ namespace Working_time_management
             }
             
         }
-        private void newFolder(int newID)
+        private void newFolder(string newID)
         {
             String sPath = @"..\..\..\data\\worker_information" + @"\" + newID; // newID ist die neue ID des Mitarbeiters welcher angelegt werden soll
             if (Directory.Exists(sPath) == false)
@@ -52,5 +57,6 @@ namespace Working_time_management
                 Directory.CreateDirectory(sPath);
             }
         }
+
     }
 }
