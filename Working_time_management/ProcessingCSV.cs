@@ -80,10 +80,10 @@ namespace Working_time_management
         {
             File.AppendAllLines(@"..\..\..\data\id_pwd\id_pwd.csv", pwdID, Encoding.UTF8);
         }
-        public static void addUserToWorkerInformationCSV(string lastName, string firtsName, string DateOfBirth, string residence)
+        public static void addUserToWorkerInformationCSV(string id, string lastName, string firstName, string DateOfBirth, string residence)
         {
-            string[] data = { lastName + ";" + firtsName + ";" + DateOfBirth + ";" + residence };
-            File.WriteAllLines(@"..\..\..\data\worker_information\" + id + @"\" + "worker_information.csv", data); // Pfad muss geändert werden; Außerdem müssen neue Ordner erstellt werden
+            string[] data = { lastName + ";" + firstName + ";" + DateOfBirth + ";" + residence };
+            File.WriteAllLines(@"..\..\..\data\worker_information\" + id + @"\worker_information.csv", data); // Pfad muss geändert werden; Außerdem müssen neue Ordner erstellt werden
         }
         public static void editUserToID_PWDCSV(string id, string newPwd)            //id und newPwd muss aus editUser.xaml.cs übergeben werden
         {
@@ -100,6 +100,10 @@ namespace Working_time_management
                 }
             }
             
+        }
+        public static string GetWorkerInformation(string id)
+        {
+            return File.ReadLines(@"..\..\..\data\worker_information\" + id + @"\worker_information.csv").First();
         }
 
     }

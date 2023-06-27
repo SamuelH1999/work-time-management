@@ -27,7 +27,7 @@ namespace Working_time_management
             this.userID = id;
             if (userID == "123456") {
                 string[] information = ProcessingCSV.GetWorkerInformation(userID).Split(';');
-                lblUserName.Content = information[0] + " " + information[1];
+                lblUserName.Content = information[1] + " " + information[0];
                 lblUserDoB.Content = information[2];
                 lblResidence.Content = information[3];
 

@@ -40,7 +40,7 @@ namespace Working_time_management
                 string fullName = firstName + " " + lastName;
                 ProcessingCSV.addUserToID_PWDCSV(pwdID);
                 newFolder(id);
-                ProcessingCSV.addUserToWorkerInformationCSV(id, firstName, lastName, dateOfBirth, residence);
+                ProcessingCSV.addUserToWorkerInformationCSV(id, lastName, firstName, dateOfBirth, residence);
                 this.NavigationService.Navigate(new userManagement(fullName));
             }
             else
