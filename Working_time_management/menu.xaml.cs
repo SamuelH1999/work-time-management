@@ -20,17 +20,12 @@ namespace Working_time_management
     /// </summary>
     public partial class menu : Page
     {
-        public int userID;
-        public menu(int id)
-        {
-            InitializeComponent();
-            this.userID = id;
-        }
+        private string userID;
 
         public menu(string id)
         {
             InitializeComponent();
-            this.userID = int.Parse(id);
+            this.userID = id;
         }
 
         private void LogOut(object sender, RoutedEventArgs e)

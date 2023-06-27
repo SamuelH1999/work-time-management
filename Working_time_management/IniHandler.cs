@@ -21,7 +21,7 @@ namespace Working_time_management
         static extern int GetPrivateProfileString(string Section, string Key, string Default, StringBuilder RetVal, int Size, string FilePath);
 
 
-        public static string  Read(string Key, string Section)
+        public static string Read(string Key, string Section)
         {
             var RetVal = new StringBuilder(255);
             GetPrivateProfileString(Section, Key, "", RetVal, 255, Path);

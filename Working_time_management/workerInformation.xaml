@@ -29,7 +29,7 @@
         
         <Label FontSize="22" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center">Angemeldet</Label>
         <Label x:Name="lblUserName" FontSize="22" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center">Peter Schmidt</Label>
-        <Label x:Name="lblUserAge" FontSize="22" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center">45</Label>
-        <Label FontSize="22" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center">Fulda</Label>
+        <Label x:Name="lblUserDoB" FontSize="22" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center">01.02.1983</Label>
+        <Label x:Name="lblResidence" FontSize="22" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center">Fulda</Label>
     </Grid>
 </Page>

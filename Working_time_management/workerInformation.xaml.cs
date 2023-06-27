@@ -20,14 +20,17 @@ namespace Working_time_management
     /// </summary>
     public partial class workerInformation : Page
     {
-        public int userID;
-        public workerInformation(int id)
+        private string userID;
+        public workerInformation(string id)
         {
             InitializeComponent();
             this.userID = id;
-            if (userID == 123456) {
-                lblUserName.Content = "Rainer Zufall";
-                lblUserAge.Content = "60";
+            if (userID == "123456") {
+                string[] information = ProcessingCSV.GetWorkerInformation(userID).Split(';');
+                lblUserName.Content = information[0] + " " + information[1];
+                lblUserDoB.Content = information[2];
+                lblResidence.Content = information[3];
+
             }
         }
     }

@@ -80,10 +80,15 @@ namespace Working_time_management
         {
             File.AppendAllLines(@"..\..\..\data\id_pwd\id_pwd.csv", pwd, Encoding.UTF8);
         }
-        public static void addUserToWorkerInformationCSV(string lastName, string firtsName, string DateOfBirth, string residence)
+        public static void addUserToWorkerInformationCSV(string id, string firstName, string lastName, string dateOfBirth, string residence)
         {
-            string[] data = { lastName + ";" + firtsName + ";" + DateOfBirth + ";" + residence };
-            File.WriteAllLines(@"..\..\..\data\id_pwd\id_pwd.csv", data); // Pfad muss geändert werden; Außerdem müssen neue Ordner erstellt werden
+            string[] data = {firstName + ";" + lastName + ";" + dateOfBirth + ";" + residence };
+            File.WriteAllLines(@"..\..\..\data\worker_information\" + id + @"\worker_information.csv", data); // Pfad muss geändert werden; Außerdem müssen neue Ordner erstellt werden
+        }
+
+        public static string GetWorkerInformation(string id)
+        {
+            return File.ReadLines(@"..\..\..\data\worker_information\" + id + @"\worker_information.csv").First();
         }
 
     }
