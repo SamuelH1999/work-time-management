@@ -76,19 +76,30 @@ namespace Working_time_management
             }
             return (int) inputCorrect;
         }
-        public static void addUserToID_PWDCSV(string[] pwd)
+        public static void addUserToID_PWDCSV(string[] pwdID)
         {
-            File.AppendAllLines(@"..\..\..\data\id_pwd\id_pwd.csv", pwd, Encoding.UTF8);
+            File.AppendAllLines(@"..\..\..\data\id_pwd\id_pwd.csv", pwdID, Encoding.UTF8);
         }
-        public static void addUserToWorkerInformationCSV(string id, string firstName, string lastName, string dateOfBirth, string residence)
+        public static void addUserToWorkerInformationCSV(string lastName, string firtsName, string DateOfBirth, string residence)
         {
-            string[] data = {firstName + ";" + lastName + ";" + dateOfBirth + ";" + residence };
-            File.WriteAllLines(@"..\..\..\data\worker_information\" + id + @"\worker_information.csv", data); // Pfad muss geändert werden; Außerdem müssen neue Ordner erstellt werden
+            string[] data = { lastName + ";" + firtsName + ";" + DateOfBirth + ";" + residence };
+            File.WriteAllLines(@"..\..\..\data\worker_information\" + id + @"\" + "worker_information.csv", data); // Pfad muss geändert werden; Außerdem müssen neue Ordner erstellt werden
         }
-
-        public static string GetWorkerInformation(string id)
+        public static void editUserToID_PWDCSV(string id, string newPwd)            //id und newPwd muss aus editUser.xaml.cs übergeben werden
         {
-            return File.ReadLines(@"..\..\..\data\worker_information\" + id + @"\worker_information.csv").First();
+            string[] editPwdID = { id + ";" + newPwd };
+            string[] CSV = readPwdIDCSV();
+            foreach (string line in CSV)
+            {
+                string[] data = line.Split(';');
+                string ID = data[0];
+                string pwd = data[1];
+                if (id == ID)
+                {
+                    File.WriteAllLines(@"..\..\..\data\id_pwd\id_pwd.csv", editPwdID, Encoding.UTF8);
+                }
+            }
+            
         }
 
     }

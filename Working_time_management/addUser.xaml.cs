@@ -42,7 +42,6 @@ namespace Working_time_management
                 newFolder(id);
                 ProcessingCSV.addUserToWorkerInformationCSV(id, firstName, lastName, dateOfBirth, residence);
                 this.NavigationService.Navigate(new userManagement(fullName));
-                
             }
             else
             {
@@ -58,5 +57,6 @@ namespace Working_time_management
                 Directory.CreateDirectory(sPath);
             }
         }
+
     }
 }
