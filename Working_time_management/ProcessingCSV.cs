@@ -22,18 +22,11 @@ namespace Working_time_management
             TimeDetectionIdNotFound,
         }
 
-        private static string[] readPwdIDCSV()
-        {
-            string[] pwdIdCSV = File.ReadAllLines(@"..\..\..\data\id_pwd\id_pwd.csv");
-            return pwdIdCSV;
-        }
         public static int checkLogIn(string userID, string userPWD, bool isLogIn)
         {
-            string[] CSV = readPwdIDCSV();
-
             LogInResult inputCorrect = LogInResult.IDNotFound;
 
-            foreach (string line in CSV)
+            foreach (string line in File.ReadLines(@"..\..\..\data\id_pwd\id_pwd.csv"))
             {
                 string[] data = line.Split(';');
                 string ID = data[0];
@@ -88,8 +81,7 @@ namespace Working_time_management
         public static void editUserToID_PWDCSV(string id, string newPwd)            //id und newPwd muss aus editUser.xaml.cs übergeben werden
         {
             string[] editPwdID = { id + ";" + newPwd };
-            string[] CSV = readPwdIDCSV();
-            foreach (string line in CSV)
+            foreach (string line in File.ReadLines(@"..\..\..\data\id_pwd\id_pwd.csv"))
             {
                 string[] data = line.Split(';');
                 string ID = data[0];
