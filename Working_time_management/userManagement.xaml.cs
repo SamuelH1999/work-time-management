@@ -72,13 +72,16 @@ namespace Working_time_management
             {
                 string[] data = line.Split(';');
                 string Id = data[0];
+                string Pwd = data[1];
                 if (Id != "123123")
                 {
                     string workerInformation = ProcessingCSV.GetWorkerInformation(Id);
                     string[] workerInformationSplit = workerInformation.Split(';');
                     string lastName = workerInformationSplit[0];
                     string firstName = workerInformationSplit[1];
-                    list.Add(new Worker { LastName = lastName, FirstName = firstName, ID = Id});
+                    string dateOfBirth = workerInformationSplit[2];
+                    string residence = workerInformationSplit[3];  
+                    list.Add(new Worker { LastName = lastName, FirstName = firstName, DateOfBirth = dateOfBirth, Residence = residence, Password = Pwd, ID = Id});
                 }
                 else
                 {

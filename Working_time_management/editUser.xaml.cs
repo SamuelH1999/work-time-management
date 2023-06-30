@@ -23,9 +23,12 @@ namespace Working_time_management
         public editUser(string[] names)
         {
             InitializeComponent();
-            tbFirstName.Text = names[0];
-            //tbLastName.Text = names[1];
-            //string ID = names[2];
+            tbLastName.Text = names[0];
+            tbFirstName.Text = names[1];
+            tbDayOfBirth.Text = names[2];
+            tbResidence.Text = names[3];
+            tbPwd.Text = names[4];
+            string ID = names[5];
         }
 
         private void confirmEditClick(object sender, RoutedEventArgs e)
@@ -33,7 +36,7 @@ namespace Working_time_management
             if (tbFirstName.Text.Length > 0 || tbLastName.Text.Length > 0)
             {
                 string fullName = tbFirstName.Text + " " + tbLastName.Text;
-                this.NavigationService.Navigate(new userManagement(fullName));
+                this.NavigationService.Navigate(new userManagement());
             }
             else
             {
