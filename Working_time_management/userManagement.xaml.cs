@@ -29,6 +29,7 @@ namespace Working_time_management
             fillListBox();
         }
 
+        /*
         public userManagement(string addName)
         {
             InitializeComponent();
@@ -36,7 +37,7 @@ namespace Working_time_management
             newUser.Content = addName;
             userList.Items.Add(newUser);
         }
-
+        */
         private void newUserClick(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new addUser());

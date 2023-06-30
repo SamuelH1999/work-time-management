@@ -41,7 +41,7 @@ namespace Working_time_management
                 ProcessingCSV.addUserToID_PWDCSV(pwdID);
                 newFolder(id);
                 ProcessingCSV.addUserToWorkerInformationCSV(id, lastName, firstName, dateOfBirth, residence);
-                this.NavigationService.Navigate(new userManagement(fullName));
+                this.NavigationService.Navigate(new userManagement());
             }
             else
             {

@@ -21,12 +21,23 @@ namespace Working_time_management
             TimeDetectionIdFound,
             TimeDetectionIdNotFound,
         }
+        private static readonly string idPwdPath = @"..\..\..\data\id_pwd\id_pwd.csv";
+
+        private static string getWorkerInformationPath(string id)
+        {
+            return @"..\..\..\data\worker_information\" + id + @"\worker_information.csv";
+        }
+
+        private static string getUserRequestPath(string id)
+        {
+            return @"..\..\..\data\worker_information\" + id + @"\request.csv";
+        }
 
         public static int checkLogIn(string userID, string userPWD, bool isLogIn)
         {
             LogInResult inputCorrect = LogInResult.IDNotFound;
 
-            foreach (string line in File.ReadLines(@"..\..\..\data\id_pwd\id_pwd.csv"))
+            foreach (string line in File.ReadLines(idPwdPath))
             {
                 string[] data = line.Split(';');
                 string ID = data[0];
@@ -71,35 +82,40 @@ namespace Working_time_management
         }
         public static void addUserToID_PWDCSV(string[] pwdID)
         {
-            File.AppendAllLines(@"..\..\..\data\id_pwd\id_pwd.csv", pwdID, Encoding.UTF8);
+            File.AppendAllLines(idPwdPath, pwdID, Encoding.UTF8);
         }
         public static void addUserToWorkerInformationCSV(string id, string lastName, string firstName, string DateOfBirth, string residence)
         {
             string[] data = { lastName + ";" + firstName + ";" + DateOfBirth + ";" + residence };
-            File.WriteAllLines(@"..\..\..\data\worker_information\" + id + @"\worker_information.csv", data); 
+            string workerInformationPath = getWorkerInformationPath(id);
+            string userRequestPath = getUserRequestPath(id);
+            File.WriteAllLines(workerInformationPath, data);
+            File.Create(userRequestPath);
         }
         public static void editUserID_PWDToCSV(string id, string newPwd)            //id und newPwd muss aus editUser.xaml.cs übergeben werden
         {
             string[] editPwdID = { id + ";" + newPwd };
-            foreach (string line in File.ReadLines(@"..\..\..\data\id_pwd\id_pwd.csv"))
+            foreach (string line in File.ReadLines(idPwdPath))
             {
                 string[] data = line.Split(';');
                 string ID = data[0];
                 string pwd = data[1];
                 if (id == ID)
                 {
-                    File.WriteAllLines(@"..\..\..\data\id_pwd\id_pwd.csv", editPwdID, Encoding.UTF8);
+                    File.WriteAllLines(idPwdPath, editPwdID, Encoding.UTF8);
                 }
             }            
         }
         public static void editUserToWorkerInformationCSV(string id, string lastName, string firstName, string DateOfBirth, string residence)
         {
             string[] data = { lastName + ";" + firstName + ";" + DateOfBirth + ";" + residence };
-            File.WriteAllLines(@"..\..\..\data\worker_information\" + id + @"\worker_information.csv", data);
+            string workerInformationPath = getWorkerInformationPath(id);
+            File.WriteAllLines(workerInformationPath, data);
         }
         public static string GetWorkerInformation(string id)
         {
-            return File.ReadLines(@"..\..\..\data\worker_information\" + id + @"\worker_information.csv").First();
+            string workerInformationPath = getWorkerInformationPath(id);
+            return File.ReadLines(workerInformationPath).First();
         }
     }
 }
