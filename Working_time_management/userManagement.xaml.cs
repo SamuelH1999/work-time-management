@@ -68,7 +68,6 @@ namespace Working_time_management
 
         private void fillListBox()
         {
-            list = new List<Worker>();
             foreach (string line in File.ReadLines(@"..\..\..\data\id_pwd\id_pwd.csv"))
             {
                 string[] data = line.Split(';');

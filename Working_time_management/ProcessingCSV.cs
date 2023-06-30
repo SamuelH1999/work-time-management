@@ -21,14 +21,14 @@ namespace Working_time_management
             TimeDetectionIdFound,
             TimeDetectionIdNotFound,
         }
-        private static readonly string idPwdPath = @"..\..\..\data\id_pwd\id_pwd.csv";
+        public static readonly string idPwdPath = @"..\..\..\data\id_pwd\id_pwd.csv";
 
-        private static string getWorkerInformationPath(string id)
+        public static string getWorkerInformationPath(string id)
         {
             return @"..\..\..\data\worker_information\" + id + @"\worker_information.csv";
         }
 
-        private static string getUserRequestPath(string id)
+        public static string getUserRequestPath(string id)
         {
             return @"..\..\..\data\worker_information\" + id + @"\request.csv";
         }

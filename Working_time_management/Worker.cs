@@ -20,5 +20,9 @@ namespace Working_time_management
         {
             return LastName + ", " + FirstName + ", " + ID;
         }
+        public string ToEdit()
+        {
+            return LastName + ", " + FirstName + ", " + DateOfBirth + ", " + Residence + ", " + Password + ", " + ID;
+        }
     }
 }
