@@ -25,12 +25,11 @@ namespace Working_time_management
         {
             InitializeComponent();
             this.userID = id;
-            if (userID == "123456") {
+            if (userID != "123123") {
                 string[] information = ProcessingCSV.GetWorkerInformation(userID).Split(';');
                 lblUserName.Content = information[1] + " " + information[0];
                 lblUserDoB.Content = information[2];
                 lblResidence.Content = information[3];
-
             }
         }
     }

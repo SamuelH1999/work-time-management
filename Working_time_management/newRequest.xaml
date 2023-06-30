@@ -28,11 +28,11 @@
         <Label Grid.Row="2" Grid.Column="0" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Right">Von:</Label>
         <Label Grid.Row="3" Grid.Column="0" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Right">Bis:</Label>
 
-        <RadioButton x:Name="checkboxHoliday" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Checked="checkedHoliday" GroupName="holidayType"></RadioButton>
-        <RadioButton Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="holidayType"></RadioButton>
+        <RadioButton x:Name="checkboxHoliday" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="holidayType" IsChecked="True"></RadioButton>
+        <RadioButton x:Name="checkboxOvertime" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="holidayType"></RadioButton>
 
-        <DatePicker Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center"></DatePicker>
-        <DatePicker Grid.Row="3" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center"></DatePicker>
+        <DatePicker x:Name="startDate" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center"></DatePicker>
+        <DatePicker x:Name="endDate" Grid.Row="3" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center"></DatePicker>
 
         <Button x:Name="btnHolidayRequest" Grid.Row="4" Grid.Column="1" FontSize="14" Click="clickHolReqVerify" Margin="100,10,10,10">Bestätigen!</Button>
 

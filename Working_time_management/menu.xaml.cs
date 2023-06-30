@@ -50,7 +50,7 @@ namespace Working_time_management
 
         private void clickRequest(object sender, RoutedEventArgs e)
         {
-            contentFrameMenu.Content = new request();
+            contentFrameMenu.Content = new request(userID);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +21,20 @@ namespace Working_time_management
     /// </summary>
     public partial class request : Page
     {
-        public request()
+        private string userID;
+        private string CSVpath;
+        public request(string id)
         {
             InitializeComponent();
+            this.userID = id;
+            this.CSVpath = ProcessingCSV.getUserRequestPath(userID);
+            foreach (string line in File.ReadLines(CSVpath))
+            {
+                string[] requestInformation = line.Split(";");
+                ListBoxItem newRequest = new ListBoxItem();
+                newRequest.Content = requestInformation[0] + ", " + requestInformation[1] + " - " + requestInformation[2] + ", " + requestInformation[3];
+                allRequest.Items.Add(newRequest);
+            }
         }
 
         public request(int i)
@@ -36,7 +48,7 @@ namespace Working_time_management
 
         private void clickNewRequest(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new newRequest());
+            this.NavigationService.Navigate(new newRequest(userID));
         }
     }
 }
