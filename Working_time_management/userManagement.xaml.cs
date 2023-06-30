@@ -22,7 +22,7 @@ namespace Working_time_management
     /// </summary>
     public partial class userManagement : Page
     {
-        private List<Worker> list;
+        private List<Worker> list = new List<Worker>();
         public userManagement()
         {
             InitializeComponent();
@@ -46,13 +46,17 @@ namespace Working_time_management
         private void deleteUserClick(object sender, RoutedEventArgs e)
 
         {
-            if (userList.SelectedItem != null)
-            {
+            if (userList.SelectedItem != null)                                          // bis jetzt wird nur Ordner verschoben
+            {                                                                           // TODO ID & Pwd löschen
                 ListBoxItem deletedUser = userList.SelectedItem as ListBoxItem;
+                string[] name = deletedUser.Content.ToString().Split(", ");
+                string id = name[2];
                 MessageBoxResult mboxResult = MessageBox.Show("Möchten Sie " + deletedUser.Content.ToString() + " wirklich löschen?", "Nutzer löschen", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
                 if (mboxResult == MessageBoxResult.Yes)
                 {
                     userList.Items.Remove(deletedUser);
+                    moveFolder(id);
+
                 }
             }
         }
@@ -61,14 +65,14 @@ namespace Working_time_management
             if (userList.SelectedItem != null)
             {
                 ListBoxItem editUser = userList.SelectedItem as ListBoxItem;
-                string[] names = editUser.Content.ToString().Split(',');
+                string[] names = editUser.Content.ToString().Split(", ");
                 this.NavigationService.Navigate(new editUser(names));
             }
         }
 
         private void fillListBox()
         {
-            foreach (string line in File.ReadLines(@"..\..\..\data\id_pwd\id_pwd.csv"))
+            foreach (string line in File.ReadLines(ProcessingCSV.idPwdPath))
             {
                 string[] data = line.Split(';');
                 string Id = data[0];
@@ -81,7 +85,7 @@ namespace Working_time_management
                     string firstName = workerInformationSplit[1];
                     string dateOfBirth = workerInformationSplit[2];
                     string residence = workerInformationSplit[3];  
-                    list.Add(new Worker { LastName = lastName, FirstName = firstName, DateOfBirth = dateOfBirth, Residence = residence, Password = Pwd, ID = Id});
+                    list.Add(new Worker { LastName = lastName, FirstName = firstName, DateOfBirth = dateOfBirth, Residence = residence, Password = Pwd, ID = Id });
                 }
                 else
                 {
@@ -93,6 +97,19 @@ namespace Working_time_management
                 ListBoxItem newWorker = new ListBoxItem();
                 newWorker.Content = list[i].ToString(); 
                 userList.Items.Add(newWorker);
+            }
+        }
+        private void moveFolder(string ID)
+        {
+            string sPath = @"..\..\..\data\worker_information\" + ID;   //source path
+            string dPath = @"..\..\..\data\archive\" + ID;              //destination path
+            if (Directory.Exists(sPath) == true)
+            {
+                Directory.Move(sPath, dPath);
+            }
+            else
+            {
+                MessageBoxResult mboxResult = MessageBox.Show("Dieser Benutzer wurde nicht gefunden");
             }
         }
     }
