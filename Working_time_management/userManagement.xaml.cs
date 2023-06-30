@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -21,9 +22,11 @@ namespace Working_time_management
     /// </summary>
     public partial class userManagement : Page
     {
+        private List<Worker> list;
         public userManagement()
         {
             InitializeComponent();
+            fillListBox();
         }
 
         public userManagement(string addName)
@@ -52,13 +55,41 @@ namespace Working_time_management
                 }
             }
         }
-        private void editUserClick(object sender, RoutedEventArgs e)
+        private void editUserClick(object sender, RoutedEventArgs e)            //TODO Samuel
         {
             if (userList.SelectedItem != null)
             {
                 ListBoxItem editUser = userList.SelectedItem as ListBoxItem;
-                string[] names = editUser.Content.ToString().Split();
+                string[] names = editUser.Content.ToString().Split(',');
                 this.NavigationService.Navigate(new editUser(names));
+            }
+        }
+
+        private void fillListBox()
+        {
+            list = new List<Worker>();
+            foreach (string line in File.ReadLines(@"..\..\..\data\id_pwd\id_pwd.csv"))
+            {
+                string[] data = line.Split(';');
+                string Id = data[0];
+                if (Id != "123123")
+                {
+                    string workerInformation = ProcessingCSV.GetWorkerInformation(Id);
+                    string[] workerInformationSplit = workerInformation.Split(';');
+                    string lastName = workerInformationSplit[0];
+                    string firstName = workerInformationSplit[1];
+                    list.Add(new Worker { LastName = lastName, FirstName = firstName, ID = Id});
+                }
+                else
+                {
+
+                }
+            }
+            for (int i = 0; i < list.Count; i++)
+            {
+                ListBoxItem newWorker = new ListBoxItem();
+                newWorker.Content = list[i].ToString(); 
+                userList.Items.Add(newWorker);
             }
         }
     }

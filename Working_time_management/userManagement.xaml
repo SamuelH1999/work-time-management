@@ -35,17 +35,7 @@
         <Label Grid.Row="1" Grid.Column="0" FontSize="18" VerticalAlignment="Center">Benutzerliste</Label>
 
         <ListBox x:Name="userList" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" Grid.RowSpan="5">
-            <ListBoxItem MinHeight="30">Hans Wurst</ListBoxItem>
-            <ListBoxItem MinHeight="30">Petra Maier</ListBoxItem>
-            <ListBoxItem MinHeight="30">Ferdie Fuchs</ListBoxItem>
-            <ListBoxItem MinHeight="30">Susie Sommer</ListBoxItem>
-            <ListBoxItem MinHeight="30">Fred Mann</ListBoxItem>
-            <ListBoxItem MinHeight="30">Peter Schmidt</ListBoxItem>
-            <ListBoxItem MinHeight="30">Rainer Zufall</ListBoxItem>
-            <ListBoxItem MinHeight="30">Otto Normal</ListBoxItem>
-            <ListBoxItem MinHeight="30">Andi Bar</ListBoxItem>
-            <ListBoxItem MinHeight="30">Rudi Winkler</ListBoxItem>
-            <ListBoxItem MinHeight="30">Marie Johanna Gärtner</ListBoxItem>
+            
         </ListBox>
 
     </Grid>

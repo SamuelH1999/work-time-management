@@ -76,9 +76,9 @@ namespace Working_time_management
         public static void addUserToWorkerInformationCSV(string id, string lastName, string firstName, string DateOfBirth, string residence)
         {
             string[] data = { lastName + ";" + firstName + ";" + DateOfBirth + ";" + residence };
-            File.WriteAllLines(@"..\..\..\data\worker_information\" + id + @"\worker_information.csv", data); // Pfad muss geändert werden; Außerdem müssen neue Ordner erstellt werden
+            File.WriteAllLines(@"..\..\..\data\worker_information\" + id + @"\worker_information.csv", data); 
         }
-        public static void editUserToID_PWDCSV(string id, string newPwd)            //id und newPwd muss aus editUser.xaml.cs übergeben werden
+        public static void editUserID_PWDToCSV(string id, string newPwd)            //id und newPwd muss aus editUser.xaml.cs übergeben werden
         {
             string[] editPwdID = { id + ";" + newPwd };
             foreach (string line in File.ReadLines(@"..\..\..\data\id_pwd\id_pwd.csv"))
@@ -90,13 +90,16 @@ namespace Working_time_management
                 {
                     File.WriteAllLines(@"..\..\..\data\id_pwd\id_pwd.csv", editPwdID, Encoding.UTF8);
                 }
-            }
-            
+            }            
+        }
+        public static void editUserToWorkerInformationCSV(string id, string lastName, string firstName, string DateOfBirth, string residence)
+        {
+            string[] data = { lastName + ";" + firstName + ";" + DateOfBirth + ";" + residence };
+            File.WriteAllLines(@"..\..\..\data\worker_information\" + id + @"\worker_information.csv", data);
         }
         public static string GetWorkerInformation(string id)
         {
             return File.ReadLines(@"..\..\..\data\worker_information\" + id + @"\worker_information.csv").First();
         }
-
     }
 }

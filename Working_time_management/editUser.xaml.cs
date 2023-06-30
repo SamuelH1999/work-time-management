@@ -24,7 +24,8 @@ namespace Working_time_management
         {
             InitializeComponent();
             tbFirstName.Text = names[0];
-            tbLastName.Text = names[1];
+            //tbLastName.Text = names[1];
+            //string ID = names[2];
         }
 
         private void confirmEditClick(object sender, RoutedEventArgs e)
