@@ -55,6 +55,7 @@ namespace Working_time_management
                 if (mboxResult == MessageBoxResult.Yes)
                 {
                     userList.Items.Remove(deletedUser);
+                    ProcessingCSV.deleteUserPwdInCSV(id);
                     moveFolder(id);
 
                 }

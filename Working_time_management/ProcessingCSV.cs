@@ -94,22 +94,19 @@ namespace Working_time_management
         }
         public static void editUserPwdToCSV(string id, string newPwd)           // id und newPwd muss aus editUser.xaml.cs übergeben werden
         {                                                                       // schwierig umzustezen, da ich nicht gleichzeitig auf csv-Datei zugreifen kann
-            int lines = 0;                                                      // Lösung 1: Passwort in workerInformation speichern
-            foreach (string line in File.ReadLines(idPwdPath))                  // Lösung 2: neue Liste anlegen, bearbeiten und dann Datei überschreiben
-            {                                                                   // Wenn Passwort in worker_information ist, kann der Mitarbeiter, wenn dieser gelöscht wurde, 
-                lines ++;                                                       // sich auch nicht mehr anmelden. Id ist zwar noch da, aber die wäre tot -> 
-                string[] data = line.Split(';');                                // wir vergeben ja eh nur aufsteigende Ids, also nicht schlimm oder?
+            string[] allLines = File.ReadAllLines(idPwdPath);                                                    // Lösung 1: Passwort in workerInformation speichern
+            for (int i = 0; i < allLines.Length; i++)                  // Lösung 2: neue Liste anlegen, bearbeiten und dann Datei überschreiben
+            {                                                                   // Wenn Passwort in worker_information ist, kann der Mitarbeiter, wenn dieser gelöscht wurde,                                                   // sich auch nicht mehr anmelden. Id ist zwar noch da, aber die wäre tot -> 
+                string[] data = allLines[i].Split(';');                                // wir vergeben ja eh nur aufsteigende Ids, also nicht schlimm oder?
                 string ID = data[0];
                 string pwd = data[1];
                 if (ID == id)
-                {      
-                    //File.WriteAllLines(idPwdPath,editPwdID, Encoding.UTF8)
+                {
+                    allLines[i] = ID + ";" + newPwd;
+                    File.WriteAllLines(idPwdPath, allLines, Encoding.UTF8);
                     break;
                 }
             }
-
-            string[] editPwdID = { id + ";" + newPwd };
-            ;
         }
         public static void editUserToWorkerInformationCSV(string id, string lastName, string firstName, string DateOfBirth, string residence)
         {
@@ -121,6 +118,22 @@ namespace Working_time_management
         {
             string workerInformationPath = getWorkerInformationPath(id);
             return File.ReadLines(workerInformationPath).First();
+        }
+        public static void deleteUserPwdInCSV(string id)            // id und newPwd muss aus editUser.xaml.cs übergeben werden
+        {                                                                       
+            string[] allLines = File.ReadAllLines(idPwdPath);       // gesamte CSV auslesen
+            string newCSV = "";                                              
+            for (int i = 0; i < allLines.Length; i++)                
+            {                                                                                                                     
+                string[] data = allLines[i].Split(';');                               
+                string ID = data[0];
+                string pwd = data[1];
+                if (ID != id)                                       // wenn ID ungleich der aktuellen id ist, wird die ID und das Passwort in newCSV geschrieben
+                {
+                    newCSV += allLines[i] + "\n";
+                }                                                   // wenn ID gleich der aktuellen ID ist, wird die ID und das Passwort einfach weggelassen und somit gelöscht
+            }
+            File.WriteAllText(idPwdPath, newCSV, Encoding.UTF8);    // alte CSV-Datei überschreieben -> Wert der weggelassen wurde nun nicht mehr enthalten
         }
     }
 }
