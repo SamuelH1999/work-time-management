@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Logo_Hochschule.PNG" />
+    <Resource Include="data\Logo_Hochschule.PNG" />
   </ItemGroup>
 
   <ItemGroup>
