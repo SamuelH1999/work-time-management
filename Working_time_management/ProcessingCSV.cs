@@ -108,9 +108,9 @@ namespace Working_time_management
                 }
             }
         }
-        public static void editUserToWorkerInformationCSV(string id, string lastName, string firstName, string DateOfBirth, string residence)
+        public static void editUserToWorkerInformationCSV(string id, string lastName, string firstName, string DateOfBirth, string residence, string status)
         {
-            string[] data = { lastName + ";" + firstName + ";" + DateOfBirth + ";" + residence };
+            string[] data = { lastName + ";" + firstName + ";" + DateOfBirth + ";" + residence + ";" + status};
             string workerInformationPath = getWorkerInformationPath(id);
             File.WriteAllLines(workerInformationPath, data);
         }

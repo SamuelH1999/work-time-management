@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -36,6 +37,14 @@ namespace Working_time_management
             {
                 lblStatus.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("Green");
                 lblStatus.Content = "Angemeldet";
+                string workerInformation = ProcessingCSV.GetWorkerInformation(id);
+                string[] workerInformationSplit = workerInformation.Split(';');
+                string lastName = workerInformationSplit[0];
+                string firstName = workerInformationSplit[1];
+                string dateOfBirth = workerInformationSplit[2];
+                string residence = workerInformationSplit[3];
+                string status = "Angemeldet";
+                ProcessingCSV.editUserToWorkerInformationCSV(id, lastName, firstName, dateOfBirth, residence, status);
                 isActive = true;
             }
             else

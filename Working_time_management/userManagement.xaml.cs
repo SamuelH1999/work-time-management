@@ -61,7 +61,7 @@ namespace Working_time_management
                 }
             }
         }
-        private void editUserClick(object sender, RoutedEventArgs e)            //TODO Samuel
+        private void editUserClick(object sender, RoutedEventArgs e)            
         {
             if (userList.SelectedItem != null)
             {
