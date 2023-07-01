@@ -30,7 +30,9 @@ namespace Working_time_management
                 lblUserName.Content = information[1] + " " + information[0];
                 lblUserDoB.Content = information[2];
                 lblResidence.Content = information[3];
+                lblStatus.Content = information[4];
             }
+
         }
     }
 }
