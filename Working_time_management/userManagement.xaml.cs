@@ -104,6 +104,12 @@ namespace Working_time_management
         {
             string sPath = @"..\..\..\data\worker_information\" + ID;   //source path
             string dPath = @"..\..\..\data\archive\" + ID;              //destination path
+            string aPath = @"..\..\..\data\archive\";                   //path to archive folder
+            if (Directory.Exists(aPath) == false)                       // creates archive folder in case it doesn't already exist
+            {
+                Directory.CreateDirectory(aPath);
+            }
+
             if (Directory.Exists(sPath) == true)
             {
                 Directory.Move(sPath, dPath);
