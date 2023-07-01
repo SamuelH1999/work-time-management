@@ -21,68 +21,77 @@ namespace Working_time_management
     /// </summary>
     public partial class settings : Page
     {
+        private bool initialCheck = true;
         public settings()
         {
             InitializeComponent();
 
-            for (int i = 0; i < selectRounding.Items.Count; i++)
+            if (IniHandler.KeyExists("Rounding", "Time"))
             {
-                ComboBoxItem item = (ComboBoxItem)selectRounding.Items[i];
-                if (item != null)
+                for (int i = 0; i < selectRounding.Items.Count; i++)
                 {
-                    if (string.Compare(item.Content.ToString(), IniHandler.Read("Rounding", "Time")) == 0)
+                    ComboBoxItem item = (ComboBoxItem)selectRounding.Items[i];
+                    if (item != null)
                     {
-                        selectRounding.SelectedItem = item;
-                        break;
+                        if (string.Compare(item.Content.ToString(), IniHandler.Read("Rounding", "Time")) == 0)
+                        {
+                            selectRounding.SelectedItem = item;
+                            break;
+                        }
                     }
                 }
             }
 
-            for (int i = 0; i < selectDuration.Items.Count; i++)
+            if (IniHandler.KeyExists("AfterHours", "Breaks"))
             {
-                ComboBoxItem item = (ComboBoxItem) selectDuration.Items[i];
-                if (item != null)
+                radbtnDuration.IsChecked = true;
+                for (int i = 0; i < selectDuration.Items.Count; i++)
                 {
-                    if (string.Compare(item.Content.ToString(), IniHandler.Read("AfterHours", "Breaks")) == 0)
+                    ComboBoxItem item = (ComboBoxItem)selectDuration.Items[i];
+                    if (item != null)
                     {
-                        selectDuration.SelectedItem = item;
-                        break;
-                    }                
+                        if (string.Compare(item.Content.ToString(), IniHandler.Read("AfterHours", "Breaks")) == 0)
+                        {
+                            selectDuration.SelectedItem = item;
+                            break;
+                        }
+                    }
                 }
             }
 
-            for (int i = 0; i < selectTime.Items.Count; i++)
+            if (IniHandler.KeyExists("Fix", "Breaks"))
             {
-                ComboBoxItem item = (ComboBoxItem)selectTime.Items[i];
-                if (item != null)
+                radbtnTime.IsChecked = true;
+                for (int i = 0; i < selectTime.Items.Count; i++)
                 {
-                    if (string.Compare(item.Content.ToString(), IniHandler.Read("Fix", "Breaks")) == 0)
+                    ComboBoxItem item = (ComboBoxItem)selectTime.Items[i];
+                    if (item != null)
                     {
-                        selectTime.SelectedItem = item;
-                        break;
+                        if (string.Compare(item.Content.ToString(), IniHandler.Read("Fix", "Breaks")) == 0)
+                        {
+                            selectTime.SelectedItem = item;
+                            break;
+                        }
                     }
                 }
             }
         }
-
         private void selectDuration_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBoxItem selected = selectDuration.SelectedItem as ComboBoxItem;
-            if (selected != null)
+            if (selectDuration.SelectedItem != null)
             {
                 IniHandler.Write("AfterHours", selected.Content.ToString(), "Breaks");
-            }
-            
+            }    
         }
 
         private void selectTime_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBoxItem selected = selectTime.SelectedItem as ComboBoxItem;
-            if(selected != null)
+            if(selectTime.SelectedItem != null)
             {
                 IniHandler.Write("Fix", selected.Content.ToString(), "Breaks");
             }
-            
         }
 
         private void selectRounding_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -103,6 +112,40 @@ namespace Working_time_management
         private void btnNewPwd_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void radbtnDuration_Checked(object sender, RoutedEventArgs e)
+        {
+            selectDuration.IsEnabled = true;
+            selectTime.IsEnabled = false;
+            selectTime.SelectedItem = null;
+            if (initialCheck == false)
+            {
+                ComboBoxItem selected = (ComboBoxItem)selectDuration.Items[2];
+                selectDuration.SelectedItem = selected;
+            }
+            if (IniHandler.KeyExists("Fix", "Breaks"))
+            {
+                IniHandler.DeleteKey("Fix", "Breaks");
+            }
+            initialCheck = false;
+        }
+
+        private void radbtnTime_Checked(object sender, RoutedEventArgs e)
+        {
+            selectDuration.IsEnabled = false;
+            selectTime.IsEnabled = true;
+            selectDuration.SelectedItem = null;
+            if (initialCheck == false)
+            {
+                ComboBoxItem selected = (ComboBoxItem)selectTime.Items[4];
+                selectTime.SelectedItem = selected;
+            }
+            if (IniHandler.KeyExists("AfterHours", "Breaks"))
+            {
+                IniHandler.DeleteKey("AfterHours", "Breaks");
+            }
+            initialCheck = false;
         }
     }
 }

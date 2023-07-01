@@ -37,8 +37,13 @@ namespace Working_time_management
 
             logoPath = IniHandler.Read("Path", "Logo");
             timeRounding = int.Parse(IniHandler.Read("Rounding", "Time"));
-            fixBreakTime = IniHandler.Read("Fix", "Breaks");
-            breakAfterHours = int.Parse(IniHandler.Read("AfterHours", "Breaks"));
+            if (IniHandler.KeyExists("Fix", "Breaks")){
+                fixBreakTime = IniHandler.Read("Fix", "Breaks");
+            }
+            if (IniHandler.KeyExists("AfterHours", "Breaks"))
+            {
+                breakAfterHours = int.Parse(IniHandler.Read("AfterHours", "Breaks"));
+            }
             imgLogo.Source = new BitmapImage(new Uri(logoPath, UriKind.Relative));
             
         }

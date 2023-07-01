@@ -31,19 +31,19 @@
             <ComboBoxItem>15</ComboBoxItem>
         </ComboBox>
         <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">Automatische Pausenzeiten</Label>
-        <RadioButton Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" GroupName="type">nach ... Stunden</RadioButton>
+        <RadioButton x:Name="radbtnDuration" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" GroupName="type" Checked="radbtnDuration_Checked">nach ... Stunden</RadioButton>
         <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">Automatische Pausenzeiten</Label>
-        <RadioButton Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" GroupName="type" >zu festen Zeiten</RadioButton>
+        <RadioButton x:Name="radbtnTime" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" GroupName="type" Checked="radbtnTime_Checked" >zu festen Zeiten</RadioButton>
         <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">Automatische Pause nach ... Stunden</Label>
-        <ComboBox x:Name="selectDuration" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" SelectionChanged="selectDuration_SelectionChanged">
+        <ComboBox x:Name="selectDuration" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" IsEnabled="False" SelectionChanged="selectDuration_SelectionChanged">
             <ComboBoxItem Content="4"/>
             <ComboBoxItem Content="5"/>
             <ComboBoxItem Content="6"/>
             <ComboBoxItem Content="7"/>
             <ComboBoxItem Content="8"/>
         </ComboBox>
-        <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">Feste Pausenzeit</Label>
-        <ComboBox x:Name="selectTime" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" SelectionChanged="selectTime_SelectionChanged">
+        <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" >Feste Pausenzeit</Label>
+        <ComboBox x:Name="selectTime" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" IsEnabled="False" SelectionChanged="selectTime_SelectionChanged">
             <ComboBoxItem Content="10:00"/>
             <ComboBoxItem Content="10:30"/>
             <ComboBoxItem Content="11:00"/>
