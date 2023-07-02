@@ -28,12 +28,13 @@ namespace Working_time_management
 
             if (IniHandler.KeyExists("Rounding", "Time"))
             {
+                string keyValue = IniHandler.Read("Rounding", "Time");
                 for (int i = 0; i < selectRounding.Items.Count; i++)
                 {
                     ComboBoxItem item = (ComboBoxItem)selectRounding.Items[i];
                     if (item != null)
                     {
-                        if (string.Compare(item.Content.ToString(), IniHandler.Read("Rounding", "Time")) == 0)
+                        if (string.Compare(item.Content.ToString(), keyValue) == 0)
                         {
                             selectRounding.SelectedItem = item;
                             break;
@@ -44,13 +45,14 @@ namespace Working_time_management
 
             if (IniHandler.KeyExists("AfterHours", "Breaks"))
             {
+                string keyValue = IniHandler.Read("AfterHours", "Breaks");
                 radbtnDuration.IsChecked = true;
                 for (int i = 0; i < selectDuration.Items.Count; i++)
                 {
                     ComboBoxItem item = (ComboBoxItem)selectDuration.Items[i];
                     if (item != null)
                     {
-                        if (string.Compare(item.Content.ToString(), IniHandler.Read("AfterHours", "Breaks")) == 0)
+                        if (string.Compare(item.Content.ToString(), keyValue) == 0)
                         {
                             selectDuration.SelectedItem = item;
                             break;
@@ -61,13 +63,14 @@ namespace Working_time_management
 
             if (IniHandler.KeyExists("Fix", "Breaks"))
             {
+                string keyValue = IniHandler.Read("Fix", "Breaks");
                 radbtnTime.IsChecked = true;
                 for (int i = 0; i < selectTime.Items.Count; i++)
                 {
                     ComboBoxItem item = (ComboBoxItem)selectTime.Items[i];
                     if (item != null)
                     {
-                        if (string.Compare(item.Content.ToString(), IniHandler.Read("Fix", "Breaks")) == 0)
+                        if (string.Compare(item.Content.ToString(), keyValue) == 0)
                         {
                             selectTime.SelectedItem = item;
                             break;
