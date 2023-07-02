@@ -26,6 +26,8 @@ namespace Working_time_management
         {
             InitializeComponent();
 
+            tbLogoPath.Text = IniHandler.Read("Path", "Logo");
+
             if (IniHandler.KeyExists("Rounding", "Time"))
             {
                 string keyValue = IniHandler.Read("Rounding", "Time");
