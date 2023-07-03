@@ -179,11 +179,12 @@ namespace Working_time_management
             DateTime today = DateTime.Now;
             string checkOutString = checkOut.ToString("HH:mm");
             string currentDate = today.ToString("dd.MM.yyyy");
+            string lastDate = currentDate;
             bool dateFound = false;
-            string workingTimeString ="0";
+            string workingTimeString ="00:00";
             int totalHours = 0;
             int totalMinutes = 0;
-            string totalWorkingTimeString = "0";
+            string totalWorkingTimeString = "00:00";
             foreach (string line in File.ReadLines(getUserPathWorkingTimeCSV(id)))
             {
                 string[] data = line.Split(';');
@@ -204,19 +205,31 @@ namespace Working_time_management
                     DateTime lastCHeckInDateTime = new DateTime(today.Year, today.Month, today.Day, hours, minutes, 0);
                     TimeSpan workingTime = checkOut.Subtract(lastCHeckInDateTime);
                     workingTimeString = workingTime.ToString();
-                    TimeSpan totalworkingTime = new TimeSpan(totalHours, totalMinutes, 0).Add(workingTime);
-                    totalWorkingTimeString = totalWorkingTimeString.ToString();
-                    break;
+                    TimeSpan totalWorkingTime = new TimeSpan(totalHours, totalMinutes, 0).Add(workingTime);
+                    totalWorkingTimeString = totalWorkingTime.ToString();
                 }
+                lastDate=date;
             }
             if (dateFound)
             {
-                string data = ";" + checkOutString + ";" + totalWorkingTimeString.Split(":")[0] + ":" + workingTimeString.Split(":")[1];
+                string data = ";" + checkOutString + ";" + totalWorkingTimeString.Split(":")[0] + ":" + totalWorkingTimeString.Split(":")[1];
                 File.AppendAllText(getUserPathWorkingTimeCSV(id), data, Encoding.UTF8);
             }
-            else
+            else //Error-Handling
             {
-                                                                                            //Error-Handling
+                if(lastDate != currentDate && lastDate != "Datum" && lastDate != "")
+                {
+                    int lastDateYear;
+                    int lastDateMonth;
+                    int lastDateDay;
+                    lastDateYear = int.Parse(lastDate.Split('.')[2]);
+                    lastDateMonth = int.Parse(lastDate.Split('.')[1]);
+                    lastDateDay = int.Parse(lastDate.Split('.')[0]);
+                    DateTime lastDateDateTime = new DateTime(lastDateYear, lastDateMonth, lastDateDay, 23, 59, 00);
+                    writeGoInCSV(id,lastDateDateTime);                   
+                }                                                               
+                writeComeInCSV(id, new DateTime(today.Year, today.Month, today.Day, 0, 0, 0));
+                writeGoInCSV(id, checkOut);
             }
 
         }
