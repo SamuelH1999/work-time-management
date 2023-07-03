@@ -9,10 +9,16 @@
 
   <ItemGroup>
     <None Remove="Bilder\Logo_Hochschule.PNG" />
+    <None Remove="data\Haftbefehl.png" />
+    <None Remove="data\img\Logo_Hochschule.PNG" />
+    <None Remove="data\img\Logo_Hochschule.svg" />
     <None Remove="Logo_Hochschule.PNG" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="data\Haftbefehl.png" />
+    <Resource Include="data\img\Logo_Hochschule.PNG" />
+    <Resource Include="data\img\Logo_Hochschule.svg" />
     <Resource Include="data\Logo_Hochschule.PNG" />
   </ItemGroup>
 

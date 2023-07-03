@@ -7,6 +7,7 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Diagnostics.Eventing.Reader;
 using System.Security.Policy;
+using System.Windows.Markup;
 
 namespace Working_time_management
 {
@@ -31,6 +32,10 @@ namespace Working_time_management
         public static string getUserRequestPath(string id)
         {
             return @"..\..\..\data\worker_information\" + id + @"\request.csv";
+        }
+        public static string getUserPathWorkingTimeCSV(string id)
+        {
+            return @"..\..\..\data\worker_information\" + id + "/" + id + "_working_time.csv";
         }
 
         public static int checkLogIn(string userID, string userPWD, bool isLogIn)
@@ -134,6 +139,11 @@ namespace Working_time_management
                 }                                                   // wenn ID gleich der aktuellen ID ist, wird die ID und das Passwort einfach weggelassen und somit gelöscht
             }
             File.WriteAllText(idPwdPath, newCSV, Encoding.UTF8);    // alte CSV-Datei überschreieben -> Wert der weggelassen wurde nun nicht mehr enthalten
+        }
+        public static void addWorkingTimeCSV(string id)
+        {
+            string[] data = { "Kommen;Gehen;Arbeitszeit" };
+            File.WriteAllLines(getUserPathWorkingTimeCSV(id), data);
         }
     }
 }
