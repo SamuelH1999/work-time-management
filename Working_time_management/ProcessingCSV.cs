@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Diagnostics.Eventing.Reader;
 using System.Security.Policy;
 using System.Windows.Markup;
+using System.ComponentModel.Design;
 
 namespace Working_time_management
 {
@@ -91,18 +92,18 @@ namespace Working_time_management
         }
         public static void addUserToWorkerInformationCSV(string id, string lastName, string firstName, string DateOfBirth, string residence) 
         {
-            string[] data = { lastName + ";" + firstName + ";" + DateOfBirth + ";" + residence };
+            string[] data = { lastName + ";" + firstName + ";" + DateOfBirth + ";" + residence + ";" + "Abgemeldet" };
             string workerInformationPath = getWorkerInformationPath(id);
             string userRequestPath = getUserRequestPath(id);
             File.WriteAllLines(workerInformationPath, data);
             File.Create(userRequestPath);
         }
         public static void editUserPwdToCSV(string id, string newPwd)           // id und newPwd muss aus editUser.xaml.cs übergeben werden
-        {                                                                       // schwierig umzustezen, da ich nicht gleichzeitig auf csv-Datei zugreifen kann
-            string[] allLines = File.ReadAllLines(idPwdPath);                                                    // Lösung 1: Passwort in workerInformation speichern
-            for (int i = 0; i < allLines.Length; i++)                  // Lösung 2: neue Liste anlegen, bearbeiten und dann Datei überschreiben
-            {                                                                   // Wenn Passwort in worker_information ist, kann der Mitarbeiter, wenn dieser gelöscht wurde,                                                   // sich auch nicht mehr anmelden. Id ist zwar noch da, aber die wäre tot -> 
-                string[] data = allLines[i].Split(';');                                // wir vergeben ja eh nur aufsteigende Ids, also nicht schlimm oder?
+        {                                                                       
+            string[] allLines = File.ReadAllLines(idPwdPath);                                                 
+            for (int i = 0; i < allLines.Length; i++)                  
+            {                                                                                                                     
+                string[] data = allLines[i].Split(';');                                
                 string ID = data[0];
                 string pwd = data[1];
                 if (ID == id)
@@ -142,8 +143,82 @@ namespace Working_time_management
         }
         public static void addWorkingTimeCSV(string id)
         {
-            string[] data = { "Kommen;Gehen;Arbeitszeit" };
+            string[] data = { "Datum;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit" +
+                    ";Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit" };
             File.WriteAllLines(getUserPathWorkingTimeCSV(id), data);
         }
-    }
+        public static void writeComeInCSV(string id, DateTime checkIn)
+        {
+            string checkInString = checkIn.ToString("HH:mm");
+            string currentDate = DateTime.Now.ToString("dd.MM.yyyy");
+            bool dateFound = false;
+            foreach (string line in File.ReadLines(getUserPathWorkingTimeCSV(id)))
+            {
+                string[] data = line.Split(';');
+                string date = data[0];
+                if (currentDate == date)
+                {
+                    dateFound = true;
+                    break;
+                }
+            }
+            if(dateFound)
+            {
+                string data =  ";" + checkInString;
+                File.AppendAllText(getUserPathWorkingTimeCSV(id), data, Encoding.UTF8);
+            }
+            else 
+            {
+                string data = "\r\n" +  currentDate + ";" + checkInString;
+                File.AppendAllText(getUserPathWorkingTimeCSV(id), data, Encoding.UTF8);
+            }
+            
+        }
+        public static void writeGoInCSV(string id, DateTime checkOut)
+        {
+            DateTime today = DateTime.Now;
+            string checkOutString = checkOut.ToString("HH:mm");
+            string currentDate = today.ToString("dd.MM.yyyy");
+            bool dateFound = false;
+            string workingTimeString ="0";
+            int totalHours = 0;
+            int totalMinutes = 0;
+            string totalWorkingTimeString = "0";
+            foreach (string line in File.ReadLines(getUserPathWorkingTimeCSV(id)))
+            {
+                string[] data = line.Split(';');
+                string date = data[0];
+                if (currentDate == date)
+                {
+                    dateFound = true;
+                    string lastCheckIn = data[data.Length - 1];
+                    if (data.Length >= 5)
+                    {
+                        string currentWorkingTimeString = data[data.Length - 2];
+                        totalHours = int.Parse(currentWorkingTimeString.Split(":")[0]);
+                        totalMinutes = int.Parse(currentWorkingTimeString.Split(":")[1]);
+                    }
+                    string[] timeInformation = lastCheckIn.Split(':');
+                    int hours = int.Parse(timeInformation[0]);
+                    int minutes = int.Parse(timeInformation[1]);
+                    DateTime lastCHeckInDateTime = new DateTime(today.Year, today.Month, today.Day, hours, minutes, 0);
+                    TimeSpan workingTime = checkOut.Subtract(lastCHeckInDateTime);
+                    workingTimeString = workingTime.ToString();
+                    TimeSpan totalworkingTime = new TimeSpan(totalHours, totalMinutes, 0).Add(workingTime);
+                    totalWorkingTimeString = totalWorkingTimeString.ToString();
+                    break;
+                }
+            }
+            if (dateFound)
+            {
+                string data = ";" + checkOutString + ";" + totalWorkingTimeString.Split(":")[0] + ":" + workingTimeString.Split(":")[1];
+                File.AppendAllText(getUserPathWorkingTimeCSV(id), data, Encoding.UTF8);
+            }
+            else
+            {
+                                                                                            //Error-Handling
+            }
+
+        }
+    }   
 }

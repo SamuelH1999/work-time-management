@@ -48,6 +48,7 @@ namespace Working_time_management
         {
             if (!isActive)
             {
+                ProcessingCSV.writeComeInCSV(id, DateTime.Now);
                 lblStatus.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("Green");
                 lblStatus.Content = "Angemeldet";
                 string workerInformation = ProcessingCSV.GetWorkerInformation(id);
@@ -62,6 +63,7 @@ namespace Working_time_management
             }
             else
             {
+                ProcessingCSV.writeGoInCSV(id, DateTime.Now);
                 lblStatus.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("Red");
                 lblStatus.Content = "Abgemeldet";
                 string workerInformation = ProcessingCSV.GetWorkerInformation(id);
@@ -81,5 +83,6 @@ namespace Working_time_management
         {
             this.NavigationService.Navigate(new Startpage());
         }
+        
     }
 }
