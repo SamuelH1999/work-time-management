@@ -41,7 +41,7 @@ namespace Working_time_management
                 string startdate = data[1];
                 string enddate = data[2];
                 string absenceReason = data[3];
-                if (Id != "123123" && Id != null && Id != "ID")
+                if (Id != "123123" && Id != null && Id != "ID")                                         // Die ID des Admins darf nicht verwendet werden, Id darf nicht leer sein und die Id darf nicht den ersten Wert in der CSV annehmen, welcher die Überschrift "ID" enthält
                 {
                     string workerInformation = ProcessingCSV.GetWorkerInformation(Id);
                     string[] workerInformationSplit = workerInformation.Split(';');
@@ -56,12 +56,12 @@ namespace Working_time_management
             }
             for (int i = 0; i < listAbsence.Count; i++)
             {
-                DateTime today = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
+                DateTime today = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);        // Parameter um die Tage vergleichen zu können, ohne Berücksictigung der Stunden, Minuten und Sekunden
                 ListBoxItem newWorker = new ListBoxItem();
                 newWorker.Content = listAbsence[i].Absence();
                 string[] startDate = listAbsence[i].StartDate.Split('.');
                 string starteDateDay = startDate[0];
-                int startDateDayInt = int.Parse(starteDateDay);
+                int startDateDayInt = int.Parse(starteDateDay);                                                         // Muss für den Datentyp "DateTime" in int umgewandelt werden
                 string startDateMonth = startDate[1];
                 int startDateMonthInt = int.Parse(startDateMonth);
                 string startDateYear = startDate[2];
@@ -74,8 +74,8 @@ namespace Working_time_management
                 int endDateMonthInt = int.Parse(endDateMonth);
                 string endDateYear = endDate[2];
                 int endDateYearInt = int.Parse(endDateYear);
-                DateTime end = new DateTime(endDateYearInt, endDateMonthInt, endDateDayInt); //DateTime erstellen und dann Start und Enddatum mit dem aktuellen Wert vergleichen
-                if((start == today && end >= today) || (start < today && end >= today)) 
+                DateTime end = new DateTime(endDateYearInt, endDateMonthInt, endDateDayInt); 
+                if((start == today && end >= today) || (start < today && end >= today))                                 // Es sollen nur die Abwesenheiten angezeigt werden, welche gerade aktiv sind
                 {
                         absenceList.Items.Add(newWorker);
                 }

@@ -27,25 +27,25 @@ namespace Working_time_management
 
         private void clickConfirm(object sender, RoutedEventArgs e)
         {
-            DateTime today = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
-            if (dpFrom.SelectedDate == null)
+            DateTime today = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);        // Mit dieser Variable werden die Abwesenheitstage verglichen
+            if (dpFrom.SelectedDate == null)                                                                        // Es muss ein Datum asugewählt werden
             {
                 return;
             }
 
-            if (dpTo.SelectedDate == null)
+            if (dpTo.SelectedDate == null)                                                                          // Es muss ein Datum asugewählt werden
             {
                 return;
             }
             if (dpFrom.SelectedDate.Value > dpTo.SelectedDate.Value || dpFrom.SelectedDate.Value < today || dpTo.SelectedDate.Value < today)  // Enddatum darf nicht vor Stardatum liegen
-            {                                                                                                                                               // End- und Startdatum dürfen nicht voe dem heutigen Datum liegen
+            {                                                                                                                                 // End- und Startdatum dürfen nicht voe dem heutigen Datum liegen
                 MessageBox.Show("Ungültige Eingabe", "Eingabefehler", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
                 return;
             }
             string from = dpFrom.SelectedDate.Value.ToString("dd.MM.yyyy");
             string until = dpTo.SelectedDate.Value.ToString("dd.MM.yyyy");
             bool IDFound = ProcessingCSV.addAbsenceToAbsenceCSV(tbID.Text, from, until);
-            if (!IDFound) 
+            if (!IDFound)                                                                                                                     // Fehlermeldung, wenn falsche ID eingegeben wird
             {
                 MessageBox.Show("ID nicht gefunden!", "Anmeldefehler", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
             }
