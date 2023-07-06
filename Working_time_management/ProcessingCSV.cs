@@ -9,6 +9,7 @@ using System.Diagnostics.Eventing.Reader;
 using System.Security.Policy;
 using System.Windows.Markup;
 using System.ComponentModel.Design;
+using System.Windows.Controls;
 
 namespace Working_time_management
 {
@@ -89,6 +90,23 @@ namespace Working_time_management
         public static void addUserToID_PWDCSV(string[] pwdID)
         {
             File.AppendAllLines(idPwdPath, pwdID, Encoding.UTF8);
+        }
+        public static bool addAbsenceToAbsenceCSV(string ID, string startDate, string endDate)
+        {
+            bool IDFound = false;
+            foreach (string line in File.ReadLines(idPwdPath))
+            {
+                string[] data = line.Split(';');
+                string id = data[0];
+                if (id == ID)
+                {
+                    IDFound = true;
+                    string[] textForCSV = { ID + ';' + startDate + ';' + endDate + ';' +  "Krankheit" };
+                    File.AppendAllLines(@"..\..\..\data\admin\absences.csv", textForCSV, Encoding.UTF8);
+                    break;
+                }
+            }
+            return IDFound;
         }
         public static void addUserToWorkerInformationCSV(string id, string lastName, string firstName, string DateOfBirth, string residence) 
         {

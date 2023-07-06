@@ -27,16 +27,13 @@
 
         <Button x:Name="btnDetails" Grid.Row="0" Grid.Column="0">Details</Button>
 
-        <Button x:Name="btnNeueAbw" Grid.Row="0" Grid.Column="1">Abwesenheit hinzufügen</Button>
+        <Button x:Name="btnNeueAbw" Grid.Row="0" Grid.Column="1" Click="clickAddAbsence">Abwesenheit hinzufügen</Button>
 
 
         <Label Grid.Row="1" Grid.Column="0" FontSize="18" VerticalAlignment="Center">Abwesenheiten:</Label>
 
 
-        <ListBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" Grid.RowSpan="5">
-            <ListBoxItem MinHeight="30" Content="Andi Bar&#x9;&#x9; &#x9;&#x9; Krankheit &#x9;&#x9; bis: 23.06.2023"></ListBoxItem>
-            <ListBoxItem MinHeight="30" Content="Otto Normal&#x9; &#x9;&#x9; Urlaub&#x9; &#x9;&#x9; bis: 05.07.2023"></ListBoxItem>
-            <ListBoxItem MinHeight="30" Content="Marie Johanna Gärtner &#x9;&#x9; Urlaub&#x9; &#x9;&#x9; bis: 07.07.2023"></ListBoxItem>
+        <ListBox x:Name="absenceList" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" Grid.RowSpan="5">
         </ListBox>
     </Grid>
 </Page>
