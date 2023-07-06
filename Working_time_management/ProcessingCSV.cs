@@ -37,7 +37,12 @@ namespace Working_time_management
         }
         public static string getUserPathWorkingTimeCSV(string id)
         {
-            return @"..\..\..\data\worker_information\" + id + "/" + id + "_working_time.csv";
+            return @"..\..\..\data\worker_information\" + id + @"\working_time.csv";
+        }
+
+        public static string getWorkingTimeInformationPath(string id)
+        {
+            return @"..\..\..\data\worker_information\" + id + @"\working_time_information.csv";
         }
 
         public static int checkLogIn(string userID, string userPWD, bool isLogIn)
@@ -151,23 +156,25 @@ namespace Working_time_management
             {                                                                                                                     
                 string[] data = allLines[i].Split(';');                               
                 string ID = data[0];
-                string pwd = data[1];
                 if (ID != id)                                       // wenn ID ungleich der aktuellen id ist, wird die ID und das Passwort in newCSV geschrieben
                 {
                     newCSV += allLines[i] + "\n";
                 }                                                   // wenn ID gleich der aktuellen ID ist, wird die ID und das Passwort einfach weggelassen und somit gelöscht
             }
-            File.WriteAllText(idPwdPath, newCSV, Encoding.UTF8);    // alte CSV-Datei überschreieben -> Wert der weggelassen wurde nun nicht mehr enthalten
+            File.WriteAllText(idPwdPath, newCSV, Encoding.UTF8);    // alte CSV-Datei überschreieben -> Wert der weggelassen wurde, nun nicht mehr enthalten
         }
         public static void addWorkingTimeCSV(string id)
         {
             string[] data = { "Datum;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit" +
                     ";Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit" };
-            File.WriteAllLines(getUserPathWorkingTimeCSV(id), data);
+            File.WriteAllLines(getUserPathWorkingTimeCSV(id), data, Encoding.UTF8);
+            string[] information = { "Pause;Überstunden;Resturlaub", "n;00:00;30"};
+            File.WriteAllLines(getWorkingTimeInformationPath(id), information, Encoding.UTF8);
+
         }
         public static void writeComeInCSV(string id, DateTime checkIn)
         {
-            string checkInString = checkIn.ToString("HH:mm");
+            string checkInString = ";" + checkIn.ToString("HH:mm");
             string currentDate = DateTime.Now.ToString("dd.MM.yyyy");
             bool dateFound = false;
             foreach (string line in File.ReadLines(getUserPathWorkingTimeCSV(id)))
@@ -180,17 +187,19 @@ namespace Working_time_management
                     break;
                 }
             }
-            if(dateFound)
+            if(!dateFound)
             {
-                string data =  ";" + checkInString;
-                File.AppendAllText(getUserPathWorkingTimeCSV(id), data, Encoding.UTF8);
+                //neue Zeille für Datum anlegen
+                checkInString= "\r\n" +  currentDate + checkInString;
+                string[] timeInformation = File.ReadAllLines(getWorkingTimeInformationPath(id))[1].Split(';');
+                //Pause zurücksetzen und Überstunden vorbereiten
+                timeInformation[0] = "n";
+                string[] overtime = timeInformation[1].Split(':');
+                string[] newovertime = new TimeSpan(int.Parse(overtime[0]) - 8, int.Parse(overtime[1]), 0).ToString().Split(':');
+                timeInformation[1] = newovertime[0] + ":" + newovertime[1];
+                File.WriteAllText(getWorkingTimeInformationPath(id), "Pause;Überstunden;Resturlaub\n" + timeInformation[0] + ";" + timeInformation[1] + ";" + timeInformation[2], Encoding.UTF8);
             }
-            else 
-            {
-                string data = "\r\n" +  currentDate + ";" + checkInString;
-                File.AppendAllText(getUserPathWorkingTimeCSV(id), data, Encoding.UTF8);
-            }
-            
+            File.AppendAllText(getUserPathWorkingTimeCSV(id), checkInString, Encoding.UTF8);
         }
         public static void writeGoInCSV(string id, DateTime checkOut)
         {
@@ -199,10 +208,9 @@ namespace Working_time_management
             string currentDate = today.ToString("dd.MM.yyyy");
             string lastDate = currentDate;
             bool dateFound = false;
-            string workingTimeString ="00:00";
             int totalHours = 0;
             int totalMinutes = 0;
-            string totalWorkingTimeString = "00:00";
+            string[] totalWorkingTimeString = { "00", "00" };
             foreach (string line in File.ReadLines(getUserPathWorkingTimeCSV(id)))
             {
                 string[] data = line.Split(';');
@@ -213,37 +221,52 @@ namespace Working_time_management
                     string lastCheckIn = data[data.Length - 1];
                     if (data.Length >= 5)
                     {
-                        string currentWorkingTimeString = data[data.Length - 2];
-                        totalHours = int.Parse(currentWorkingTimeString.Split(":")[0]);
-                        totalMinutes = int.Parse(currentWorkingTimeString.Split(":")[1]);
+                        string[] currentWorkingTimeString = data[data.Length - 2].Split(":");
+
+                        totalHours = int.Parse(currentWorkingTimeString[0]);
+                        totalMinutes = int.Parse(currentWorkingTimeString[1]);
                     }
-                    string[] timeInformation = lastCheckIn.Split(':');
-                    int hours = int.Parse(timeInformation[0]);
-                    int minutes = int.Parse(timeInformation[1]);
-                    DateTime lastCHeckInDateTime = new DateTime(today.Year, today.Month, today.Day, hours, minutes, 0);
-                    TimeSpan workingTime = checkOut.Subtract(lastCHeckInDateTime);
-                    workingTimeString = workingTime.ToString();
+                    string[] lastCheckInTime = lastCheckIn.Split(':');
+                    DateTime lastCheckInDateTime = new DateTime(today.Year, today.Month, today.Day, int.Parse(lastCheckInTime[0]), int.Parse(lastCheckInTime[1]), 0);
+                    TimeSpan workingTime = checkOut.Subtract(lastCheckInDateTime);
                     TimeSpan totalWorkingTime = new TimeSpan(totalHours, totalMinutes, 0).Add(workingTime);
-                    totalWorkingTimeString = totalWorkingTime.ToString();
+                    string[] timeInformation = File.ReadAllLines(getWorkingTimeInformationPath(id))[1].Split(';');
+                    if (timeInformation[0] == "n" && MainWindow.breakAfterHours != 0 && totalWorkingTime.Hours >= MainWindow.breakAfterHours) // nach fixer Stundenzahl halbe Std abziehen
+                    {
+                        totalWorkingTime.Subtract(new TimeSpan(0, 30, 0)); // nach fixer Uhrzeit halbe Std abziehen
+                        timeInformation[0] = "j";
+                    }
+                    else if (timeInformation[0] == "n" && MainWindow.fixBreakTime != null)
+                    {
+                        string[] breakTimeString = MainWindow.fixBreakTime.Split(":");
+                        int breakHours = int.Parse(breakTimeString[0]);
+                        int breakMinutes = int.Parse(breakTimeString[1]);
+                        DateTime breakTime = new DateTime(today.Year, today.Month, today.Day, breakHours, breakMinutes, 0);
+                        if (lastCheckInDateTime < breakTime && checkOut > breakTime)
+                        {
+                            totalWorkingTime.Subtract(new TimeSpan(0, 30, 0)); // nach fixer Uhrzeit halbe Std abziehen
+                            timeInformation[0] = "j";
+                        }
+                    }
+                    string[] overtime = timeInformation[1].Split(':');
+                    string[] newovertime = new TimeSpan(int.Parse(overtime[0]), int.Parse(overtime[1]),0).Add(workingTime).ToString().Split(':');
+                    timeInformation[1] = newovertime[0] + ":" + newovertime[1];
+                    File.WriteAllText(getWorkingTimeInformationPath(id), "Pause;Überstunden;Resturlaub\n" + timeInformation[0] + ";" + timeInformation[1] + ";" + timeInformation[2], Encoding.UTF8);
+                    totalWorkingTimeString = totalWorkingTime.ToString().Split(':');
                 }
                 lastDate=date;
             }
             if (dateFound)
             {
-                string data = ";" + checkOutString + ";" + totalWorkingTimeString.Split(":")[0] + ":" + totalWorkingTimeString.Split(":")[1];
+                string data = ";" + checkOutString + ";" + totalWorkingTimeString[0] + ":" + totalWorkingTimeString[1];
                 File.AppendAllText(getUserPathWorkingTimeCSV(id), data, Encoding.UTF8);
             }
             else //Error-Handling
             {
                 if(lastDate != currentDate && lastDate != "Datum" && lastDate != "")
                 {
-                    int lastDateYear;
-                    int lastDateMonth;
-                    int lastDateDay;
-                    lastDateYear = int.Parse(lastDate.Split('.')[2]);
-                    lastDateMonth = int.Parse(lastDate.Split('.')[1]);
-                    lastDateDay = int.Parse(lastDate.Split('.')[0]);
-                    DateTime lastDateDateTime = new DateTime(lastDateYear, lastDateMonth, lastDateDay, 23, 59, 00);
+                    string[] lastDateDMY = lastDate.Split(".");
+                    DateTime lastDateDateTime = new DateTime(int.Parse(lastDateDMY[2]), int.Parse(lastDateDMY[1]), int.Parse(lastDateDMY[0]), 23, 59, 00);
                     writeGoInCSV(id,lastDateDateTime);                   
                 }                                                               
                 writeComeInCSV(id, new DateTime(today.Year, today.Month, today.Day, 0, 0, 0));

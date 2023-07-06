@@ -21,10 +21,10 @@ namespace Working_time_management
     /// </summary>
     public partial class MainWindow : Window
     {
-        public string logoPath;
-        public int timeRounding;
-        public string fixBreakTime;
-        public int breakAfterHours;
+        private string logoPath;
+        public static int timeRounding;
+        public static string fixBreakTime = null;
+        public static int breakAfterHours = 0;
 
         public MainWindow()
         {
@@ -35,22 +35,40 @@ namespace Working_time_management
             clockTimer.Tick += clockTick;
             clockTimer.Start();
 
+            getIniVals();
+            
+        }
+
+        private void getIniVals()
+        {
             logoPath = IniHandler.Read("Path", "Logo");
             timeRounding = int.Parse(IniHandler.Read("Rounding", "Time"));
-            if (IniHandler.KeyExists("Fix", "Breaks")){
+            if (IniHandler.KeyExists("Fix", "Breaks"))
+            {
                 fixBreakTime = IniHandler.Read("Fix", "Breaks");
+            }
+            else
+            {
+                fixBreakTime = null;
             }
             if (IniHandler.KeyExists("AfterHours", "Breaks"))
             {
                 breakAfterHours = int.Parse(IniHandler.Read("AfterHours", "Breaks"));
             }
+            else
+            {
+                breakAfterHours = 0;
+            }
             imgLogo.Source = new BitmapImage(new Uri(logoPath, UriKind.Relative));
-            
         }
-
-        void clockTick(object sender, EventArgs e)
+        private void clockTick(object sender, EventArgs e)
         {
-            tbClock.Content = " " + DateTime.Now.ToString("HH:mm") + " Uhr\n" + DateTime.Now.ToString("dd.MM.yyyy");
+            DateTime currentTime = DateTime.Now;
+            tbClock.Content = " " + currentTime.ToString("HH:mm") + " Uhr\n" + currentTime.ToString("dd.MM.yyyy");
+            if (currentTime.ToString("HH:mm") == "00.00")
+            {
+                getIniVals();
+            }
         }
     }
 }
