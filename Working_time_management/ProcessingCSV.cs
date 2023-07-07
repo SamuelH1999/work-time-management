@@ -174,6 +174,18 @@ namespace Working_time_management
         }
         public static void writeComeInCSV(string id, DateTime checkIn)
         {
+            if (MainWindow.timeRounding == 15)
+            {
+                checkIn = roundUp(checkIn, TimeSpan.FromMinutes(15));
+            }
+            else if (MainWindow.timeRounding == 5)
+            {
+                checkIn = roundUp(checkIn, TimeSpan.FromMinutes(5));
+            }
+            else
+            {
+                checkIn = roundUp(checkIn, TimeSpan.FromMinutes(1));
+            }
             string checkInString = ";" + checkIn.ToString("HH:mm");
             string currentDate = DateTime.Now.ToString("dd.MM.yyyy");
             bool dateFound = false;
@@ -203,6 +215,18 @@ namespace Working_time_management
         }
         public static void writeGoInCSV(string id, DateTime checkOut)
         {
+            if (MainWindow.timeRounding == 15)
+            {
+                checkOut = roundDown(checkOut, TimeSpan.FromMinutes(15));
+            }
+            else if (MainWindow.timeRounding == 5)
+            {
+                checkOut = roundDown(checkOut, TimeSpan.FromMinutes(5));
+            }
+            else
+            {
+                checkOut = roundDown(checkOut, TimeSpan.FromMinutes(1));
+            }
             checkOut = new DateTime(checkOut.Year, checkOut.Month, checkOut.Day, checkOut.Hour, checkOut.Minute, 0);
             DateTime today = DateTime.Now;
             string checkOutString = checkOut.ToString("HH:mm");
@@ -223,17 +247,31 @@ namespace Working_time_management
                     if (data.Length >= 5)
                     {
                         string[] currentWorkingTimeString = data[data.Length - 2].Split(":");
-
+                        
                         totalHours = int.Parse(currentWorkingTimeString[0]);
                         totalMinutes = int.Parse(currentWorkingTimeString[1]);
+                        if (currentWorkingTimeString[0].StartsWith('-'))
+                        {
+                            totalMinutes *= -1;
+                        }
                     }
                     string[] lastCheckInTime = lastCheckIn.Split(':');
                     DateTime lastCheckInDateTime = new DateTime(today.Year, today.Month, today.Day, int.Parse(lastCheckInTime[0]), int.Parse(lastCheckInTime[1]), 0);
                     TimeSpan workingTime = checkOut.Subtract(lastCheckInDateTime);
+                    if (workingTime < new TimeSpan(0, 0, 0))
+                    {
+                        workingTime = new TimeSpan(0, 0, 0);
+                    }
                     TimeSpan totalWorkingTime = new TimeSpan(totalHours, totalMinutes, 0).Add(workingTime);
                     string[] timeInformation = File.ReadAllLines(getWorkingTimeInformationPath(id))[1].Split(';');
                     string[] overtime = timeInformation[1].Split(':');
-                    TimeSpan overtimeSpan = new TimeSpan(int.Parse(overtime[0]), int.Parse(overtime[1]), 0).Add(workingTime);
+                    int overTimeHours = int.Parse(overtime[0]);
+                    int overTimeMinutes = int.Parse(overtime[1]);
+                    if (overtime[0].StartsWith('-'))
+                    {
+                        overTimeMinutes *= -1;
+                    }
+                    TimeSpan overtimeSpan = new TimeSpan(overTimeHours, overTimeMinutes, 0).Add(workingTime);
                     if (timeInformation[0] == "n" && MainWindow.breakAfterHours != 0 && totalWorkingTime.Hours >= MainWindow.breakAfterHours) // nach fixer Stundenzahl halbe Std abziehen
                     {
                         totalWorkingTime = totalWorkingTime.Subtract(new TimeSpan(0, 45, 0)); // nach fixer Uhrzeit 45 Minuten abziehen
@@ -277,6 +315,18 @@ namespace Working_time_management
                 writeGoInCSV(id, checkOut);
             }
 
+        }
+        public static DateTime roundUp(DateTime roundTime, TimeSpan roundingFactor)
+        {
+            var modTicks = roundTime.Ticks % roundingFactor.Ticks;
+            var delta = modTicks != 0 ? roundingFactor.Ticks - modTicks : 0;
+            return new DateTime(roundTime.Ticks + delta, roundTime.Kind);
+        }
+
+        public static DateTime roundDown(DateTime roundTime, TimeSpan roundingFactor)
+        {
+            var delta = roundTime.Ticks % roundingFactor.Ticks;
+            return new DateTime(roundTime.Ticks - delta, roundTime.Kind);
         }
     }   
 }
