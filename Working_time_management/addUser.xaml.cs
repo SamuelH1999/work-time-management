@@ -28,7 +28,7 @@ namespace Working_time_management
 
         private void confirmClick(object sender, RoutedEventArgs e)
         {
-            if(tbFirstName.Text.Length > 0 || tbLastName.Text.Length > 0) 
+            if(tbFirstName.Text.Length > 0 && tbLastName.Text.Length > 0 && tbPwd.Text.Length > 0) 
             {
                 string pwd = tbPwd.Text;
                 string id = tbID.Text;

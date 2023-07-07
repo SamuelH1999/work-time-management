@@ -116,7 +116,7 @@ namespace Working_time_management
 
         private void btnNewPwd_Click(object sender, RoutedEventArgs e)
         {
-
+            this.NavigationService.Navigate(new changeAdminPwd());
         }
 
         private void radbtnDuration_Checked(object sender, RoutedEventArgs e)

@@ -122,20 +122,20 @@ namespace Working_time_management
             File.Create(userRequestPath);
         }
         public static void editUserPwdToCSV(string id, string newPwd)           // id und newPwd muss aus editUser.xaml.cs übergeben werden
-        {                                                                       
-            string[] allLines = File.ReadAllLines(idPwdPath);                                                 
-            for (int i = 0; i < allLines.Length; i++)                  
-            {                                                                                                                     
-                string[] data = allLines[i].Split(';');                                
-                string ID = data[0];
-                string pwd = data[1];
-                if (ID == id)
+        { 
+                string[] allLines = File.ReadAllLines(idPwdPath);
+                for (int i = 0; i < allLines.Length; i++)
                 {
-                    allLines[i] = ID + ";" + newPwd;
-                    File.WriteAllLines(idPwdPath, allLines, Encoding.UTF8);
-                    break;
+                    string[] data = allLines[i].Split(';');
+                    string ID = data[0];
+                    string pwd = data[1];
+                    if (ID == id)
+                    {
+                        allLines[i] = ID + ";" + newPwd;
+                        File.WriteAllLines(idPwdPath, allLines, Encoding.UTF8);
+                        break;
+                    }
                 }
-            }
         }
         public static void editUserToWorkerInformationCSV(string id, string lastName, string firstName, string DateOfBirth, string residence, string status)
         {
