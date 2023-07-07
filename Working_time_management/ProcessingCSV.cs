@@ -233,7 +233,7 @@ namespace Working_time_management
                     string[] timeInformation = File.ReadAllLines(getWorkingTimeInformationPath(id))[1].Split(';');
                     if (timeInformation[0] == "n" && MainWindow.breakAfterHours != 0 && totalWorkingTime.Hours >= MainWindow.breakAfterHours) // nach fixer Stundenzahl halbe Std abziehen
                     {
-                        totalWorkingTime.Subtract(new TimeSpan(0, 30, 0)); // nach fixer Uhrzeit halbe Std abziehen
+                        totalWorkingTime = totalWorkingTime.Subtract(new TimeSpan(0, 45, 0)); // nach fixer Uhrzeit halbe Std abziehen
                         timeInformation[0] = "j";
                     }
                     else if (timeInformation[0] == "n" && MainWindow.fixBreakTime != null)
@@ -244,7 +244,7 @@ namespace Working_time_management
                         DateTime breakTime = new DateTime(today.Year, today.Month, today.Day, breakHours, breakMinutes, 0);
                         if (lastCheckInDateTime < breakTime && checkOut > breakTime)
                         {
-                            totalWorkingTime.Subtract(new TimeSpan(0, 30, 0)); // nach fixer Uhrzeit halbe Std abziehen
+                            totalWorkingTime = totalWorkingTime.Subtract(new TimeSpan(0, 45, 0)); // nach fixer Uhrzeit halbe Std abziehen
                             timeInformation[0] = "j";
                         }
                     }
