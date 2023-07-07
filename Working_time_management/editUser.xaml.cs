@@ -40,7 +40,7 @@ namespace Working_time_management
         private void confirmEditClick(object sender, RoutedEventArgs e)
         {
             ID = this.ID;
-            if (tbFirstName.Text.Length > 0 && tbLastName.Text.Length > 0 && tbPwd.Text.Length > 0 && tbResidence.Text.Length > 0 && tbDayOfBirth.Text.Length >0)
+            if (tbFirstName.Text.Length > 0 && tbLastName.Text.Length > 0 && tbPwd.Text.Length > 0 && tbResidence.Text.Length > 0 && tbDayOfBirth.Text.Length >0 && ID != "ID")
             {
                 ProcessingCSV.editUserPwdToCSV(ID, tbPwd.Text);
                 ProcessingCSV.editUserToWorkerInformationCSV(ID, tbLastName.Text, tbFirstName.Text, tbDayOfBirth.Text, tbResidence.Text, "");

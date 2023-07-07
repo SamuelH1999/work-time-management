@@ -10,6 +10,7 @@ using System.Security.Policy;
 using System.Windows.Markup;
 using System.ComponentModel.Design;
 using System.Windows.Controls;
+using System.Windows.Shapes;
 
 namespace Working_time_management
 {
@@ -54,7 +55,7 @@ namespace Working_time_management
                 string[] data = line.Split(';');
                 string ID = data[0];
                 string pwd = data[1];
-                if (ID == userID)
+                if (ID == userID && ID != "ID")
                 {
                     if (isLogIn == false)
                     {
@@ -115,7 +116,7 @@ namespace Working_time_management
         }
         public static void addUserToWorkerInformationCSV(string id, string lastName, string firstName, string DateOfBirth, string residence) 
         {
-            string[] data = { lastName + ";" + firstName + ";" + DateOfBirth + ";" + residence + ";" + "Abgemeldet" };
+            string[] data = { "Nachname" + ";" + "Vorname" + ";" + "Geburtsdatum" + ";" + "Wohnort" + ";" + "Status" + "\n" + lastName + ";" + firstName + ";" + DateOfBirth + ";" + residence + ";" + "Abgemeldet" };
             string workerInformationPath = getWorkerInformationPath(id);
             string userRequestPath = getUserRequestPath(id);
             File.WriteAllLines(workerInformationPath, data);
@@ -129,7 +130,7 @@ namespace Working_time_management
                     string[] data = allLines[i].Split(';');
                     string ID = data[0];
                     string pwd = data[1];
-                    if (ID == id)
+                    if (ID == id && ID != "ID")
                     {
                         allLines[i] = ID + ";" + newPwd;
                         File.WriteAllLines(idPwdPath, allLines, Encoding.UTF8);
@@ -145,8 +146,18 @@ namespace Working_time_management
         }
         public static string GetWorkerInformation(string id)
         {
+            string workerInformation = "";
             string workerInformationPath = getWorkerInformationPath(id);
-            return File.ReadLines(workerInformationPath).First();
+            foreach (string line in File.ReadAllLines(workerInformationPath))
+            {
+                string[] data = line.Split(';');
+                string lastName = data[0];
+                if (lastName != "Nachname")
+                {
+                    workerInformation = line;
+                }
+            }
+            return workerInformation; 
         }
         public static void deleteUserPwdInCSV(string id)            // id und newPwd muss aus editUser.xaml.cs übergeben werden
         {                                                                       

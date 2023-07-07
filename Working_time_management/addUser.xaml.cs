@@ -32,20 +32,39 @@ namespace Working_time_management
             {
                 string pwd = tbPwd.Text;
                 string id = tbID.Text;
-                string[] pwdID = {id + ";" + pwd};
-                string firstName = tbFirstName.Text;
-                string lastName = tbLastName.Text;
-                string dateOfBirth = tbDateOfBirth.Text;
-                string residence = tbResidence.Text;
-                string fullName = firstName + " " + lastName;
-                ProcessingCSV.addUserToID_PWDCSV(pwdID);
-                newFolder(id);
-                ProcessingCSV.addUserToWorkerInformationCSV(id, lastName, firstName, dateOfBirth, residence);
-                ProcessingCSV.addWorkingTimeCSV(id);
-                this.NavigationService.Navigate(new userManagement());
+                bool IDAlreadyExists = false;
+                foreach (string line in File.ReadLines(ProcessingCSV.idPwdPath))
+                {
+                    string[] data = line.Split(';');
+                    string ID = data[0];
+                    string Password = data[1];    // Es wird überprüft, ob es diese ID schon gibt
+                    if (id == ID)
+                    {
+                        IDAlreadyExists = true;
+                    }
+                }
+                if (IDAlreadyExists == false)
+                {
+                    string[] pwdID = { id + ";" + pwd };
+                    string firstName = tbFirstName.Text;
+                    string lastName = tbLastName.Text;
+                    string dateOfBirth = tbDateOfBirth.Text;
+                    string residence = tbResidence.Text;
+                    string fullName = firstName + " " + lastName;
+                    ProcessingCSV.addUserToID_PWDCSV(pwdID);
+                    newFolder(id);
+                    ProcessingCSV.addUserToWorkerInformationCSV(id, lastName, firstName, dateOfBirth, residence);
+                    ProcessingCSV.addWorkingTimeCSV(id);
+                    this.NavigationService.Navigate(new userManagement());
+                }
+                else
+                {
+                    MessageBox.Show("ID existiert bereits!", "Eingabefehler", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
+                }
             }
             else
             {
+                MessageBox.Show("Eingaben fehlerhaft!", "Eingabefehler", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
                 this.NavigationService.Navigate(new userManagement());
             }
             

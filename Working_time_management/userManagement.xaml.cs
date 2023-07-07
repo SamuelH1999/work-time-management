@@ -78,7 +78,7 @@ namespace Working_time_management
                 string[] data = line.Split(';');
                 string Id = data[0];
                 string Pwd = data[1];
-                if (Id != "123123")
+                if (Id != "123123" && Id != "ID")
                 {
                     string workerInformation = ProcessingCSV.GetWorkerInformation(Id);
                     string[] workerInformationSplit = workerInformation.Split(';');
