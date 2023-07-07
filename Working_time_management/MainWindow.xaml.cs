@@ -65,7 +65,7 @@ namespace Working_time_management
         {
             DateTime currentTime = DateTime.Now;
             tbClock.Content = " " + currentTime.ToString("HH:mm") + " Uhr\n" + currentTime.ToString("dd.MM.yyyy");
-            if (currentTime.ToString("HH:mm") == "00.00")
+            if (currentTime.ToString("HH:mm") == "00:00")
             {
                 getIniVals();
             }

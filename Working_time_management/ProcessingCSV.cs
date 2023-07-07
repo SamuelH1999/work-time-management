@@ -203,6 +203,7 @@ namespace Working_time_management
         }
         public static void writeGoInCSV(string id, DateTime checkOut)
         {
+            checkOut = new DateTime(checkOut.Year, checkOut.Month, checkOut.Day, checkOut.Hour, checkOut.Minute, 0);
             DateTime today = DateTime.Now;
             string checkOutString = checkOut.ToString("HH:mm");
             string currentDate = today.ToString("dd.MM.yyyy");
@@ -231,9 +232,12 @@ namespace Working_time_management
                     TimeSpan workingTime = checkOut.Subtract(lastCheckInDateTime);
                     TimeSpan totalWorkingTime = new TimeSpan(totalHours, totalMinutes, 0).Add(workingTime);
                     string[] timeInformation = File.ReadAllLines(getWorkingTimeInformationPath(id))[1].Split(';');
+                    string[] overtime = timeInformation[1].Split(':');
+                    TimeSpan overtimeSpan = new TimeSpan(int.Parse(overtime[0]), int.Parse(overtime[1]), 0).Add(workingTime);
                     if (timeInformation[0] == "n" && MainWindow.breakAfterHours != 0 && totalWorkingTime.Hours >= MainWindow.breakAfterHours) // nach fixer Stundenzahl halbe Std abziehen
                     {
-                        totalWorkingTime = totalWorkingTime.Subtract(new TimeSpan(0, 45, 0)); // nach fixer Uhrzeit halbe Std abziehen
+                        totalWorkingTime = totalWorkingTime.Subtract(new TimeSpan(0, 45, 0)); // nach fixer Uhrzeit 45 Minuten abziehen
+                        overtimeSpan = overtimeSpan.Subtract(new TimeSpan(0, 45, 0)); // nach fixer Uhrzeit 45 Minuten abziehen
                         timeInformation[0] = "j";
                     }
                     else if (timeInformation[0] == "n" && MainWindow.fixBreakTime != null)
@@ -242,14 +246,14 @@ namespace Working_time_management
                         int breakHours = int.Parse(breakTimeString[0]);
                         int breakMinutes = int.Parse(breakTimeString[1]);
                         DateTime breakTime = new DateTime(today.Year, today.Month, today.Day, breakHours, breakMinutes, 0);
-                        if (lastCheckInDateTime < breakTime && checkOut > breakTime)
+                        if (lastCheckInDateTime < breakTime && checkOut >= breakTime)
                         {
-                            totalWorkingTime = totalWorkingTime.Subtract(new TimeSpan(0, 45, 0)); // nach fixer Uhrzeit halbe Std abziehen
+                            totalWorkingTime = totalWorkingTime.Subtract(new TimeSpan(0, 45, 0)); // nach fixer Uhrzeit 45 Minuten abziehen
+                            overtimeSpan = overtimeSpan.Subtract(new TimeSpan(0, 45, 0)); // nach fixer Uhrzeit 45 Minuten abziehen
                             timeInformation[0] = "j";
                         }
                     }
-                    string[] overtime = timeInformation[1].Split(':');
-                    string[] newovertime = new TimeSpan(int.Parse(overtime[0]), int.Parse(overtime[1]),0).Add(workingTime).ToString().Split(':');
+                    string[] newovertime = overtimeSpan.ToString().Split(':');
                     timeInformation[1] = newovertime[0] + ":" + newovertime[1];
                     File.WriteAllText(getWorkingTimeInformationPath(id), "Pause;Überstunden;Resturlaub\n" + timeInformation[0] + ";" + timeInformation[1] + ";" + timeInformation[2], Encoding.UTF8);
                     totalWorkingTimeString = totalWorkingTime.ToString().Split(':');
