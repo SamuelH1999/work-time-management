@@ -28,7 +28,7 @@
 
         <Button x:Name="btnDetails" Grid.Row="0" Grid.Column="0" Click="clickNewRequest">Neuer Antrag</Button>
 
-        <Button x:Name="btnAnnehmen" Grid.Row="0" Grid.Column="1">Antrag löschen</Button>
+        <Button x:Name="btnAnnehmen" Grid.Row="0" Grid.Column="1" Click="clickDeleteRequest">Antrag löschen</Button>
 
 
 

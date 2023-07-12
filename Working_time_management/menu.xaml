@@ -32,11 +32,9 @@
 
         <Button x:Name="Anmeldung" Click="ClickWorkerInformation">Mitarbeiterinformationen</Button>
 
-        <Button x:Name="Urlaub" Grid.Row="2" Click="ClickHoliday">Urlaub</Button>
+        <Button x:Name="Urlaub" Grid.Row="2" Click="ClickHoliday">Urlaub / Überstunden</Button>
 
-        <Button x:Name="Überstunden" Grid.Row="4" Click="ClickOvertime">Überstunden</Button>
-
-        <Button x:Name="Anträge" Grid.Row="6" Click="clickRequest">Anträge</Button>
+        <Button x:Name="Anträge" Grid.Row="4" Click="clickRequest">Anträge</Button>
 
         <Button x:Name="Abmelden" Click="LogOut" Grid.Row="7" Grid.Column="5">Abmelden</Button>
         

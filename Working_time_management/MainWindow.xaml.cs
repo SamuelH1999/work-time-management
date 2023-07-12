@@ -34,7 +34,6 @@ namespace Working_time_management
             clockTimer.Interval = TimeSpan.FromSeconds(1);
             clockTimer.Tick += clockTick;
             clockTimer.Start();
-
             getIniVals();
             
         }

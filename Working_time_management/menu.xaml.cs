@@ -40,12 +40,7 @@ namespace Working_time_management
 
         private void ClickHoliday(object sender, RoutedEventArgs e)
         {
-            contentFrameMenu.Content = new Holidays();
-        }
-
-        private void ClickOvertime(object sender, RoutedEventArgs e)
-        {
-            contentFrameMenu.Content = new overtime();
+            contentFrameMenu.Content = new Holidays(userID);
         }
 
         private void clickRequest(object sender, RoutedEventArgs e)

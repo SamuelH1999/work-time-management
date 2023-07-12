@@ -55,11 +55,23 @@ namespace Working_time_management
             {
                 return;
             }
-            string from = startDate.SelectedDate.Value.ToString("dd.MM.yyyy");
-            string until = endDate.SelectedDate.Value.ToString("dd.MM.yyyy");
-            string requestData = "\n" + type + ";" + from + ";" + until + ";" + "offen";
-            File.AppendAllText(CSVpath, requestData);
-            this.NavigationService.Navigate(new request(userID));
+            if(endDate.SelectedDate < startDate.SelectedDate)
+            {
+                MessageBox.Show("Ungültiger Zeitraum!", "Eingabefehler", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
+            }
+            else if(startDate.SelectedDate < new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0))
+            {
+                MessageBox.Show("Start darf nicht in der Vergangenheit liegen!", "Eingabefehler", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
+            }
+            else
+            {
+                string from = startDate.SelectedDate.Value.ToString("dd.MM.yyyy");
+                string until = endDate.SelectedDate.Value.ToString("dd.MM.yyyy");
+                string[] requestData = { type + ";" + from + ";" + until + ";" + "offen" };
+                File.AppendAllLines(CSVpath, requestData);
+                this.NavigationService.Navigate(new request(userID));
+            }
+            
         }
    
     }

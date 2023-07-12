@@ -44,10 +44,10 @@ namespace Working_time_management
             }
             string from = dpFrom.SelectedDate.Value.ToString("dd.MM.yyyy");
             string until = dpTo.SelectedDate.Value.ToString("dd.MM.yyyy");
-            bool IDFound = ProcessingCSV.addAbsenceToAbsenceCSV(tbID.Text, from, until);
+            bool IDFound = ProcessingCSV.addAbsenceToAbsenceCSV(tbID.Text, from, until, "Krankheit");
             if (!IDFound)                                                                                                                     // Fehlermeldung, wenn falsche ID eingegeben wird
             {
-                MessageBox.Show("ID nicht gefunden!", "Anmeldefehler", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
+                MessageBox.Show("ID nicht gefunden!", "Eingabefehler", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
             }
             this.NavigationService.Navigate(new absence());
         }

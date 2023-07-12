@@ -37,18 +37,60 @@ namespace Working_time_management
             }
         }
 
-        public request(int i)
-        {
-            InitializeComponent();
-            ListBoxItem newRequest = new ListBoxItem();
-            newRequest.Content = "Urlaub            30.06.2023 - 14.07.2023             Status: offen";
-            newRequest.MinHeight = 30;
-            allRequest.Items.Add(newRequest);
-        }
-
         private void clickNewRequest(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new newRequest(userID));
+        }
+
+        private void clickDeleteRequest(object sender, RoutedEventArgs e)
+        {
+            ListBoxItem deleteItem = allRequest.SelectedItem as ListBoxItem;
+            if(deleteItem != null )
+            {
+                string[] details = deleteItem.Content.ToString().Split(", ");
+                string reason = details[0];
+                string[] timeSpan = details[1].Split(" - ");
+                string from = timeSpan[0];
+                string until = timeSpan[1];
+                string status = details[2];
+                if(status != "genehmigt")
+                {
+                    bool wasFound = false;
+                    string[] requestCSV = File.ReadAllLines(CSVpath);
+                    string[] newCSVstring = new string[requestCSV.Length-1];
+                    for( int i = 0; i < requestCSV.Length; i++)
+                    {
+                        string[] requestInformation = requestCSV[i].Split(";");
+                        if (!wasFound && requestInformation[0] == reason && requestInformation[1] == from && requestInformation[2] == until && requestInformation[3] == status)
+                        {
+                            wasFound = true;
+                        }
+                        else
+                        {
+                            if(!wasFound) {
+                                if(i < newCSVstring.Length)
+                                {
+                                    newCSVstring[i] = requestCSV[i];
+                                }
+                            }
+                            else 
+                            {
+                                newCSVstring[i-1] = requestCSV[i];
+                            }
+                        }
+                    }
+                    if (wasFound)
+                    {
+                        allRequest.Items.Remove(deleteItem);
+                        File.WriteAllLines(CSVpath, newCSVstring);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Antrag bereits bewilligt!", "Fehler", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
+                }
+            }
+            
         }
     }
 }

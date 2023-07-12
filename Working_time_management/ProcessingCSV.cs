@@ -97,7 +97,7 @@ namespace Working_time_management
         {
             File.AppendAllLines(idPwdPath, pwdID, Encoding.UTF8);
         }
-        public static bool addAbsenceToAbsenceCSV(string ID, string startDate, string endDate)
+        public static bool addAbsenceToAbsenceCSV(string ID, string startDate, string endDate, string reason)
         {
             bool IDFound = false;
             foreach (string line in File.ReadLines(idPwdPath))
@@ -107,7 +107,7 @@ namespace Working_time_management
                 if (id == ID)
                 {
                     IDFound = true;
-                    string[] textForCSV = { ID + ';' + startDate + ';' + endDate + ';' +  "Krankheit" };
+                    string[] textForCSV = { ID + ';' + startDate + ';' + endDate + ';' +  reason };
                     File.AppendAllLines(@"..\..\..\data\admin\absences.csv", textForCSV, Encoding.UTF8);
                     break;
                 }
@@ -159,6 +159,12 @@ namespace Working_time_management
             }
             return workerInformation; 
         }
+
+        public static string[] getAllWorkerRequests(string id)
+        {
+            return File.ReadAllLines(getUserRequestPath(id));
+        }
+
         public static void deleteUserPwdInCSV(string id)            // id und newPwd muss aus editUser.xaml.cs übergeben werden
         {                                                                       
             string[] allLines = File.ReadAllLines(idPwdPath);       // gesamte CSV auslesen
@@ -303,6 +309,19 @@ namespace Working_time_management
                         }
                     }
                     string[] newovertime = overtimeSpan.ToString().Split(':');
+                    if (newovertime[0].Contains('.'))
+                    {
+                        int fullHours = int.Parse(newovertime[0].Split('.')[0]) * 24;
+                        if (newovertime[0].StartsWith('-'))
+                        {
+                            fullHours -= int.Parse(newovertime[0].Split('.')[1]);
+                        }
+                        else
+                        {
+                            fullHours += int.Parse(newovertime[0].Split('.')[1]);
+                        }
+                        newovertime[0] = fullHours.ToString();
+                    }
                     timeInformation[1] = newovertime[0] + ":" + newovertime[1];
                     File.WriteAllText(getWorkingTimeInformationPath(id), "Pause;Überstunden;Resturlaub\n" + timeInformation[0] + ";" + timeInformation[1] + ";" + timeInformation[2], Encoding.UTF8);
                     totalWorkingTimeString = totalWorkingTime.ToString().Split(':');
