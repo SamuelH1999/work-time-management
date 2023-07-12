@@ -97,9 +97,14 @@ namespace Working_time_management
 
                         DateTime fromDate = new DateTime(yearFrom, monthFrom, dayFrom);
                         DateTime untilDate = new DateTime(yearUntil, monthUntil, dayUntil);
-
-                        TimeSpan absenceTime = untilDate.Subtract(fromDate);
-                        int absenceDays = absenceTime.Days + 1;
+                        int absenceDays = 0; 
+                        for (DateTime dt = fromDate; dt <= untilDate; dt = dt.AddDays(1))
+                        {
+                            if (dt.DayOfWeek != DayOfWeek.Saturday && dt.DayOfWeek != DayOfWeek.Sunday)
+                            {
+                                absenceDays++;
+                            }
+                        }
 
                         if(reason == "Urlaub")
                         {
