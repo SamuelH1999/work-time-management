@@ -47,18 +47,18 @@ namespace Working_time_management
         private void btnLogInSuc(object sender, RoutedEventArgs e)
         {
             string userID = tbId.Text;
-            string userPWD = tbPwd.Text;
+            string userPWD = tbPwd.Password;
             int inputCorrect = ProcessingCSV.checkLogIn(userID, userPWD, isLogIn);
             switch (inputCorrect)
             {
                 case (int)ProcessingCSV.LogInResult.IDNotFound:
                     MessageBox.Show("ID nicht gefunden!", "Anmeldefehler", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
                     tbId.Text = "";
-                    tbPwd.Text = "";
+                    tbPwd.Password = "";
                     break;
                 case (int)ProcessingCSV.LogInResult.PwdIncorrect:
                     MessageBox.Show("Passwort nicht korrekt!", "Anmeldefehler", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
-                    tbPwd.Text = "";
+                    tbPwd.Password = "";
                     break;
                 case (int)ProcessingCSV.LogInResult.UserCorrect:
                     this.NavigationService.Navigate(new menu(userID));
@@ -72,7 +72,7 @@ namespace Working_time_management
                 case (int)ProcessingCSV.LogInResult.TimeDetectionIdNotFound:
                     MessageBox.Show("ID nicht gefunden!", "Anmeldefehler", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
                     tbId.Text = "";
-                    tbPwd.Text = "";
+                    tbPwd.Password = "";
                     break;
             }
         }

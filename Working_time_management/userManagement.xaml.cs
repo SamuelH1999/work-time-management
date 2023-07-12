@@ -46,8 +46,8 @@ namespace Working_time_management
         private void deleteUserClick(object sender, RoutedEventArgs e)
 
         {
-            if (userList.SelectedItem != null)                                          // bis jetzt wird nur Ordner verschoben
-            {                                                                           // TODO ID & Pwd löschen
+            if (userList.SelectedItem != null)                                          
+            {                                                                         
                 ListBoxItem deletedUser = userList.SelectedItem as ListBoxItem;
                 string[] name = deletedUser.Content.ToString().Split(", ");
                 string id = name[2];
