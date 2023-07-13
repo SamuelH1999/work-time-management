@@ -11,12 +11,13 @@ using System.Windows.Markup;
 using System.ComponentModel.Design;
 using System.Windows.Controls;
 using System.Windows.Shapes;
+using System.Windows.Media.Media3D;
 
 namespace Working_time_management
 {
     public static class ProcessingCSV
     {
-        public enum LogInResult
+        public enum LogInResult                 // Ergebnis der Funktion checkLogIn()
         {
             IDNotFound,
             PwdIncorrect,
@@ -25,7 +26,7 @@ namespace Working_time_management
             TimeDetectionIdFound,
             TimeDetectionIdNotFound,
         }
-        public static readonly string idPwdPath = @"..\..\..\data\id_pwd\id_pwd.csv";
+        public static readonly string idPwdPath = @"..\..\..\data\id_pwd\id_pwd.csv";           // Die Ordnerpfade werden definiert in den folgenden Funktionen und Variablen
 
         public static string getWorkerInformationPath(string id)
         {
@@ -46,28 +47,28 @@ namespace Working_time_management
             return @"..\..\..\data\worker_information\" + id + @"\working_time_information.csv";
         }
 
-        public static int checkLogIn(string userID, string userPWD, bool isLogIn)
+        public static int checkLogIn(string userID, string userPWD, bool isLogIn)                       // ID und Passwort wird mit der Datenbank abgelichen
         {
             LogInResult inputCorrect = LogInResult.IDNotFound;
 
-            foreach (string line in File.ReadLines(idPwdPath))
+            foreach (string line in File.ReadLines(idPwdPath))                  // Die IDs und Passwörter werden aus der CSV-Datei geholt
             {
                 string[] data = line.Split(';');
                 string ID = data[0];
                 string pwd = data[1];
-                if (ID == userID && ID != "ID")
+                if (ID == userID && ID != "ID")                         // Die Überschrift "ID" wird nicht berücksichtigt
                 {
-                    if (isLogIn == false)
+                    if (isLogIn == false)                       //Wenn der Benutzer sich nicht anmelden will, sondern nur in das Zeiterfassungsmenü möchte
                     {
                         inputCorrect = LogInResult.TimeDetectionIdFound;
 
                         break;
                     }
-                    else 
+                    else                                                //Passwort wird überprüft
                     { 
                         if (string.Compare(pwd, userPWD) == 0)
                         {
-                            if (string.Compare(userID, "123123") == 0)
+                            if (string.Compare(userID, "123123") == 0)      //ID des Admins ist "123123"
                             {
                                 inputCorrect = LogInResult.AdminCorrect;
                                 break;
@@ -93,11 +94,11 @@ namespace Working_time_management
             }
             return (int) inputCorrect;
         }
-        public static void addUserToID_PWDCSV(string[] pwdID)
+        public static void addUserToID_PWDCSV(string[] pwdID)       //Neue Zeile mit den neuen Zugangsdaten wird angehängt
         {
             File.AppendAllLines(idPwdPath, pwdID, Encoding.UTF8);
         }
-        public static bool addAbsenceToAbsenceCSV(string ID, string startDate, string endDate, string reason)
+        public static bool addAbsenceToAbsenceCSV(string ID, string startDate, string endDate, string reason)       //Abwesenheit wird in CSV-Datei eingetragen
         {
             bool IDFound = false;
             foreach (string line in File.ReadLines(idPwdPath))
@@ -114,7 +115,7 @@ namespace Working_time_management
             }
             return IDFound;
         }
-        public static void addUserToWorkerInformationCSV(string id, string lastName, string firstName, string DateOfBirth, string residence) 
+        public static void addUserToWorkerInformationCSV(string id, string lastName, string firstName, string DateOfBirth, string residence)  //Die Mitarbeiterinformationen werden in eine neu erstellte CSV-Datei eingetragen. Außerdem wird auch die Datei "Requests" erstellt und die Überschriften werden eingefügt
         {
             string[] data = { "Nachname" + ";" + "Vorname" + ";" + "Geburtsdatum" + ";" + "Wohnort" + ";" + "Status" + "\n" + lastName + ";" + firstName + ";" + DateOfBirth + ";" + residence + ";" + "Abgemeldet" };
             string[] header = { "Abwesenheitsgrund" + ";" + "Von" + ";" + "Bis" + ";" + "Status" };
@@ -124,7 +125,7 @@ namespace Working_time_management
             File.WriteAllLines(userRequestPath, header);
         }
         public static void editUserPwdToCSV(string id, string newPwd)           // id und newPwd muss aus editUser.xaml.cs übergeben werden
-        { 
+        {                                                                       //Gesamte CSV im Array "allLines" zwischenspeichern. ID in "allLines" finden, alte ID und neues Passwort in die ausgewählte Zeile schreiben und dann die gesamte CSV mit den Zwischegespeicherten Daten überschreiben
                 string[] allLines = File.ReadAllLines(idPwdPath);
                 for (int i = 0; i < allLines.Length; i++)
                 {
@@ -139,13 +140,13 @@ namespace Working_time_management
                     }
                 }
         }
-        public static void editUserToWorkerInformationCSV(string id, string lastName, string firstName, string DateOfBirth, string residence, string status)
+        public static void editUserToWorkerInformationCSV(string id, string lastName, string firstName, string DateOfBirth, string residence, string status)    //Datensatz aus worker_information.csv holen, bearbeitete Spalten einfügen und die alte CSV mit den neuen Daten überschreiben
         {
             string[] data = { lastName + ";" + firstName + ";" + DateOfBirth + ";" + residence + ";" + status};
             string workerInformationPath = getWorkerInformationPath(id);
             File.WriteAllLines(workerInformationPath, data);
         }
-        public static string GetWorkerInformation(string id)
+        public static string GetWorkerInformation(string id)        //Die Mitarbeiterinformationen aus der CSV holen
         {
             string workerInformation = "";
             string workerInformationPath = getWorkerInformationPath(id);
@@ -153,7 +154,7 @@ namespace Working_time_management
             {
                 string[] data = line.Split(';');
                 string lastName = data[0];
-                if (lastName != "Nachname")
+                if (lastName != "Nachname")     //Die überschrift soll nicht gelesen werden
                 {
                     workerInformation = line;
                 }
@@ -161,7 +162,7 @@ namespace Working_time_management
             return workerInformation; 
         }
 
-        public static string[] getAllWorkerRequests(string id)
+        public static string[] getAllWorkerRequests(string id)          //Gibt alle <anträge dieses Mitarbiters zurück
         {
             return File.ReadAllLines(getUserRequestPath(id));
         }
@@ -181,18 +182,18 @@ namespace Working_time_management
             }
             File.WriteAllText(idPwdPath, newCSV, Encoding.UTF8);    // alte CSV-Datei überschreieben -> Wert der weggelassen wurde, nun nicht mehr enthalten
         }
-        public static void addWorkingTimeCSV(string id)
+        public static void addWorkingTimeCSV(string id)         //CSV für die Arbeitszeiterfassung wird erstellt
         {
             string[] data = { "Datum;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit" +
-                    ";Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit" };
+                    ";Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit" }; // Der Mitarbeiter soll sich unbegrenzt oft anmelden können, kann er auch, irgendwann hören nur die Überschriften auf
             File.WriteAllLines(getUserPathWorkingTimeCSV(id), data, Encoding.UTF8);
             string[] information = { "Pause;Überstunden;Resturlaub", "n;00:00;30"};
-            File.WriteAllLines(getWorkingTimeInformationPath(id), information, Encoding.UTF8);
+            File.WriteAllLines(getWorkingTimeInformationPath(id), information, Encoding.UTF8);          //CSV zur Eintragung der Überstunden, der Urlaubstage und, ob eine Pause genommen wurde, wird erstellt
 
         }
         public static void writeComeInCSV(string id, DateTime checkIn)
         {
-            if (MainWindow.timeRounding == 15)
+            if (MainWindow.timeRounding == 15)                  // Aufrundung der Arbeitszeit, je nachdem, ob die Rundung nach 1, 5 oder 15 Minuten eingestellt ist
             {
                 checkIn = roundUp(checkIn, TimeSpan.FromMinutes(15));
             }
@@ -226,7 +227,7 @@ namespace Working_time_management
                 timeInformation[0] = "n";
                 string[] overtime = timeInformation[1].Split(':');
                 int overTimeHoursCome = 0;
-                if (overtime[0].Contains('.'))
+                if (overtime[0].Contains('.'))              //Wenn "overtime" die Zeit in Tagen und nicht mehr in Stunden gespeichert hat, wird diese hier wieder in Stunden umgewandelt
                 {
                     overTimeHoursCome = int.Parse(overtime[0].Split('.')[0]) * 24;
                 }
@@ -242,7 +243,7 @@ namespace Working_time_management
         }
         public static void writeGoInCSV(string id, DateTime checkOut)
         {
-            if (MainWindow.timeRounding == 15)
+            if (MainWindow.timeRounding == 15)                      //Abrundung der Arbeitszeit, je nachedem, ob 1, 5 oder 15 Minuten eingestellt wurden
             {
                 checkOut = roundDown(checkOut, TimeSpan.FromMinutes(15));
             }
@@ -293,7 +294,7 @@ namespace Working_time_management
                     string[] timeInformation = File.ReadAllLines(getWorkingTimeInformationPath(id))[1].Split(';');
                     string[] overtime = timeInformation[1].Split(':');
                     int overTimeHours = 0;
-                    if (overtime[0].Contains('.'))
+                    if (overtime[0].Contains('.')) //Wenn "overtime" die Zeit in Tagen und nicht mehr in Stunden gespeichert hat, wird diese hier wieder in Stunden umgewandelt
                     {
                         overTimeHours = int.Parse(overtime[0].Split('.')[0]) * 24;
                     }
@@ -364,14 +365,14 @@ namespace Working_time_management
             }
 
         }
-        public static DateTime roundUp(DateTime roundTime, TimeSpan roundingFactor)
+        public static DateTime roundUp(DateTime roundTime, TimeSpan roundingFactor)     //Aufrundung der Arbeitszeit
         {
             var modTicks = roundTime.Ticks % roundingFactor.Ticks;
             var delta = modTicks != 0 ? roundingFactor.Ticks - modTicks : 0;
             return new DateTime(roundTime.Ticks + delta, roundTime.Kind);
         }
 
-        public static DateTime roundDown(DateTime roundTime, TimeSpan roundingFactor)
+        public static DateTime roundDown(DateTime roundTime, TimeSpan roundingFactor)       //Abrundung der Arbeitszeit
         {
             var delta = roundTime.Ticks % roundingFactor.Ticks;
             return new DateTime(roundTime.Ticks - delta, roundTime.Kind);
