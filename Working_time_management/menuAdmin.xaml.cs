@@ -27,7 +27,7 @@ namespace Working_time_management
             InitializeComponent();
         }
 
-        private void LogOut(object sender, RoutedEventArgs e)
+        private void LogOut(object sender, RoutedEventArgs e)       //Nachfolgend wird an die einzelnen Seiten navigiert
         {
             this.NavigationService.Navigate(new Startpage());
         }

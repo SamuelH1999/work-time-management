@@ -31,10 +31,10 @@ namespace Working_time_management
         private bool isLogIn = false;
 
 
-        private void LogInEvent(object sender, RoutedEventArgs e)
+        private void LogInEvent(object sender, RoutedEventArgs e)   //Wenn der Knopf "Anmelden" gedrückt wurde, wird das Passwortfeld sichtbar
         {   
             isLogIn = true;
-            lblAnm.Visibility = Visibility.Visible;
+            lblAnm.Visibility = Visibility.Visible;     
             lblPwd.Visibility = Visibility.Visible;
             tbPwd.Visibility = Visibility.Visible;
             Grid.SetRow(btnLogIn, 6);
@@ -44,32 +44,32 @@ namespace Working_time_management
             btnTimeDtc.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FFDDDDDD");
         }
 
-        private void btnLogInSuc(object sender, RoutedEventArgs e)
+        private void btnLogInSuc(object sender, RoutedEventArgs e)      //Die ID und das Passwort wird geprüft und bei nicht erfolgreicher Anmeldung wird eine Fehlermeldung´ausgegeben
         {
             string userID = tbId.Text;
             string userPWD = tbPwd.Password;
             int inputCorrect = ProcessingCSV.checkLogIn(userID, userPWD, isLogIn);
             switch (inputCorrect)
             {
-                case (int)ProcessingCSV.LogInResult.IDNotFound:
+                case (int)ProcessingCSV.LogInResult.IDNotFound:     //ID wurde nicht gefunden
                     MessageBox.Show("ID nicht gefunden!", "Anmeldefehler", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
                     tbId.Text = "";
                     tbPwd.Password = "";
                     break;
-                case (int)ProcessingCSV.LogInResult.PwdIncorrect:
+                case (int)ProcessingCSV.LogInResult.PwdIncorrect:       //Passwort nicht gefunden
                     MessageBox.Show("Passwort nicht korrekt!", "Anmeldefehler", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
                     tbPwd.Password = "";
                     break;
-                case (int)ProcessingCSV.LogInResult.UserCorrect:
+                case (int)ProcessingCSV.LogInResult.UserCorrect:        //Anmelden war erfolgreich
                     this.NavigationService.Navigate(new menu(userID));
                     break;
-                case (int)ProcessingCSV.LogInResult.AdminCorrect:
+                case (int)ProcessingCSV.LogInResult.AdminCorrect:       //Anmelden als Admin war erfolgreich
                     this.NavigationService.Navigate(new menuAdmin());
                     break;
-                case (int)ProcessingCSV.LogInResult.TimeDetectionIdFound:
+                case (int)ProcessingCSV.LogInResult.TimeDetectionIdFound:       //Anmeldung bei der Zeiterfassung war erfolgreich
                     this.NavigationService.Navigate(new TimeDetection(userID));
                     break;
-                case (int)ProcessingCSV.LogInResult.TimeDetectionIdNotFound:
+                case (int)ProcessingCSV.LogInResult.TimeDetectionIdNotFound:        //ID wurde bei der Anmeldung für die Zeiterfassung nicht gefunden
                     MessageBox.Show("ID nicht gefunden!", "Anmeldefehler", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
                     tbId.Text = "";
                     tbPwd.Password = "";
@@ -77,10 +77,10 @@ namespace Working_time_management
             }
         }
 
-        private void TimeDtc(object sender, RoutedEventArgs e)
+        private void TimeDtc(object sender, RoutedEventArgs e) //Anmeldung für die Zeiterfassung, Passwort-Eingabe wird versteckt
         {
             isLogIn = false;
-            lblAnm.Visibility = Visibility.Hidden;
+            lblAnm.Visibility = Visibility.Hidden;     
             lblPwd.Visibility = Visibility.Hidden;
             tbPwd.Visibility = Visibility.Hidden;
             Grid.SetRow(btnLogIn, 4);
