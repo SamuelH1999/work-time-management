@@ -142,7 +142,7 @@ namespace Working_time_management
         }
         public static void editUserToWorkerInformationCSV(string id, string lastName, string firstName, string DateOfBirth, string residence, string status)    //Datensatz aus worker_information.csv holen, bearbeitete Spalten einfügen und die alte CSV mit den neuen Daten überschreiben
         {
-            string[] data = { lastName + ";" + firstName + ";" + DateOfBirth + ";" + residence + ";" + status};
+            string[] data = { "Nachname" + ";" + "Vorname" + ";" + "Geburtsdatum" + ";" + "Wohnort" + ";" + "Status" + "\n" + lastName + ";" + firstName + ";" + DateOfBirth + ";" + residence + ";" + status};
             string workerInformationPath = getWorkerInformationPath(id);
             File.WriteAllLines(workerInformationPath, data);
         }
