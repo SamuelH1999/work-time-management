@@ -340,11 +340,11 @@ namespace Working_time_management
                         int fullHours = int.Parse(newovertime[0].Split('.')[0]) * 24;
                         if (newovertime[0].StartsWith('-'))
                         {
-                            fullHours -= int.Parse(overtime[0].Split('.')[1]);
+                            fullHours -= int.Parse(newovertime[0].Split('.')[1]);
                         }
                         else
                         {
-                            fullHours += int.Parse(overtime[0].Split('.')[1]);
+                            fullHours += int.Parse(newovertime[0].Split('.')[1]);
                         }
                         newovertime[0] = fullHours.ToString();
                     }
