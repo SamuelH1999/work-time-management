@@ -184,9 +184,9 @@ namespace Working_time_management
         }
         public static void addWorkingTimeCSV(string id)         //CSV für die Arbeitszeiterfassung wird erstellt
         {
-            string[] data = { "Datum;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit" +
-                    ";Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit" }; // Der Mitarbeiter soll sich unbegrenzt oft anmelden können, kann er auch, irgendwann hören nur die Überschriften auf
-            File.WriteAllLines(getUserPathWorkingTimeCSV(id), data, Encoding.UTF8);
+            string data =  "Datum;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit" +
+                    ";Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit;Kommen;Gehen;Arbeitszeit" ; // Der Mitarbeiter soll sich unbegrenzt oft anmelden können, kann er auch, irgendwann hören nur die Überschriften auf
+            File.WriteAllText(getUserPathWorkingTimeCSV(id), data, Encoding.UTF8);
             string[] information = { "Pause;Überstunden;Resturlaub", "n;00:00;30"};
             File.WriteAllLines(getWorkingTimeInformationPath(id), information, Encoding.UTF8);          //CSV zur Eintragung der Überstunden, der Urlaubstage und, ob eine Pause genommen wurde, wird erstellt
 
