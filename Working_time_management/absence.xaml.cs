@@ -25,14 +25,14 @@ namespace Working_time_management
         public absence()
         {
             InitializeComponent();
-            fillListBox();
+            fillListBox();              //Liste beim Laden der Seite mit den aktuellen Abwesenheiten füllen
         }
 
-        private void clickAddAbsence(object sender, RoutedEventArgs e)
+        private void clickAddAbsence(object sender, RoutedEventArgs e)  //Öffnen einer neuen Seite um eine neue Abwesenheit zu erstellen
         {
             this.NavigationService.Navigate(new AddAbsence());
         }
-        private void fillListBox()
+        private void fillListBox()          //Die Liste wird mit den aktuellen Abwesenheiten gefüllt
         {
             foreach (string line in File.ReadLines(@"..\..\..\data\admin\absences.csv"))
             {
