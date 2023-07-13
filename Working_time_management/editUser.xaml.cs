@@ -26,12 +26,12 @@ namespace Working_time_management
         public editUser(string[] names)
         {
             InitializeComponent();
-            tbLastName.Text = names[0];
+            tbLastName.Text = names[0];         //Der Name wird aus userManagement übergeben
             tbFirstName.Text = names[1];
             ID = names[2];
-            string Pwd = getIDPwd(ID);
+            string Pwd = getIDPwd(ID);      //Passwort wird aus CSV-Datei geholt
             tbPwd.Text = Pwd;
-            string workerInformation = ProcessingCSV.GetWorkerInformation(ID);
+            string workerInformation = ProcessingCSV.GetWorkerInformation(ID);          //Die Informationen des Mitaarbeiter wird aus der CSV gehlt
             string[] workerInformationSplit = workerInformation.Split(";");
             tbDayOfBirth.Text = workerInformationSplit[2];
             tbResidence.Text = workerInformationSplit[3];
@@ -40,7 +40,7 @@ namespace Working_time_management
         private void confirmEditClick(object sender, RoutedEventArgs e)
         {
             ID = this.ID;
-            if (tbFirstName.Text.Length > 0 && tbLastName.Text.Length > 0 && tbPwd.Text.Length > 0 && tbResidence.Text.Length > 0 && tbDayOfBirth.Text.Length >0 && ID != "ID")
+            if (tbFirstName.Text.Length > 0 && tbLastName.Text.Length > 0 && tbPwd.Text.Length > 0 && tbResidence.Text.Length > 0 && tbDayOfBirth.Text.Length >0 && ID != "ID") //Die Einträge dürfen nicht leer sein und die ID darf nicht "ID" sein
             {
                 ProcessingCSV.editUserPwdToCSV(ID, tbPwd.Text);
                 ProcessingCSV.editUserToWorkerInformationCSV(ID, tbLastName.Text, tbFirstName.Text, tbDayOfBirth.Text, tbResidence.Text, "");
@@ -51,7 +51,7 @@ namespace Working_time_management
                 this.NavigationService.Navigate(new userManagement()); 
             }
         }
-        private string getIDPwd(string ID)
+        private string getIDPwd(string ID)          //Passwort wird aus CSV-Datei geholt
         {
             string pwd = "";
             foreach (string line in File.ReadLines(ProcessingCSV.idPwdPath))

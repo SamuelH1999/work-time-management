@@ -38,7 +38,7 @@ namespace Working_time_management
                 return;
             }
             if (dpFrom.SelectedDate.Value > dpTo.SelectedDate.Value || dpFrom.SelectedDate.Value < today || dpTo.SelectedDate.Value < today)  // Enddatum darf nicht vor Stardatum liegen
-            {                                                                                                                                 // End- und Startdatum dürfen nicht voe dem heutigen Datum liegen
+            {                                                                                                                                 // End- und Startdatum dürfen nicht vor dem heutigen Datum liegen
                 MessageBox.Show("Ungültige Eingabe", "Eingabefehler", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
                 return;
             }

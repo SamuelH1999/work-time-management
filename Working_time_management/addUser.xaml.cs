@@ -26,9 +26,9 @@ namespace Working_time_management
             InitializeComponent();
         }
 
-        private void confirmClick(object sender, RoutedEventArgs e)
+        private void confirmClick(object sender, RoutedEventArgs e) 
         {
-            if(tbFirstName.Text.Length > 0 && tbLastName.Text.Length > 0 && tbPwd.Text.Length > 0) 
+            if(tbFirstName.Text.Length > 0 && tbLastName.Text.Length > 0 && tbPwd.Text.Length > 0)  //Felder dürfen nicht leer bleiben
             {
                 string pwd = tbPwd.Text;
                 string id = tbID.Text;
@@ -37,13 +37,13 @@ namespace Working_time_management
                 {
                     string[] data = line.Split(';');
                     string ID = data[0];
-                    string Password = data[1];    // Es wird überprüft, ob es diese ID schon gibt
-                    if (id == ID)
+                    string Password = data[1];   
+                    if (id == ID)                    // Es wird überprüft, ob es diese ID schon gibt
                     {
                         IDAlreadyExists = true;
                     }
                 }
-                if (IDAlreadyExists == false)
+                if (IDAlreadyExists == false)               //Neuer Mitarbeiter wird angelegt
                 {
                     string[] pwdID = { id + ";" + pwd };
                     string firstName = tbFirstName.Text;
@@ -55,7 +55,7 @@ namespace Working_time_management
                     newFolder(id);
                     ProcessingCSV.addUserToWorkerInformationCSV(id, lastName, firstName, dateOfBirth, residence);
                     ProcessingCSV.addWorkingTimeCSV(id);
-                    this.NavigationService.Navigate(new userManagement());
+                    this.NavigationService.Navigate(new userManagement());              //Bei erfolgreicher Eingabe gelangt man wieder zurück in das userManagement
                 }
                 else
                 {
