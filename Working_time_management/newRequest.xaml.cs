@@ -27,13 +27,13 @@ namespace Working_time_management
         {
             InitializeComponent();
             this.userID = id;
-            this.CSVpath = ProcessingCSV.getUserRequestPath(userID);
+            this.CSVpath = ProcessingCSV.getUserRequestPath(userID);        // Pfad der CSV-Datei speichern
         }
 
-        private void clickHolReqVerify(object sender, RoutedEventArgs e)
+        private void clickHolReqVerify(object sender, RoutedEventArgs e)    // Button Bestätigen verarbeiten
         {
             string type = "";
-            if (checkboxHoliday.IsChecked == true)
+            if (checkboxHoliday.IsChecked == true)                          // Prüft Antragsart
             {
                 type = "Urlaub";
             }
@@ -55,11 +55,11 @@ namespace Working_time_management
             {
                 return;
             }
-            if(endDate.SelectedDate < startDate.SelectedDate)
+            if(endDate.SelectedDate < startDate.SelectedDate)       // Fehler wenn Enddatum vor Startdatum liegt
             {
                 MessageBox.Show("Ungültiger Zeitraum!", "Eingabefehler", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
             }
-            else if(startDate.SelectedDate < new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0))
+            else if(startDate.SelectedDate < new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0))    // Fehler, wenn Startdatum 
             {
                 MessageBox.Show("Start darf nicht in der Vergangenheit liegen!", "Eingabefehler", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
             }
@@ -67,9 +67,9 @@ namespace Working_time_management
             {
                 string from = startDate.SelectedDate.Value.ToString("dd.MM.yyyy");
                 string until = endDate.SelectedDate.Value.ToString("dd.MM.yyyy");
-                string[] requestData = { type + ";" + from + ";" + until + ";" + "offen" };
-                File.AppendAllLines(CSVpath, requestData);
-                this.NavigationService.Navigate(new request(userID));
+                string[] requestData = { type + ";" + from + ";" + until + ";" + "offen" };     // Antrag für CSV formatieren
+                File.AppendAllLines(CSVpath, requestData);                                      // Zeile an CSV anhängen
+                this.NavigationService.Navigate(new request(userID));                           // Naviguiere zurück auf Antraäge Page
             }
             
         }
