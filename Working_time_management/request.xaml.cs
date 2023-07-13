@@ -30,10 +30,15 @@ namespace Working_time_management
             this.CSVpath = ProcessingCSV.getUserRequestPath(userID);
             foreach (string line in File.ReadLines(CSVpath))
             {
-                string[] requestInformation = line.Split(";");
-                ListBoxItem newRequest = new ListBoxItem();
-                newRequest.Content = requestInformation[0] + ", " + requestInformation[1] + " - " + requestInformation[2] + ", " + requestInformation[3];
-                allRequest.Items.Add(newRequest);
+                string[] data = line.Split(';');
+                string header = data[0];
+                if (data[0] != "Abwesenheitsgrund")
+                {
+                    string[] requestInformation = line.Split(";");
+                    ListBoxItem newRequest = new ListBoxItem();
+                    newRequest.Content = requestInformation[0] + ", " + requestInformation[1] + " - " + requestInformation[2] + ", " + requestInformation[3];
+                    allRequest.Items.Add(newRequest);
+                }
             }
         }
 

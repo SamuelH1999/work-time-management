@@ -117,10 +117,11 @@ namespace Working_time_management
         public static void addUserToWorkerInformationCSV(string id, string lastName, string firstName, string DateOfBirth, string residence) 
         {
             string[] data = { "Nachname" + ";" + "Vorname" + ";" + "Geburtsdatum" + ";" + "Wohnort" + ";" + "Status" + "\n" + lastName + ";" + firstName + ";" + DateOfBirth + ";" + residence + ";" + "Abgemeldet" };
+            string[] header = { "Abwesenheitsgrund" + ";" + "Von" + ";" + "Bis" + ";" + "Status" };
             string workerInformationPath = getWorkerInformationPath(id);
             string userRequestPath = getUserRequestPath(id);
             File.WriteAllLines(workerInformationPath, data);
-            File.Create(userRequestPath);
+            File.WriteAllLines(userRequestPath, header);
         }
         public static void editUserPwdToCSV(string id, string newPwd)           // id und newPwd muss aus editUser.xaml.cs übergeben werden
         { 
@@ -224,7 +225,16 @@ namespace Working_time_management
                 //Pause zurücksetzen und Überstunden vorbereiten
                 timeInformation[0] = "n";
                 string[] overtime = timeInformation[1].Split(':');
-                string[] newovertime = new TimeSpan(int.Parse(overtime[0]) - 8, int.Parse(overtime[1]), 0).ToString().Split(':');
+                int overTimeHoursCome = 0;
+                if (overtime[0].Contains('.'))
+                {
+                    overTimeHoursCome = int.Parse(overtime[0].Split('.')[0]) * 24;
+                }
+                else
+                {
+                    overTimeHoursCome = int.Parse(overtime[0]);
+                }
+                string[] newovertime = new TimeSpan(overTimeHoursCome - 8, int.Parse(overtime[1]), 0).ToString().Split(':');
                 timeInformation[1] = newovertime[0] + ":" + newovertime[1];
                 File.WriteAllText(getWorkingTimeInformationPath(id), "Pause;Überstunden;Resturlaub\n" + timeInformation[0] + ";" + timeInformation[1] + ";" + timeInformation[2], Encoding.UTF8);
             }
@@ -282,7 +292,15 @@ namespace Working_time_management
                     TimeSpan totalWorkingTime = new TimeSpan(totalHours, totalMinutes, 0).Add(workingTime);
                     string[] timeInformation = File.ReadAllLines(getWorkingTimeInformationPath(id))[1].Split(';');
                     string[] overtime = timeInformation[1].Split(':');
-                    int overTimeHours = int.Parse(overtime[0]);
+                    int overTimeHours = 0;
+                    if (overtime[0].Contains('.'))
+                    {
+                        overTimeHours = int.Parse(overtime[0].Split('.')[0]) * 24;
+                    }
+                    else
+                    {
+                        overTimeHours = int.Parse(overtime[0]);
+                    }
                     int overTimeMinutes = int.Parse(overtime[1]);
                     if (overtime[0].StartsWith('-'))
                     {
