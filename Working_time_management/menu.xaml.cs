@@ -22,13 +22,13 @@ namespace Working_time_management
     {
         private string userID;
 
-        public menu(string id)
+        public menu(string id)      //ID des angemeldeten Users wird übergeben
         {
             InitializeComponent();
             this.userID = id;
         }
 
-        private void LogOut(object sender, RoutedEventArgs e)
+        private void LogOut(object sender, RoutedEventArgs e)       //Nachfolgend wird nur zu den einzelnen Seiten navigiert
         {
             this.NavigationService.Navigate(new Startpage());
         }

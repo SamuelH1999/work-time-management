@@ -21,13 +21,13 @@ namespace Working_time_management
     /// </summary>
     public partial class Holidays : Page
     {
-        public Holidays(string id)
+        public Holidays(string id)          //Daten des aktuell angemeldeten Mitarbeiters werden ausgegeben
         {
             InitializeComponent();
             string[] information = File.ReadAllLines(ProcessingCSV.getWorkingTimeInformationPath(id))[1].Split(';');
             string holidaysRemaining = information[2];
             string overtime = information[1];
-            lblHolidays.Content = holidaysRemaining;
+            lblHolidays.Content = holidaysRemaining;            
             lblOvertime.Content = overtime; 
         }
     }

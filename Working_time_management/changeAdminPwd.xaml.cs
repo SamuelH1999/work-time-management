@@ -26,12 +26,12 @@ namespace Working_time_management
             InitializeComponent();
         }
 
-        private void btnAdminPwdConfirm_Click(object sender, RoutedEventArgs e)
+        private void btnAdminPwdConfirm_Click(object sender, RoutedEventArgs e)   
         {
-            if(ProcessingCSV.checkLogIn("123123", tbOldPwd.Text, true) == (int) ProcessingCSV.LogInResult.AdminCorrect && tbNewPwd.Text.Length > 0)
+            if(ProcessingCSV.checkLogIn("123123", tbOldPwd.Text, true) == (int) ProcessingCSV.LogInResult.AdminCorrect && tbNewPwd.Text.Length > 0) //Altes Passwort wird überprüft und das neue darf nicht leer sein
             {
                 ProcessingCSV.editUserPwdToCSV("123123", tbNewPwd.Text);
-                this.NavigationService.GoBack();
+                this.NavigationService.GoBack();            //Es wird wieder zurück gesprungen
             }
         }
     }

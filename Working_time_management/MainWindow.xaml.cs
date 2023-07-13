@@ -38,11 +38,11 @@ namespace Working_time_management
             
         }
 
-        private void getIniVals()
+        private void getIniVals()           //Init-Datei auslesen
         {
             logoPath = IniHandler.Read("Path", "Logo");
             timeRounding = int.Parse(IniHandler.Read("Rounding", "Time"));
-            if (IniHandler.KeyExists("Fix", "Breaks"))
+            if (IniHandler.KeyExists("Fix", "Breaks"))          //Feste Pausenzeiten auslesen
             {
                 fixBreakTime = IniHandler.Read("Fix", "Breaks");
             }
@@ -50,7 +50,7 @@ namespace Working_time_management
             {
                 fixBreakTime = null;
             }
-            if (IniHandler.KeyExists("AfterHours", "Breaks"))
+            if (IniHandler.KeyExists("AfterHours", "Breaks"))       //Dynamische Pausenzeiten auslesen
             {
                 breakAfterHours = int.Parse(IniHandler.Read("AfterHours", "Breaks"));
             }
@@ -58,13 +58,13 @@ namespace Working_time_management
             {
                 breakAfterHours = 0;
             }
-            imgLogo.Source = new BitmapImage(new Uri(logoPath, UriKind.Relative));
+            imgLogo.Source = new BitmapImage(new Uri(logoPath, UriKind.Relative)); //Pfad für das Logo auslesen
         }
-        private void clockTick(object sender, EventArgs e)
+        private void clockTick(object sender, EventArgs e)      //Die aktuelle Uhrzeit aus dem System auslesen und anzeigen
         {
             DateTime currentTime = DateTime.Now;
             tbClock.Content = " " + currentTime.ToString("HH:mm") + " Uhr\n" + currentTime.ToString("dd.MM.yyyy");
-            if (currentTime.ToString("HH:mm") == "00:00")
+            if (currentTime.ToString("HH:mm") == "00:00")           //Um 0:00 Uhr an jedem Tag werden die Daten der Init-Datei aktualisiert, damit es keine Konflikte gibt, während der Arbeitszeit
             {
                 getIniVals();
             }
