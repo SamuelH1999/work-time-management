@@ -26,24 +26,14 @@ namespace Working_time_management
         public userManagement()
         {
             InitializeComponent();
-            fillListBox();
+            fillListBox();      //Liste mit den Mitarbeitern befüllen
         }
-
-        /*
-        public userManagement(string addName)
-        {
-            InitializeComponent();
-            ListBoxItem newUser = new ListBoxItem();
-            newUser.Content = addName;
-            userList.Items.Add(newUser);
-        }
-        */
-        private void newUserClick(object sender, RoutedEventArgs e)
+        private void newUserClick(object sender, RoutedEventArgs e) //Neue Seite um neuen Nutzer anzulegen
         {
             this.NavigationService.Navigate(new addUser());
         }
 
-        private void deleteUserClick(object sender, RoutedEventArgs e)
+        private void deleteUserClick(object sender, RoutedEventArgs e)  //Ausgewählter Benutzer wird gelöscht
 
         {
             if (userList.SelectedItem != null)                                          
@@ -55,13 +45,13 @@ namespace Working_time_management
                 if (mboxResult == MessageBoxResult.Yes)
                 {
                     userList.Items.Remove(deletedUser);
-                    ProcessingCSV.deleteUserPwdInCSV(id);
-                    moveFolder(id);
+                    ProcessingCSV.deleteUserPwdInCSV(id);       //ID und Passwort wird aus CSV gelöscht       
+                    moveFolder(id);                             //Ordener des Benutzers wird in den Ordner "archive" verschoben
 
                 }
             }
         }
-        private void editUserClick(object sender, RoutedEventArgs e)            
+        private void editUserClick(object sender, RoutedEventArgs e)      //Neue Seite zum Bearbeiten des ausgewählten Mitarbeiters wird geöffnet      
         {
             if (userList.SelectedItem != null)
             {
@@ -71,14 +61,14 @@ namespace Working_time_management
             }
         }
 
-        private void fillListBox()
+        private void fillListBox()  //Liste wird mit Mitarbeitern befüllt
         {
             foreach (string line in File.ReadLines(ProcessingCSV.idPwdPath))
             {
                 string[] data = line.Split(';');
                 string Id = data[0];
                 string Pwd = data[1];
-                if (Id != "123123" && Id != "ID")
+                if (Id != "123123" && Id != "ID")               //der Admin und die Überschrift dürfen nicht aufgeführt werden
                 {
                     string workerInformation = ProcessingCSV.GetWorkerInformation(Id);
                     string[] workerInformationSplit = workerInformation.Split(';');
@@ -102,10 +92,10 @@ namespace Working_time_management
         }
         private void moveFolder(string ID)
         {
-            string sPath = @"..\..\..\data\worker_information\" + ID;   //source path
-            string dPath = @"..\..\..\data\archive\" + ID;              //destination path
-            string aPath = @"..\..\..\data\archive\";                   //path to archive folder
-            if (Directory.Exists(aPath) == false)                       //creates archive folder in case it doesn't already exist
+            string sPath = @"..\..\..\data\worker_information\" + ID;   //Quellpfad
+            string dPath = @"..\..\..\data\archive\" + ID;              //Zielpfad
+            string aPath = @"..\..\..\data\archive\";                   //Pfad zum Archiv-Ordner
+            if (Directory.Exists(aPath) == false)                       //Erstellt einen Ordner für den Fall, dass noch keiner existiert
             {
                 Directory.CreateDirectory(aPath);
             }
