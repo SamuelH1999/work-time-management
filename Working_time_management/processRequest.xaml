@@ -25,12 +25,9 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Button x:Name="btnDetails" Grid.Row="0" Grid.Column="0" Click="showDetails">Details</Button>
-
         <Button x:Name="btnAnnehmen" Grid.Row="0" Grid.Column="1" Click="acceptClick">Antrag annehmen</Button>
 
         <Button x:Name="btnAblehnen" Grid.Row="0" Grid.Column="2" Click="rejectClick">Antrag ablehnen</Button>
-
 
         <Label Grid.Row="1" Grid.Column="0" FontSize="18" VerticalAlignment="Center">Offene Anträge:</Label>
 

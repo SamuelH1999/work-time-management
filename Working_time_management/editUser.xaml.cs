@@ -22,7 +22,8 @@ namespace Working_time_management
     public partial class editUser : Page
     {
         private List<Worker> list = new List<Worker>();
-        string ID;
+        private string ID;
+        private string status;
         public editUser(string[] names)
         {
             InitializeComponent();
@@ -35,6 +36,7 @@ namespace Working_time_management
             string[] workerInformationSplit = workerInformation.Split(";");
             tbDayOfBirth.Text = workerInformationSplit[2];
             tbResidence.Text = workerInformationSplit[3];
+            status = workerInformationSplit[4];
         }
 
         private void confirmEditClick(object sender, RoutedEventArgs e)
@@ -43,7 +45,7 @@ namespace Working_time_management
             if (tbFirstName.Text.Length > 0 && tbLastName.Text.Length > 0 && tbPwd.Text.Length > 0 && tbResidence.Text.Length > 0 && tbDayOfBirth.Text.Length >0 && ID != "ID") //Die Einträge dürfen nicht leer sein und die ID darf nicht "ID" sein
             {
                 ProcessingCSV.editUserPwdToCSV(ID, tbPwd.Text);
-                ProcessingCSV.editUserToWorkerInformationCSV(ID, tbLastName.Text, tbFirstName.Text, tbDayOfBirth.Text, tbResidence.Text, "");
+                ProcessingCSV.editUserToWorkerInformationCSV(ID, tbLastName.Text, tbFirstName.Text, tbDayOfBirth.Text, tbResidence.Text, status);   // Einträge aktualisieren
                 this.NavigationService.Navigate(new userManagement());
             }
             else

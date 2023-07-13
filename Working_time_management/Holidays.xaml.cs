@@ -24,8 +24,8 @@ namespace Working_time_management
         public Holidays(string id)          //Daten des aktuell angemeldeten Mitarbeiters werden ausgegeben
         {
             InitializeComponent();
-            string[] information = File.ReadAllLines(ProcessingCSV.getWorkingTimeInformationPath(id))[1].Split(';');
-            string holidaysRemaining = information[2];
+            string[] information = File.ReadAllLines(ProcessingCSV.getWorkingTimeInformationPath(id))[1].Split(';');        // Daten auslesen
+            string holidaysRemaining = information[2];      // UI entsprechend anpassen
             string overtime = information[1];
             lblHolidays.Content = holidaysRemaining;            
             lblOvertime.Content = overtime; 

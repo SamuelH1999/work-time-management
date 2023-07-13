@@ -27,16 +27,16 @@ namespace Working_time_management
         {
             InitializeComponent();
             this.id = id_str;
-            string workerInformation = ProcessingCSV.GetWorkerInformation(id);
+            string workerInformation = ProcessingCSV.GetWorkerInformation(id);      // Aktuellen Anmelde-Status des Mitarbeiters auslesen
             string[] workerInformationSplit = workerInformation.Split(';');
             string status = workerInformationSplit[4];
-            if (status == "Angemeldet")
+            if (status == "Angemeldet")     // UI entsprechend anpassen
             {
                 isActive = true;
                 lblStatus.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("Green");
                 lblStatus.Content = "Angemeldet";
             }
-            else
+            else                            // UI entsprechend anpassen
             {
                 isActive = false;
                 lblStatus.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("Red");
@@ -44,12 +44,12 @@ namespace Working_time_management
             }
         }
 
-        private void btnCaG(object sender, RoutedEventArgs e)
+        private void btnCaG(object sender, RoutedEventArgs e)       // Verarbeitet Kommen/Gehen Button
         {
-            if (!isActive)
+            if (!isActive)          // Abgemeldet --> Anmelden
             {
-                ProcessingCSV.writeComeInCSV(id, DateTime.Now);
-                lblStatus.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("Green");
+                ProcessingCSV.writeComeInCSV(id, DateTime.Now);     // Aktuelle Uhrzeit in CSV schreiben
+                lblStatus.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("Green");        // UI entsprechend anpassen
                 lblStatus.Content = "Angemeldet";
                 string workerInformation = ProcessingCSV.GetWorkerInformation(id);
                 string[] workerInformationSplit = workerInformation.Split(';');
@@ -58,13 +58,13 @@ namespace Working_time_management
                 string dateOfBirth = workerInformationSplit[2];
                 string residence = workerInformationSplit[3];
                 string status = "Angemeldet";
-                ProcessingCSV.editUserToWorkerInformationCSV(id, lastName, firstName, dateOfBirth, residence, status);
+                ProcessingCSV.editUserToWorkerInformationCSV(id, lastName, firstName, dateOfBirth, residence, status);      // Anmelde-Status aktualisieren
                 isActive = true;
             }
-            else
+            else                     // Abgemeldet --> Anmelden
             {
-                ProcessingCSV.writeGoInCSV(id, DateTime.Now);
-                lblStatus.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("Red");
+                ProcessingCSV.writeGoInCSV(id, DateTime.Now);   // Aktuelle Uhrzeit in CSV schreiben
+                lblStatus.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("Red");      // UI entsprechend anpassen
                 lblStatus.Content = "Abgemeldet";
                 string workerInformation = ProcessingCSV.GetWorkerInformation(id);
                 string[] workerInformationSplit = workerInformation.Split(';');
@@ -73,7 +73,7 @@ namespace Working_time_management
                 string dateOfBirth = workerInformationSplit[2];
                 string residence = workerInformationSplit[3];
                 string status = "Abgemeldet";
-                ProcessingCSV.editUserToWorkerInformationCSV(id, lastName, firstName, dateOfBirth, residence, status);
+                ProcessingCSV.editUserToWorkerInformationCSV(id, lastName, firstName, dateOfBirth, residence, status);      // Anmelde-Status aktualisieren
                 isActive = false;
             }
             
@@ -81,7 +81,7 @@ namespace Working_time_management
 
         private void btnBackTDEvt(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new Startpage());
+            this.NavigationService.Navigate(new Startpage());           // Zurück zu Startpage navigieren
         }
         
     }
