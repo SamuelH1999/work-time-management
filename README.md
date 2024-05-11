@@ -1,0 +1,1 @@
+Programming of a working-time-management system to detect the check in, check out and the break of a the employes. Further you can store important information about every employee, which can be edited or deleted. Employees can also apply for holiday, which the admin can approve or reject. Furthermore, sick days can also be entered.
